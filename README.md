@@ -9,8 +9,7 @@ Byron (BYRON) is a sustainable cryptocurrency modeled after Satoshi Nakamoto’s
   with a collateral of 50,000 BYRON.
 
 
-Please reach out at info@byron.org
-
+Please reach out at ceo@adabyron.dev
 ### Coin Specs
 | Block Time                  | 3 Minutes      |
 | Max Coin Supply (PoW Phase) | 5,000,000 BYRON    |
