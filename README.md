@@ -6,11 +6,10 @@ Byron (BYRON) is a sustainable cryptocurrency modeled after Satoshi Nakamoto’s
 - Fast transactions featuring guaranteed zero confirmation transactions, we call it _SwiftTX_.
 - Decentralized blockchain voting providing for consensus based advancement of the current Masternode
   technology used to secure the network and provide the above features, each Masternode is secured
-  with a collateral of 20,000 BYRON.
+  with a collateral of 50,000 BYRON.
 
 
-Please reach out at info@byron.org
-
+Please reach out at ceo@adabyron.dev
 ### Coin Specs
 | Block Time                  | 3 Minutes      |
 | Max Coin Supply (PoW Phase) | 5,000,000 BYRON    |
