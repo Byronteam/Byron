@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,6 @@
 #include "guiconstants.h"
 #include "guiutil.h"
 
-#include "main.h"
 #include "net.h"
 #include "sync.h"
 
@@ -61,6 +60,7 @@ public:
                 return;
             }
             cachedNodeStats.clear();
+
             cachedNodeStats.reserve(vNodes.size());
             foreach (CNode* pnode, vNodes) {
                 CNodeCombinedStats stats;

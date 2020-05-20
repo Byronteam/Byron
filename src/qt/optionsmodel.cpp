@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -73,21 +74,21 @@ void OptionsModel::Init()
         settings.setValue("fHideZeroBalances", true);
     fHideZeroBalances = settings.value("fHideZeroBalances").toBool();
 
+    if (!settings.contains("fHideOrphans"))
+        settings.setValue("fHideOrphans", false);
+    fHideOrphans = settings.value("fHideOrphans").toBool();
+
     if (!settings.contains("fCoinControlFeatures"))
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
+    if (!settings.contains("nAnonymizeBYRONAmount"))
+        settings.setValue("nAnonymizeBYRONAmount", 1000);
 
+    nAnonymizeBYRONAmount = settings.value("nAnonymizeBYRONAmount").toLongLong();
 
     if (!settings.contains("fShowMasternodesTab"))
         settings.setValue("fShowMasternodesTab", masternodeConfig.getCount());
-
-    if (!settings.contains("fShowBudgetProposalsTab"))
-        settings.setValue("fShowBudgetProposalsTab", true);     /*  default: true */
-
-    if (!settings.contains("fShowCommunityProposalsTab"))
-        settings.setValue("fShowCommunityProposalsTab", false); /*  default: false */
-
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
@@ -143,11 +144,17 @@ void OptionsModel::Init()
     // Display
     if (!settings.contains("digits"))
         settings.setValue("digits", "2");
+    if (!settings.contains("theme"))
+        settings.setValue("theme", "");
+    if (!settings.contains("fCSSexternal"))
+        settings.setValue("fCSSexternal", false);
     if (!settings.contains("language"))
         settings.setValue("language", "");
     if (!SoftSetArg("-lang", settings.value("language").toString().toStdString()))
         addOverriddenOption("-lang");
 
+    if (settings.contains("nAnonymizeBYRONAmount"))
+        SoftSetArg("-anonymizebyronamount", settings.value("nAnonymizeBYRONAmount").toString().toStdString());
 
     language = settings.value("language").toString();
 }
@@ -209,21 +216,19 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
         case ShowMasternodesTab:
             return settings.value("fShowMasternodesTab");
 #endif
-        case ShowBudgetProposalsTab:
-            return settings.value("fShowBudgetProposalsTab");
-        case ShowCommunityProposalsTab:
-            return settings.value("fShowCommunityProposalsTab");
-
         case StakeSplitThreshold:
             if (pwalletMain)
                 return QVariant((int)pwalletMain->nStakeSplitThreshold);
             return settings.value("nStakeSplitThreshold");
         case DisplayUnit:
+
             return nDisplayUnit;
         case ThirdPartyTxUrls:
             return strThirdPartyTxUrls;
         case Digits:
             return settings.value("digits");
+        case Theme:
+            return settings.value("theme");
         case Language:
             return settings.value("language");
         case CoinControlFeatures:
@@ -234,6 +239,10 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
             return settings.value("nThreadsScriptVerif");
         case HideZeroBalances:
             return settings.value("fHideZeroBalances");
+        case HideOrphans:
+            return settings.value("fHideOrphans");
+        case AnonymizeBYRONAmount:
+            return QVariant(nAnonymizeBYRONAmount);
         case Listen:
             return settings.value("fListen");
         default:
@@ -243,7 +252,7 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-// write QSettings values
+// Write QSettings values
 bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     bool successful = true; /* set to false on parse error */
@@ -266,7 +275,7 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             settings.setValue("fMinimizeOnClose", fMinimizeOnClose);
             break;
 
-        // default proxy
+        // Default proxy
         case ProxyUse:
             if (settings.value("fUseProxy") != value) {
                 settings.setValue("fUseProxy", value.toBool());
@@ -274,22 +283,22 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             }
             break;
         case ProxyIP: {
-            // contains current IP at index 0 and current port at index 1
+            // Contains current IP at index 0 and current port at index 1
             QStringList strlIpPort = settings.value("addrProxy").toString().split(":", QString::SkipEmptyParts);
-            // if that key doesn't exist or has a changed IP
+            // If that key doesn't exist or has a changed IP
             if (!settings.contains("addrProxy") || strlIpPort.at(0) != value.toString()) {
-                // construct new value from new IP and current port
+                // Construct new value from new IP and current port
                 QString strNewValue = value.toString() + ":" + strlIpPort.at(1);
                 settings.setValue("addrProxy", strNewValue);
                 setRestartRequired(true);
             }
         } break;
         case ProxyPort: {
-            // contains current IP at index 0 and current port at index 1
+            // Contains current IP at index 0 and current port at index 1
             QStringList strlIpPort = settings.value("addrProxy").toString().split(":", QString::SkipEmptyParts);
-            // if that key doesn't exist or has a changed port
+            // If that key doesn't exist or has a changed port
             if (!settings.contains("addrProxy") || strlIpPort.at(1) != value.toString()) {
-                // construct new value from current IP and new port
+                // Construct new value from current IP and new port
                 QString strNewValue = strlIpPort.at(0) + ":" + value.toString();
                 settings.setValue("addrProxy", strNewValue);
                 setRestartRequired(true);
@@ -309,18 +318,6 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             }
             break;
 #endif
-        case ShowBudgetProposalsTab:
-            if (settings.value("fShowBudgetProposalsTab") != value) {
-                settings.setValue("fShowBudgetProposalsTab", value);
-                setRestartRequired(true);
-            }
-            break;
-        case ShowCommunityProposalsTab:
-            if (settings.value("fShowCommunityProposalsTab") != value) {
-                settings.setValue("fShowCommunityProposalsTab", value);
-                setRestartRequired(true);
-            }
-            break;
         case StakeSplitThreshold:
             settings.setValue("nStakeSplitThreshold", value.toInt());
             setStakeSplitThreshold(value.toInt());
@@ -341,6 +338,12 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
                 setRestartRequired(true);
             }
             break;
+        case Theme:
+            if (settings.value("theme") != value) {
+                settings.setValue("theme", value);
+                setRestartRequired(true);
+            }
+            break;
         case Language:
             if (settings.value("language") != value) {
                 settings.setValue("language", value);
@@ -351,6 +354,16 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             fHideZeroBalances = value.toBool();
             settings.setValue("fHideZeroBalances", fHideZeroBalances);
             emit hideZeroBalancesChanged(fHideZeroBalances);
+            break;
+        case HideOrphans:
+            fHideOrphans = value.toBool();
+            settings.setValue("fHideOrphans", fHideOrphans);
+            emit hideOrphansChanged(fHideOrphans);
+            break;
+        case AnonymizeBYRONAmount:
+            nAnonymizeBYRONAmount = value.toInt();
+            settings.setValue("nAnonymizeBYRONAmount", nAnonymizeBYRONAmount);
+            emit anonymizeBYRONAmountChanged(nAnonymizeBYRONAmount);
             break;
         case CoinControlFeatures:
             fCoinControlFeatures = value.toBool();
@@ -413,6 +426,7 @@ void OptionsModel::setStakeSplitThreshold(int value)
         }
     }
 }
+
 
 bool OptionsModel::getProxySettings(QNetworkProxy& proxy) const
 {

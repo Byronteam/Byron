@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#  byrond The Byron core server.
+#  byrond The BYRON core server.
 #
 #
 # chkconfig: 345 80 20

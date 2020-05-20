@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin developers
 // Copyright (c) 2016-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -39,7 +38,7 @@
 WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
                                           clientModel(0),
                                           walletModel(0)
-{
+{   
     // Create tabs
     overviewPage = new OverviewPage();
     explorerWindow = new BlockExplorer(this);
@@ -60,7 +59,7 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     labelOverviewHeaderLeft->setObjectName(QStringLiteral("labelOverviewHeaderLeft"));
     labelOverviewHeaderLeft->setMinimumSize(QSize(464, 60));
     labelOverviewHeaderLeft->setMaximumSize(QSize(16777215, 60));
-    labelOverviewHeaderLeft->setText(tr("HISTORY"));
+    labelOverviewHeaderLeft->setText(tr("TRANSACTIONS"));
     QFont fontHeaderLeft;
     fontHeaderLeft.setPointSize(20);
     fontHeaderLeft.setBold(true);
@@ -130,13 +129,6 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
         addWidget(masternodeListPage);
     }
 
-    /*  Show governance tab if at least one of the sub-tabs is enabled */
-    if (settings.value("fShowBudgetProposalsTab").toBool() || settings.value("fShowCommunityProposalsTab").toBool())
-    {
-        proposalList = new ProposalList(this);
-        addWidget(proposalList);
-    }
-
     // Clicking on a transaction on the overview pre-selects the transaction on the transaction history page
     connect(overviewPage, SIGNAL(transactionClicked(QModelIndex)), transactionView, SLOT(focusTransaction(QModelIndex)));
 
@@ -202,10 +194,6 @@ void WalletView::setWalletModel(WalletModel* walletModel)
     }
     receiveCoinsPage->setModel(walletModel);
     sendCoinsPage->setModel(walletModel);
-    if (settings.value("fShowBudgetProposalsTab").toBool() || settings.value("fShowCommunityProposalsTab").toBool())
-    {
-        proposalList->setModel(walletModel);
-    }
 
     if (walletModel) {
         // Receive and pass through messages from wallet model
@@ -268,15 +256,6 @@ void WalletView::gotoMasternodePage()
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
         setCurrentWidget(masternodeListPage);
-    }
-}
-
-void WalletView::gotoProposalPage()
-{
-    QSettings settings;
-    if (settings.value("fShowBudgetProposalsTab").toBool() || settings.value("fShowCommunityProposalsTab").toBool())
-    {
-        setCurrentWidget(proposalList);
     }
 }
 
@@ -358,7 +337,7 @@ void WalletView::encryptWallet(bool status)
 {
     if (!walletModel)
         return;
-    AskPassphraseDialog dlg(status ? AskPassphraseDialog::Mode::Encrypt : AskPassphraseDialog::Mode::Decrypt, this,
+    AskPassphraseDialog dlg(status ? AskPassphraseDialog::Mode::Encrypt : AskPassphraseDialog::Mode::Decrypt, this, 
                             walletModel, AskPassphraseDialog::Context::Encrypt);
     dlg.exec();
 
@@ -369,18 +348,11 @@ void WalletView::backupWallet()
 {
     QString filename = GUIUtil::getSaveFileName(this,
         tr("Backup Wallet"), QString(),
-        tr("Wallet Data (*.dat)"), nullptr);
+        tr("Wallet Data (*.dat)"), NULL);
 
     if (filename.isEmpty())
         return;
-
-    if (!walletModel->backupWallet(filename)) {
-        emit message(tr("Backup Failed"), tr("There was an error trying to save the wallet data to %1.").arg(filename),
-            CClientUIInterface::MSG_ERROR);
-    } else {
-        emit message(tr("Backup Successful"), tr("The wallet data was successfully saved to %1.").arg(filename),
-            CClientUIInterface::MSG_INFORMATION);
-    }
+    walletModel->backupWallet(filename);
 }
 
 void WalletView::changePassphrase()
@@ -395,8 +367,8 @@ void WalletView::unlockWallet(AskPassphraseDialog::Context context)
         return;
     // Unlock wallet when requested by wallet model
 
-    if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForStakingOnly) {
-        AskPassphraseDialog dlg(AskPassphraseDialog::Mode::UnlockStaking, this, walletModel, context);
+    if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForAnonymizationOnly) {
+        AskPassphraseDialog dlg(AskPassphraseDialog::Mode::UnlockAnonymize, this, walletModel, context);
         dlg.exec();
     }
 }
@@ -418,12 +390,12 @@ void WalletView::toggleLockWallet()
 
     // Unlock the wallet when requested
     if (encStatus == walletModel->Locked) {
-        AskPassphraseDialog dlg(AskPassphraseDialog::Mode::Unlock, this, walletModel, AskPassphraseDialog::Context::ToggleLock);
+        AskPassphraseDialog dlg(AskPassphraseDialog::Mode::UnlockAnonymize, this, walletModel, AskPassphraseDialog::Context::ToggleLock);
         dlg.exec();
     }
 
-    else if (encStatus == walletModel->Unlocked || encStatus == walletModel->UnlockedForStakingOnly) {
-        walletModel->setWalletLocked(true);
+    else if (encStatus == walletModel->Unlocked || encStatus == walletModel->UnlockedForAnonymizationOnly) {
+            walletModel->setWalletLocked(true);
     }
 }
 

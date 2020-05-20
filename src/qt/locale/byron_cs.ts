@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Kopírovat vybranou adresu do mezipaměti</translation>
+        <translation>Kopírovat vybranou adresu do schránky</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -136,10 +136,6 @@
         <translation>Slouží k neumožnění zaslání jednoduché platby, pokud je učet OS kompromitován. Neposkytuje tak reálné zabezpeční.</translation>
     </message>
     <message>
-        <source>For staking only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Zadejte nové frázové heslo pro Vaši peněženku &lt;br/&gt; Prosím, použijte frázové heslo z &lt;b&gt; nebo více náhodných znaků &lt;/b&gt;, nebo&lt;b&gt;z osmi nebo více slov&lt;/b&gt;  .</translation>
     </message>
@@ -176,8 +172,8 @@
         <translation>Potvrdit zašifrování peněženky</translation>
     </message>
     <message>
-        <source>Byron will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</source>
-        <translation>Byron se teď zavře pro dokončení šifrovacího procesu. Prosím, vemte na vědomí, že zašifrování Vaší peněženky plně neochrání Vaše BYRONy před krádží, pokud je Váš počítač infikován malwarem.</translation>
+        <source>BYRON will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</source>
+        <translation>BYRON se teď zavře pro dokončení šifrovacího procesu. Prosím, vemte na vědomí, že zašifrování Vaší peněženky plně neochrání Vaše BYRONy před krádží, pokud je Váš počítač infikován malwarem.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -229,6 +225,9 @@
     </message>
 </context>
 <context>
+    <name>BanTableModel</name>
+    </context>
+<context>
     <name>Bip38ToolDialog</name>
     <message>
         <source>BIP 38 Tool</source>
@@ -239,16 +238,8 @@
         <translation>&amp;BIP 38 Šifrovat</translation>
     </message>
     <message>
-        <source>Enter a BYRON Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Zadejte BYRON adresu, kterou si přejete zašifrovat pomocí BIP38. Frázové heslo zadejte do prostředního boxu. Stiskněte šifrovat pro výpočet šifrovaného privátního klíče.</translation>
-    </message>
-    <message>
         <source>Address:</source>
         <translation>Adresa:</translation>
-    </message>
-    <message>
-        <source>The BYRON address to sign the message with</source>
-        <translation>BYRON adresa pro podepsání zprávy</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -279,16 +270,8 @@
         <translation>Kopírovat aktuální podpis do systémové mezipaměti</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this BYRON address</source>
-        <translation>Podepsat zprávu k prokázání, že vlastníte tuto BYRON adresu</translation>
-    </message>
-    <message>
         <source>Encrypt &amp;Key</source>
         <translation>Šifrovat &amp;Klíč</translation>
-    </message>
-    <message>
-        <source>Reset all sign message fields</source>
-        <translation>Resetovat všechny položky podepsání zprávy</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -303,20 +286,8 @@
         <translation>Vložte BIP 38 šifrovaný privítní klíc. Frázové heslo vložte do prostředního boxu. Kliknětě na Dešifrovat Klíč pro výpočet privátního klíče. Poté co bude klíč dešifrován, kliknutím na 'Importovat Adresu' přidáte privátní klíč do Vaší peněženky.</translation>
     </message>
     <message>
-        <source>The BYRON address the message was signed with</source>
-        <translation>BYRON adresa zprávy byla podpsána</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified BYRON address</source>
-        <translation>Verifikujte zprávu pro ujištění, že byla podepsána zmíněnou BYRON adresou</translation>
-    </message>
-    <message>
         <source>Decrypt &amp;Key</source>
         <translation>Dešifrovat &amp;Klíč</translation>
-    </message>
-    <message>
-        <source>Reset all verify message fields</source>
-        <translation>Resetovat všechny položky pro ověření zprávy</translation>
     </message>
     <message>
         <source>Decrypted Key:</source>
@@ -424,6 +395,10 @@
     <message>
         <source>Browse transaction history</source>
         <translation>Procházet historii transakcí</translation>
+    </message>
+    <message>
+        <source>Privacy Actions for zBYRON</source>
+        <translation>Řešení soukromí pro zBYRON</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -566,6 +541,30 @@
         <translation>Zobrazit seznam použitých adres  a popisků pro přijetí plateb</translation>
     </message>
     <message>
+        <source>&amp;Multisignature creation...</source>
+        <translation>&amp;Vytvoření multisignatury</translation>
+    </message>
+    <message>
+        <source>Create a new multisignature address and add it to this wallet</source>
+        <translation>Vytvořit novou multisignaturní adresu a přidat ji do této peněženky</translation>
+    </message>
+    <message>
+        <source>&amp;Multisignature spending...</source>
+        <translation>&amp;Multisignaturní výdaje...</translation>
+    </message>
+    <message>
+        <source>Spend from a multisignature address</source>
+        <translation>Uhradit z multisignaturní adresy</translation>
+    </message>
+    <message>
+        <source>&amp;Multisignature signing...</source>
+        <translation>&amp;Multisignaturní podepisování...</translation>
+    </message>
+    <message>
+        <source>Sign with a multisignature address</source>
+        <translation>Podepsat multisignaturní adresou</translation>
+    </message>
+    <message>
         <source>Open &amp;URI...</source>
         <translation>Otevřít &amp;URI...</translation>
     </message>
@@ -576,6 +575,10 @@
     <message>
         <source>Synchronizing additional data: %p%</source>
         <translation>Synchronizuji přídavná data: %p%</translation>
+    </message>
+    <message>
+        <source>%1 behind. Scanning block %2</source>
+        <translation>Zbývá %1 bloků. Skenuji blok %2</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -608,6 +611,10 @@
     <message>
         <source>Request payments (generates QR codes and byron: URIs)</source>
         <translation>Vyžádat platbu (generování QK kódu a byron: URIs)</translation>
+    </message>
+    <message>
+        <source>&amp;Privacy</source>
+        <translation>&amp;Soukromí</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -666,8 +673,8 @@
         <translation>Otevřít Masternodový konfigurační soubor</translation>
     </message>
     <message>
-        <source>Open a byron: URI or payment request</source>
-        <translation>Otevřít byron: URI nebo platební žádost</translation>
+        <source>Open a BYRON: URI or payment request</source>
+        <translation>Otevřít BYRON: URI nebo platební žádost</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -678,8 +685,8 @@
         <translation>Okno blokového průzkumníka</translation>
     </message>
     <message>
-        <source>Show the Byron Core help message to get a list with possible Byron command-line options</source>
-        <translation>Zobrazit Byron Core pomocnou zpráv pro získání seznamu možných parametrů Byron pro příkazy do příkazové řádky</translation>
+        <source>Show the Byron Core help message to get a list with possible BYRON command-line options</source>
+        <translation>Zobrazit Byron Core pomocnou zpráv pro získání seznamu možných parametrů BYRON pro příkazy do příkazové řádky</translation>
     </message>
     <message>
         <source>Byron Core client</source>
@@ -710,8 +717,8 @@
         <translation>%1 a %2</translation>
     </message>
     <message>
-        <source>%1 behind</source>
-        <translation>%1 za</translation>
+        <source>Catching up...</source>
+        <translation>Doháníme co se dá...</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
@@ -793,6 +800,14 @@ MultiSend: %1</translation>
         <translation>Blockchainový průzkumník</translation>
     </message>
     <message>
+        <source>Back</source>
+        <translation>Zpět</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Dále</translation>
+    </message>
+    <message>
         <source>Address / Block / Transaction</source>
         <translation>Adresa / Blok / Transakce</translation>
     </message>
@@ -811,6 +826,10 @@ MultiSend: %1</translation>
 </context>
 <context>
     <name>ClientModel</name>
+    <message>
+        <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
+        <translation>Celkem: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / neznámé: %5)</translation>
+    </message>
     <message>
         <source>Network Alert</source>
         <translation>Upozornění sítě</translation>
@@ -1155,8 +1174,8 @@ MultiSend: %1</translation>
         <translation>Při prvním spuštění programu si můžete vybrat, kam bude Byron Core ukládat svá data.</translation>
     </message>
     <message>
-        <source>Byron Core will download and store a copy of the Byron block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Byron Core stáhne a uloží kopii Byron blockchainu. Nejméně %1GB dat bude do této složky uloženo a v průběhu času bude ukládat další data. Peněženka bude v této složce uložena také.</translation>
+        <source>Byron Core will download and store a copy of the BYRON block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Byron Core stáhne a uloží kopii BYRON blockchainu. Nejméně %1GB dat bude do této složky uloženo a v průběhu času bude ukládat další data. Peněženka bude v této složce uložena také.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1192,10 +1211,6 @@ MultiSend: %1</translation>
     <message>
         <source>Form</source>
         <translation>Od</translation>
-    </message>
-    <message>
-        <source>My Masternodes</source>
-        <translation>Moje Masternody</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -1373,6 +1388,10 @@ MultiSend: %1</translation>
         <translation>Poslat pro odměny masternodů</translation>
     </message>
     <message>
+        <source>(no label)</source>
+        <translation>(bez popisku)</translation>
+    </message>
+    <message>
         <source>The entered address:
 </source>
         <translation>Zadaná adresa:
@@ -1411,6 +1430,68 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
 </translation>
     </message>
 </context>
+<context>
+    <name>MultisigDialog</name>
+    <message>
+        <source>Status:</source>
+        <translation>Stav:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Hodnota:</translation>
+    </message>
+    </context>
+<context>
+    <name>ObfuscationConfig</name>
+    <message>
+        <source>Configure Obfuscation</source>
+        <translation>Konfigurace obfuskace</translation>
+    </message>
+    <message>
+        <source>Basic Privacy</source>
+        <translation>Základní ochrana soukromí</translation>
+    </message>
+    <message>
+        <source>High Privacy</source>
+        <translation>Vysoká ochrana soukromí</translation>
+    </message>
+    <message>
+        <source>Maximum Privacy</source>
+        <translation>Maximální ochrana soukromí</translation>
+    </message>
+    <message>
+        <source>Please select a privacy level.</source>
+        <translation>Vyberte úrpvěň ochrany soukromí</translation>
+    </message>
+    <message>
+        <source>Use 2 separate masternodes to mix funds up to 200000 BYRON</source>
+        <translation>Použí 2 oddělené masternody k promíchání prostředků až do 200000 BYRON</translation>
+    </message>
+    <message>
+        <source>Use 16 separate masternodes</source>
+        <translation>Použít 16 oddělených masternodů</translation>
+    </message>
+    <message>
+        <source>This option is the quickest and will cost about ~0.025 BYRON to anonymize 200000 BYRON</source>
+        <translation>Tato možnost je nejrychleší a bude stát zhruba ~0.025 BYRON pro anonymizaci 200000 BYRON</translation>
+    </message>
+    <message>
+        <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
+        <translation>Toto je nejpomalejší a nejvíce bezpečná volba. Použití maximalní anonymity bude stát</translation>
+    </message>
+    <message>
+        <source>0.1 BYRON per 200000 BYRON you anonymize.</source>
+        <translation>0.1 BYRON za 200000 BYRON anonymizujete.</translation>
+    </message>
+    <message>
+        <source>Obfuscation Configuration</source>
+        <translation>Konfigurace obufuskace</translation>
+    </message>
+    </context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1469,12 +1550,12 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start Byron after logging in to the system.</source>
-        <translation>Automaticky spustit Byron po přihlášení do systému</translation>
+        <source>Automatically start BYRON after logging in to the system.</source>
+        <translation>Automaticky spustit BYRON po přihlášení do systému</translation>
     </message>
     <message>
-        <source>&amp;Start Byron on system login</source>
-        <translation>&amp;Spusti Byron při přihlášení do systému</translation>
+        <source>&amp;Start BYRON on system login</source>
+        <translation>&amp;Spusti BYRON při přihlášení do systému</translation>
     </message>
     <message>
         <source>Show Masternodes Tab</source>
@@ -1556,22 +1637,14 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
         <translation>Zpracovávané:</translation>
     </message>
     <message>
-        <source>Balances</source>
-        <translation>Balance</translation>
-    </message>
-    <message>
         <source>Total:</source>
         <translation>Celkem:</translation>
-    </message>
-    <message>
-        <source>Your current total balance</source>
-        <translation>Vaše aktuální celková balance</translation>
     </message>
     <message>
         <source>Spendable:</source>
         <translation>Disponibilní:</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>PaymentServer</name>
     <message>
@@ -1590,6 +1663,89 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
         <translation>Čas pingnutí</translation>
     </message>
 </context>
+<context>
+    <name>PrivacyDialog</name>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Reset</translation>
+    </message>
+    <message>
+        <source>Quantity:</source>
+        <translation>Množství:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Hodnota:</translation>
+    </message>
+    <message>
+        <source>Choose previously used address</source>
+        <translation>Vyberte již dříve použitou adresu</translation>
+    </message>
+    <message>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
+    </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <translation>Vložit adresu z mezipamětí</translation>
+    </message>
+    <message>
+        <source>Alt+P</source>
+        <translation>Alt+P</translation>
+    </message>
+    <message>
+        <source>&amp;Label:</source>
+        <translation>&amp;Popis</translation>
+    </message>
+    <message>
+        <source>A&amp;mount:</source>
+        <translation>H&amp;odnota:</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation>Priorita:</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation>TextPopisku</translation>
+    </message>
+    <message>
+        <source>Fee:</source>
+        <translation>Poplatek:</translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation>ne</translation>
+    </message>
+    <message>
+        <source>Bytes:</source>
+        <translation>Byty:</translation>
+    </message>
+    <message>
+        <source>Insufficient funds!</source>
+        <translation>Nedostatek prostředků!</translation>
+    </message>
+    <message>
+        <source>medium</source>
+        <translation>střední</translation>
+    </message>
+    <message>
+        <source>Change:</source>
+        <translation>Změna:</translation>
+    </message>
+    <message>
+        <source>Copy quantity</source>
+        <translation>Kopíroat množstí</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation>Kopírovat hodnotu</translation>
+    </message>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -1975,10 +2131,6 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
         <translation>Přidat &amp;Příjemce</translation>
     </message>
     <message>
-        <source>SwiftTX</source>
-        <translation>SwiftTX</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Balance:</translation>
     </message>
@@ -2251,10 +2403,6 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
     <message>
         <source>Information</source>
         <translation>Informace</translation>
-    </message>
-    <message>
-        <source>SwiftTX options:</source>
-        <translation>SwiftTx možnosti:</translation>
     </message>
     <message>
         <source>Synchronization failed</source>

@@ -131,7 +131,7 @@ static void secp256k1_ecmult_odd_multiples_table_globalz_windowa(secp256k1_ge *p
     secp256k1_gej prej[ECMULT_TABLE_SIZE(WINDOW_A)];
     secp256k1_fe zr[ECMULT_TABLE_SIZE(WINDOW_A)];
 
-    /* Compute the odd multiples in Jacobian form. */
+    /* Compute the odd multiples in Byronobian form. */
     secp256k1_ecmult_odd_multiples_table(ECMULT_TABLE_SIZE(WINDOW_A), prej, zr, a);
     /* Bring them to the same Z denominator. */
     secp256k1_ge_globalz_set_table_gej(ECMULT_TABLE_SIZE(WINDOW_A), pre, globalz, prej, zr);
@@ -143,7 +143,7 @@ static void secp256k1_ecmult_odd_multiples_table_storage_var(int n, secp256k1_ge
     secp256k1_fe *zr = (secp256k1_fe*)checked_malloc(cb, sizeof(secp256k1_fe) * n);
     int i;
 
-    /* Compute the odd multiples in Jacobian form. */
+    /* Compute the odd multiples in Byronobian form. */
     secp256k1_ecmult_odd_multiples_table(n, prej, zr, a);
     /* Convert them in batch to affine coordinates. */
     secp256k1_ge_set_table_gej_var(prea, prej, zr, n);
@@ -395,7 +395,7 @@ static void secp256k1_ecmult_strauss_wnaf(const secp256k1_ecmult_context *ctx, c
      * isomorphism to efficiently add with a known Z inverse.
      */
     if (no > 0) {
-        /* Compute the odd multiples in Jacobian form. */
+        /* Compute the odd multiples in Byronobian form. */
         secp256k1_ecmult_odd_multiples_table(ECMULT_TABLE_SIZE(WINDOW_A), state->prej, state->zr, &a[state->ps[0].input_pos]);
         for (np = 1; np < no; ++np) {
             secp256k1_gej tmp = a[state->ps[np].input_pos];

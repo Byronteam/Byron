@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +20,9 @@ bool CKeyStore::GetPubKey(const CKeyID& address, CPubKey& vchPubKeyOut) const
     CKey key;
     if (!GetKey(address, key))
         return false;
+
     vchPubKeyOut = key.GetPubKey();
+
     return true;
 }
 
@@ -33,6 +35,7 @@ bool CBasicKeyStore::AddKeyPubKey(const CKey& key, const CPubKey& pubkey)
 {
     LOCK(cs_KeyStore);
     mapKeys[pubkey.GetID()] = key;
+
     return true;
 }
 
@@ -43,6 +46,7 @@ bool CBasicKeyStore::AddCScript(const CScript& redeemScript)
 
     LOCK(cs_KeyStore);
     mapScripts[CScriptID(redeemScript)] = redeemScript;
+
     return true;
 }
 
@@ -56,10 +60,12 @@ bool CBasicKeyStore::GetCScript(const CScriptID& hash, CScript& redeemScriptOut)
 {
     LOCK(cs_KeyStore);
     ScriptMap::const_iterator mi = mapScripts.find(hash);
+
     if (mi != mapScripts.end()) {
         redeemScriptOut = (*mi).second;
         return true;
     }
+
     return false;
 }
 
@@ -67,6 +73,7 @@ bool CBasicKeyStore::AddWatchOnly(const CScript& dest)
 {
     LOCK(cs_KeyStore);
     setWatchOnly.insert(dest);
+
     return true;
 }
 
@@ -74,6 +81,7 @@ bool CBasicKeyStore::RemoveWatchOnly(const CScript& dest)
 {
     LOCK(cs_KeyStore);
     setWatchOnly.erase(dest);
+
     return true;
 }
 

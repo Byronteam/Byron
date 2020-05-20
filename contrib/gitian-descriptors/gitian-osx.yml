@@ -1,5 +1,5 @@
 ---
-name: "byron-osx-1.2"
+name: "byron-osx-3.2"
 enable_cache: true
 suites:
 - "bionic"
@@ -28,7 +28,7 @@ packages:
 - "python-setuptools"
 - "fonts-tuffy"
 remotes:
-- "url": "https://github.com/byron-official/byron.git"
+- "url": "https://github.com/byron-project/byron.git"
   "dir": "byron"
 files:
 - "MacOSX10.11.sdk.tar.gz"

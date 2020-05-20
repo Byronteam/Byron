@@ -1,4 +1,6 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -51,6 +53,7 @@ string FormatScript(const CScript& script)
         ret += strprintf("0x%x ", HexStr(it2, script.end()));
         break;
     }
+
     return ret.substr(0, ret.size() - 1);
 }
 
@@ -58,6 +61,7 @@ string EncodeHexTx(const CTransaction& tx)
 {
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
     ssTx << tx;
+
     return HexStr(ssTx.begin(), ssTx.end());
 }
 
@@ -91,11 +95,10 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
 {
     entry.pushKV("txid", tx.GetHash().GetHex());
     entry.pushKV("version", tx.nVersion);
-    entry.pushKV("size", (int)::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION));
     entry.pushKV("locktime", (int64_t)tx.nLockTime);
 
     UniValue vin(UniValue::VARR);
-    for (const CTxIn& txin : tx.vin) {
+    BOOST_FOREACH (const CTxIn& txin, tx.vin) {
         UniValue in(UniValue::VOBJ);
         if (tx.IsCoinBase())
             in.pushKV("coinbase", HexStr(txin.scriptSig.begin(), txin.scriptSig.end()));
@@ -129,8 +132,8 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
     }
     entry.pushKV("vout", vout);
 
-    if (!hashBlock.IsNull())
+    if (hashBlock != 0)
         entry.pushKV("blockhash", hashBlock.GetHex());
 
-    entry.pushKV("hex", EncodeHexTx(tx)); // the hex-encoded transaction. used the name "hex" to be consistent with the verbose output of "getrawtransaction".
+    entry.pushKV("hex", EncodeHexTx(tx)); // The hex-encoded transaction. used the name "hex" to be consistent with the verbose output of "getrawtransaction".
 }

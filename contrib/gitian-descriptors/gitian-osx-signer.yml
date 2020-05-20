@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/byron-official/byron-detached-sigs.git"
+- "url": "https://github.com/byron-project/byron-detached-sigs.git"
   "dir": "signature"
 files:
 - "byron-osx-unsigned.tar.gz"

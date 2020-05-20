@@ -9,6 +9,9 @@
 #define UNUSED
 #endif
 static const char UNUSED *byron_strings[] = {
+QT_TRANSLATE_NOOP("byron-core", " mints deleted\n"),
+QT_TRANSLATE_NOOP("byron-core", " mints updated, "),
+QT_TRANSLATE_NOOP("byron-core", " unconfirmed transactions removed\n"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "(1 = keep tx meta data e.g. account owner and payment request information, 2 "
 "= drop tx meta data)"),
@@ -16,9 +19,6 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "Allow JSON-RPC connections from specified source. Valid for <ip> are a "
 "single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or "
 "a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times"),
-QT_TRANSLATE_NOOP("byron-core", ""
-"An error occurred while setting up the RPC address %s port %u for listening: "
-"%s"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Bind to given address and always listen on it. Use [host]:port notation for "
 "IPv6"),
@@ -29,6 +29,8 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "Bind to given address to listen for JSON-RPC connections. Use [host]:port "
 "notation for IPv6. This option can be specified multiple times (default: "
 "bind to all interfaces)"),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Calculated accumulator checkpoint is not what is recorded by block index"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Cannot obtain a lock on data directory %s. Byron Core is probably already "
 "running."),
@@ -45,13 +47,15 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "Delete all wallet transactions and only recover those parts of the "
 "blockchain through -rescan on startup"),
 QT_TRANSLATE_NOOP("byron-core", ""
-"Disable all Byron specific functionality (Masternodes, SwiftTX, "
+"Disable all BYRON specific functionality (Masternodes, Zerocoin, SwiftX, "
 "Budgeting) (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Distributed under the MIT software license, see the accompanying file "
 "COPYING or <http://www.opensource.org/licenses/mit-license.php>."),
 QT_TRANSLATE_NOOP("byron-core", ""
-"Enable SwiftTX, show confirmations for locked transactions (bool, default: %s)"),
+"Enable SwiftX, show confirmations for locked transactions (bool, default: %s)"),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Enable or disable staking functionality for BYRON inputs (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Enable spork administration functionality with the appropriate private key."),
 QT_TRANSLATE_NOOP("byron-core", ""
@@ -59,6 +63,8 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "be solved instantly."),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Error: Listening for incoming connections failed (listen returned error %s)"),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Error: The transaction is larger than the maximum allowed transaction size!"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Error: The transaction was rejected! This might happen if some of the coins "
 "in your wallet were already spent, such as if you used a copy of wallet.dat "
@@ -81,6 +87,11 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "Execute command when the best block changes (%s in cmd is replaced by block "
 "hash)"),
 QT_TRANSLATE_NOOP("byron-core", ""
+"Execute command when the best block changes and its size is over (%s in cmd "
+"is replaced by block hash, %d with the block size)"),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Failed to find coin set amongst held coins with less than maxNumber of Spends"),
+QT_TRANSLATE_NOOP("byron-core", ""
 "Fees (in BYRON/Kb) smaller than this are considered zero fee for relaying "
 "(default: %s)"),
 QT_TRANSLATE_NOOP("byron-core", ""
@@ -90,8 +101,14 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "Flush database activity from memory pool to disk log every <n> megabytes "
 "(default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
+"Found unconfirmed denominated outputs, will wait till they confirm to "
+"continue."),
+QT_TRANSLATE_NOOP("byron-core", ""
 "If paytxfee is not set, include enough fee so transactions begin "
 "confirmation on average within n blocks (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", ""
+"In rare cases, a spend with 7 coins exceeds our maximum allowable "
+"transaction size, please retry spend using 6 or less coins"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "In this mode -genproclimit controls how many blocks are generated "
 "immediately."),
@@ -117,7 +134,13 @@ QT_TRANSLATE_NOOP("byron-core", ""
 QT_TRANSLATE_NOOP("byron-core", ""
 "Number of seconds to keep misbehaving peers from reconnecting (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
+"Obfuscation uses exact denominated amounts to send funds, you might simply "
+"need to anonymize some more coins."),
+QT_TRANSLATE_NOOP("byron-core", ""
 "Output debugging information (default: %u, supplying <category> is optional)"),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Preferred Denomination for automatically minted Zerocoin  "
+"(1/5/10/50/100/500/1000/5000), 0 for no preference. default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Query for peer addresses via DNS lookup, if low on addresses (default: 1 "
 "unless -connect)"),
@@ -140,9 +163,13 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "Show N confirmations for a successfully locked transaction (0-9999, default: "
 "%u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
+"Specify custom backup path to add a copy of any wallet backup. If set as "
+"dir, every backup generates a timestamped file. If set as file, will rewrite "
+"to that file every backup."),
+QT_TRANSLATE_NOOP("byron-core", ""
 "Support filtering of blocks and transaction with bloom filters (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", ""
-"SwiftTX requires inputs with at least 6 confirmations, you might need to wait "
+"SwiftX requires inputs with at least 6 confirmations, you might need to wait "
 "a few minutes and try again."),
 QT_TRANSLATE_NOOP("byron-core", ""
 "This is a pre-release test build - use at your own risk - do not use for "
@@ -152,22 +179,17 @@ QT_TRANSLATE_NOOP("byron-core", ""
 "the OpenSSL Toolkit <https://www.openssl.org/> and cryptographic software "
 "written by Eric Young and UPnP software written by Thomas Bernard."),
 QT_TRANSLATE_NOOP("byron-core", ""
-"To use byrond, or the -server option to byron-qt, you must set an rpcpassword "
-"in the configuration file:\n"
-"%s\n"
-"It is recommended you use the following random password:\n"
-"rpcuser=byronrpc\n"
-"rpcpassword=%s\n"
-"(you do not need to remember this password)\n"
-"The username and password MUST NOT be the same.\n"
-"If the file does not exist, create it with owner-readable-only file "
-"permissions.\n"
-"It is also recommended to set alertnotify so you are notified of problems;\n"
-"for example: alertnotify=echo %%s | mail -s \"Byron Alert\" admin@foo.com\n"),
+"Total length of network version string (%i) exceeds maximum length (%i). "
+"Reduce the number or size of uacomments."),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Unable to bind to %s on this computer. Byron Core is probably already running."),
 QT_TRANSLATE_NOOP("byron-core", ""
-"Unable to locate enough funds for this transaction that are not equal 1000 "
+"Unable to locate enough Obfuscation denominated funds for this transaction."),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Unable to locate enough Obfuscation non-denominated funds for this "
+"transaction that are not equal 200000 BYRON."),
+QT_TRANSLATE_NOOP("byron-core", ""
+"Unable to locate enough funds for this transaction that are not equal 10000 "
 "BYRON."),
 QT_TRANSLATE_NOOP("byron-core", ""
 "Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: "
@@ -211,21 +233,25 @@ QT_TRANSLATE_NOOP("byron-core", "<category> can be:"),
 QT_TRANSLATE_NOOP("byron-core", "Accept command line and JSON-RPC commands"),
 QT_TRANSLATE_NOOP("byron-core", "Accept connections from outside (default: 1 if no -proxy or -connect)"),
 QT_TRANSLATE_NOOP("byron-core", "Accept public REST requests (default: %u)"),
-QT_TRANSLATE_NOOP("byron-core", "Acceptable ciphers (default: %s)"),
 QT_TRANSLATE_NOOP("byron-core", "Add a node to connect to and attempt to keep the connection open"),
 QT_TRANSLATE_NOOP("byron-core", "Allow DNS lookups for -addnode, -seednode and -connect"),
 QT_TRANSLATE_NOOP("byron-core", "Already have that input."),
 QT_TRANSLATE_NOOP("byron-core", "Always query for peer addresses via DNS lookup (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", "Append comment to the user agent string"),
 QT_TRANSLATE_NOOP("byron-core", "Attempt to force blockchain corruption recovery"),
 QT_TRANSLATE_NOOP("byron-core", "Attempt to recover private keys from a corrupt wallet.dat"),
 QT_TRANSLATE_NOOP("byron-core", "Automatically create Tor hidden service (default: %d)"),
 QT_TRANSLATE_NOOP("byron-core", "Block creation options:"),
+QT_TRANSLATE_NOOP("byron-core", "Calculating missing accumulators..."),
+QT_TRANSLATE_NOOP("byron-core", "Can't denominate: no compatible inputs left."),
 QT_TRANSLATE_NOOP("byron-core", "Can't find random Masternode."),
+QT_TRANSLATE_NOOP("byron-core", "Can't mix while sync in progress."),
 QT_TRANSLATE_NOOP("byron-core", "Cannot downgrade wallet"),
 QT_TRANSLATE_NOOP("byron-core", "Cannot resolve -bind address: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Cannot resolve -externalip address: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Cannot resolve -whitebind address: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Cannot write default address"),
+QT_TRANSLATE_NOOP("byron-core", "CoinSpend: Accumulator witness does not verify"),
 QT_TRANSLATE_NOOP("byron-core", "Collateral not valid."),
 QT_TRANSLATE_NOOP("byron-core", "Connect only to the specified node(s)"),
 QT_TRANSLATE_NOOP("byron-core", "Connect through SOCKS5 proxy"),
@@ -233,10 +259,8 @@ QT_TRANSLATE_NOOP("byron-core", "Connect to a node to retrieve peer addresses, a
 QT_TRANSLATE_NOOP("byron-core", "Connection options:"),
 QT_TRANSLATE_NOOP("byron-core", "Copyright (C) 2009-%i The Bitcoin Core Developers"),
 QT_TRANSLATE_NOOP("byron-core", "Copyright (C) 2014-%i The Dash Core Developers"),
-QT_TRANSLATE_NOOP("byron-core", "Copyright (C) 2015-%i The PIVX Core Developers"),
-QT_TRANSLATE_NOOP("byron-core", "Copyright (C) 2017-%i The Byron Core Developers"),
+QT_TRANSLATE_NOOP("byron-core", "Copyright (C) 2015-%i The Byron Core Developers"),
 QT_TRANSLATE_NOOP("byron-core", "Corrupted block database detected"),
-QT_TRANSLATE_NOOP("byron-core", "Could not parse -rpcbind value %s as network address"),
 QT_TRANSLATE_NOOP("byron-core", "Could not parse masternode.conf"),
 QT_TRANSLATE_NOOP("byron-core", "Debugging/Testing options:"),
 QT_TRANSLATE_NOOP("byron-core", "Delete blockchain folders and resync from scratch"),
@@ -249,10 +273,10 @@ QT_TRANSLATE_NOOP("byron-core", "Do not load the wallet and disable wallet RPC c
 QT_TRANSLATE_NOOP("byron-core", "Do you want to rebuild the block database now?"),
 QT_TRANSLATE_NOOP("byron-core", "Done loading"),
 QT_TRANSLATE_NOOP("byron-core", "Enable publish hash block in <address>"),
-QT_TRANSLATE_NOOP("byron-core", "Enable publish hash transaction (locked via SwiftTX) in <address>"),
+QT_TRANSLATE_NOOP("byron-core", "Enable publish hash transaction (locked via SwiftX) in <address>"),
 QT_TRANSLATE_NOOP("byron-core", "Enable publish hash transaction in <address>"),
 QT_TRANSLATE_NOOP("byron-core", "Enable publish raw block in <address>"),
-QT_TRANSLATE_NOOP("byron-core", "Enable publish raw transaction (locked via SwiftTX) in <address>"),
+QT_TRANSLATE_NOOP("byron-core", "Enable publish raw transaction (locked via SwiftX) in <address>"),
 QT_TRANSLATE_NOOP("byron-core", "Enable publish raw transaction in <address>"),
 QT_TRANSLATE_NOOP("byron-core", "Enable staking functionality (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Enable the client to act as a masternode (0-1, default: %u)"),
@@ -267,15 +291,22 @@ QT_TRANSLATE_NOOP("byron-core", "Error loading wallet.dat: Wallet requires newer
 QT_TRANSLATE_NOOP("byron-core", "Error opening block database"),
 QT_TRANSLATE_NOOP("byron-core", "Error reading from database, shutting down."),
 QT_TRANSLATE_NOOP("byron-core", "Error recovering public key."),
+QT_TRANSLATE_NOOP("byron-core", "Error writing zerocoinDB to disk"),
 QT_TRANSLATE_NOOP("byron-core", "Error"),
 QT_TRANSLATE_NOOP("byron-core", "Error: A fatal internal error occured, see debug.log for details"),
+QT_TRANSLATE_NOOP("byron-core", "Error: A fatal internal error occurred, see debug.log for details"),
+QT_TRANSLATE_NOOP("byron-core", "Error: Can't select current denominated inputs"),
 QT_TRANSLATE_NOOP("byron-core", "Error: Disk space is low!"),
+QT_TRANSLATE_NOOP("byron-core", "Error: No valid utxo!"),
 QT_TRANSLATE_NOOP("byron-core", "Error: Unsupported argument -tor found, use -onion."),
 QT_TRANSLATE_NOOP("byron-core", "Error: Wallet locked, unable to create transaction!"),
+QT_TRANSLATE_NOOP("byron-core", "Error: You already have pending entries in the Obfuscation pool"),
+QT_TRANSLATE_NOOP("byron-core", "Failed to calculate accumulator checkpoint"),
+QT_TRANSLATE_NOOP("byron-core", "Failed to deserialize"),
 QT_TRANSLATE_NOOP("byron-core", "Failed to listen on any port. Use -listen=0 if you want this."),
-QT_TRANSLATE_NOOP("byron-core", "Failed to read block index"),
+QT_TRANSLATE_NOOP("byron-core", "Failed to parse host:port string"),
 QT_TRANSLATE_NOOP("byron-core", "Failed to read block"),
-QT_TRANSLATE_NOOP("byron-core", "Failed to write block index"),
+QT_TRANSLATE_NOOP("byron-core", "Failed to write coin serial number into wallet"),
 QT_TRANSLATE_NOOP("byron-core", "Fee (in BYRON/kB) to add to transactions you send (default: %s)"),
 QT_TRANSLATE_NOOP("byron-core", "Finalizing transaction."),
 QT_TRANSLATE_NOOP("byron-core", "Force safe mode (default: %u)"),
@@ -296,7 +327,6 @@ QT_TRANSLATE_NOOP("byron-core", "Input is not valid."),
 QT_TRANSLATE_NOOP("byron-core", "Insufficient funds"),
 QT_TRANSLATE_NOOP("byron-core", "Insufficient funds."),
 QT_TRANSLATE_NOOP("byron-core", "Invalid -onion address or hostname: '%s'"),
-QT_TRANSLATE_NOOP("byron-core", "Invalid -proxy address or hostname: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Invalid amount for -maxtxfee=<amount>: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Invalid amount for -minrelaytxfee=<amount>: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Invalid amount for -mintxfee=<amount>: '%s'"),
@@ -310,6 +340,8 @@ QT_TRANSLATE_NOOP("byron-core", "Invalid port detected in masternode.conf"),
 QT_TRANSLATE_NOOP("byron-core", "Invalid private key."),
 QT_TRANSLATE_NOOP("byron-core", "Invalid script detected."),
 QT_TRANSLATE_NOOP("byron-core", "Keep at most <n> unconnectable transactions in memory (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", "Last Obfuscation was too recent."),
+QT_TRANSLATE_NOOP("byron-core", "Last successful Obfuscation action was too recent."),
 QT_TRANSLATE_NOOP("byron-core", "Limit size of signature cache to <n> entries (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Line: %d"),
 QT_TRANSLATE_NOOP("byron-core", "Listen for JSON-RPC connections on <port> (default: %u or testnet: %u)"),
@@ -322,47 +354,57 @@ QT_TRANSLATE_NOOP("byron-core", "Loading masternode payment cache..."),
 QT_TRANSLATE_NOOP("byron-core", "Loading sporks..."),
 QT_TRANSLATE_NOOP("byron-core", "Loading wallet... (%3.2f %%)"),
 QT_TRANSLATE_NOOP("byron-core", "Loading wallet..."),
+QT_TRANSLATE_NOOP("byron-core", "Location of the auth cookie (default: data dir)"),
 QT_TRANSLATE_NOOP("byron-core", "Lock is already in place."),
 QT_TRANSLATE_NOOP("byron-core", "Lock masternodes from masternode configuration file (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", "Lookup(): Invalid -proxy address or hostname: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Maintain at most <n> connections to peers (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Masternode options:"),
 QT_TRANSLATE_NOOP("byron-core", "Masternode queue is full."),
 QT_TRANSLATE_NOOP("byron-core", "Masternode:"),
 QT_TRANSLATE_NOOP("byron-core", "Maximum per-connection receive buffer, <n>*1000 bytes (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Maximum per-connection send buffer, <n>*1000 bytes (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", "Mint did not make it into blockchain"),
 QT_TRANSLATE_NOOP("byron-core", "Missing input transaction information."),
+QT_TRANSLATE_NOOP("byron-core", "Mixing in progress..."),
+QT_TRANSLATE_NOOP("byron-core", "Need address because change is not exact"),
 QT_TRANSLATE_NOOP("byron-core", "Need to specify a port with -whitebind: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "No Masternodes detected."),
 QT_TRANSLATE_NOOP("byron-core", "No compatible Masternode found."),
+QT_TRANSLATE_NOOP("byron-core", "No funds detected in need of denominating."),
+QT_TRANSLATE_NOOP("byron-core", "No matching denominations found for mixing."),
 QT_TRANSLATE_NOOP("byron-core", "Node relay options:"),
 QT_TRANSLATE_NOOP("byron-core", "Non-standard public key detected."),
 QT_TRANSLATE_NOOP("byron-core", "Not compatible with existing transactions."),
 QT_TRANSLATE_NOOP("byron-core", "Not enough file descriptors available."),
 QT_TRANSLATE_NOOP("byron-core", "Not in the Masternode list."),
 QT_TRANSLATE_NOOP("byron-core", "Number of automatic wallet backups (default: 10)"),
+QT_TRANSLATE_NOOP("byron-core", "Number of custom location backups to retain (default: %d)"),
+QT_TRANSLATE_NOOP("byron-core", "Obfuscation is idle."),
+QT_TRANSLATE_NOOP("byron-core", "Obfuscation request complete:"),
+QT_TRANSLATE_NOOP("byron-core", "Obfuscation request incomplete:"),
 QT_TRANSLATE_NOOP("byron-core", "Only accept block chain matching built-in checkpoints (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Only connect to nodes in network <net> (ipv4, ipv6 or onion)"),
 QT_TRANSLATE_NOOP("byron-core", "Options:"),
 QT_TRANSLATE_NOOP("byron-core", "Password for JSON-RPC connections"),
+QT_TRANSLATE_NOOP("byron-core", "Percentage of automatically minted Zerocoin  (1-100, default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Preparing for resync..."),
 QT_TRANSLATE_NOOP("byron-core", "Prepend debug output with timestamp (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Print version and exit"),
-QT_TRANSLATE_NOOP("byron-core", "RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)"),
 QT_TRANSLATE_NOOP("byron-core", "RPC server options:"),
-QT_TRANSLATE_NOOP("byron-core", "RPC support for HTTP persistent connections (default: %d)"),
 QT_TRANSLATE_NOOP("byron-core", "Randomly drop 1 of every <n> network messages"),
 QT_TRANSLATE_NOOP("byron-core", "Randomly fuzz 1 of every <n> network messages"),
 QT_TRANSLATE_NOOP("byron-core", "Rebuild block chain index from current blk000??.dat files"),
 QT_TRANSLATE_NOOP("byron-core", "Receive and display P2P network alerts (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", "Reindex the BYRON money supply statistics"),
 QT_TRANSLATE_NOOP("byron-core", "Relay and mine data carrier transactions (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Relay non-P2SH multisig (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Rescan the block chain for missing wallet transactions"),
 QT_TRANSLATE_NOOP("byron-core", "Rescanning..."),
 QT_TRANSLATE_NOOP("byron-core", "Run a thread to flush wallet periodically (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Run in the background as a daemon and accept commands"),
+QT_TRANSLATE_NOOP("byron-core", "Selected coins value is less than payment target"),
 QT_TRANSLATE_NOOP("byron-core", "Send transactions as zero-fee transactions if possible (default: %u)"),
-QT_TRANSLATE_NOOP("byron-core", "Server certificate file (default: %s)"),
-QT_TRANSLATE_NOOP("byron-core", "Server private key (default: %s)"),
 QT_TRANSLATE_NOOP("byron-core", "Session not complete!"),
 QT_TRANSLATE_NOOP("byron-core", "Session timed out."),
 QT_TRANSLATE_NOOP("byron-core", "Set database cache size in megabytes (%d to %d, default: %d)"),
@@ -386,13 +428,14 @@ QT_TRANSLATE_NOOP("byron-core", "Specify masternode configuration file (default:
 QT_TRANSLATE_NOOP("byron-core", "Specify pid file (default: %s)"),
 QT_TRANSLATE_NOOP("byron-core", "Specify wallet file (within data directory)"),
 QT_TRANSLATE_NOOP("byron-core", "Specify your own public address"),
+QT_TRANSLATE_NOOP("byron-core", "Spend Valid"),
 QT_TRANSLATE_NOOP("byron-core", "Spend unconfirmed change when sending transactions (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Staking options:"),
 QT_TRANSLATE_NOOP("byron-core", "Stop running after importing blocks from disk (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Submitted following entries to masternode: %u / %d"),
 QT_TRANSLATE_NOOP("byron-core", "Submitted to masternode, waiting for more entries ( %u / %d ) %s"),
 QT_TRANSLATE_NOOP("byron-core", "Submitted to masternode, waiting in queue %s"),
-QT_TRANSLATE_NOOP("byron-core", "SwiftTX options:"),
+QT_TRANSLATE_NOOP("byron-core", "SwiftX options:"),
 QT_TRANSLATE_NOOP("byron-core", "Synchronization failed"),
 QT_TRANSLATE_NOOP("byron-core", "Synchronization finished"),
 QT_TRANSLATE_NOOP("byron-core", "Synchronization pending..."),
@@ -400,13 +443,20 @@ QT_TRANSLATE_NOOP("byron-core", "Synchronizing budgets..."),
 QT_TRANSLATE_NOOP("byron-core", "Synchronizing masternode winners..."),
 QT_TRANSLATE_NOOP("byron-core", "Synchronizing masternodes..."),
 QT_TRANSLATE_NOOP("byron-core", "Synchronizing sporks..."),
+QT_TRANSLATE_NOOP("byron-core", "The coin spend has been used"),
+QT_TRANSLATE_NOOP("byron-core", "The new spend coin transaction did not verify"),
+QT_TRANSLATE_NOOP("byron-core", "The selected mint coin is an invalid coin"),
+QT_TRANSLATE_NOOP("byron-core", "The transaction did not verify"),
 QT_TRANSLATE_NOOP("byron-core", "This help message"),
 QT_TRANSLATE_NOOP("byron-core", "This is experimental software."),
 QT_TRANSLATE_NOOP("byron-core", "This is intended for regression testing tools and app development."),
 QT_TRANSLATE_NOOP("byron-core", "This is not a Masternode."),
 QT_TRANSLATE_NOOP("byron-core", "Threshold for disconnecting misbehaving peers (default: %u)"),
+QT_TRANSLATE_NOOP("byron-core", "Too many spends needed"),
 QT_TRANSLATE_NOOP("byron-core", "Tor control port password (default: empty)"),
 QT_TRANSLATE_NOOP("byron-core", "Tor control port to use if onion listening enabled (default: %s)"),
+QT_TRANSLATE_NOOP("byron-core", "Transaction Created"),
+QT_TRANSLATE_NOOP("byron-core", "Transaction Mint Started"),
 QT_TRANSLATE_NOOP("byron-core", "Transaction amount too small"),
 QT_TRANSLATE_NOOP("byron-core", "Transaction amounts must be positive"),
 QT_TRANSLATE_NOOP("byron-core", "Transaction created successfully."),
@@ -415,17 +465,22 @@ QT_TRANSLATE_NOOP("byron-core", "Transaction not valid."),
 QT_TRANSLATE_NOOP("byron-core", "Transaction too large for fee policy"),
 QT_TRANSLATE_NOOP("byron-core", "Transaction too large"),
 QT_TRANSLATE_NOOP("byron-core", "Transmitting final transaction."),
+QT_TRANSLATE_NOOP("byron-core", "Try to spend with a higher security level to include more coins"),
+QT_TRANSLATE_NOOP("byron-core", "Trying to spend an already spent serial #, try again."),
 QT_TRANSLATE_NOOP("byron-core", "Unable to bind to %s on this computer (bind returned error %s)"),
+QT_TRANSLATE_NOOP("byron-core", "Unable to find transaction containing mint"),
 QT_TRANSLATE_NOOP("byron-core", "Unable to sign spork message, wrong key?"),
+QT_TRANSLATE_NOOP("byron-core", "Unable to start HTTP server. See debug log for details."),
 QT_TRANSLATE_NOOP("byron-core", "Unknown network specified in -onlynet: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "Unknown state: id = %u"),
 QT_TRANSLATE_NOOP("byron-core", "Upgrade wallet to latest format"),
-QT_TRANSLATE_NOOP("byron-core", "Use OpenSSL (https) for JSON-RPC connections"),
 QT_TRANSLATE_NOOP("byron-core", "Use UPnP to map the listening port (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Use UPnP to map the listening port (default: 1 when listening)"),
 QT_TRANSLATE_NOOP("byron-core", "Use a custom max chain reorganization depth (default: %u)"),
 QT_TRANSLATE_NOOP("byron-core", "Use the test network"),
+QT_TRANSLATE_NOOP("byron-core", "User Agent comment (%s) contains unsafe characters."),
 QT_TRANSLATE_NOOP("byron-core", "Username for JSON-RPC connections"),
+QT_TRANSLATE_NOOP("byron-core", "Value more than Obfuscation pool maximum allows."),
 QT_TRANSLATE_NOOP("byron-core", "Verifying blocks..."),
 QT_TRANSLATE_NOOP("byron-core", "Verifying wallet..."),
 QT_TRANSLATE_NOOP("byron-core", "Wallet %s resides outside data directory %s"),
@@ -443,6 +498,7 @@ QT_TRANSLATE_NOOP("byron-core", "Your entries added successfully."),
 QT_TRANSLATE_NOOP("byron-core", "Your transaction was accepted into the pool!"),
 QT_TRANSLATE_NOOP("byron-core", "Zapping all transactions from wallet..."),
 QT_TRANSLATE_NOOP("byron-core", "ZeroMQ notification options:"),
+QT_TRANSLATE_NOOP("byron-core", "isValid(): Invalid -proxy address or hostname: '%s'"),
 QT_TRANSLATE_NOOP("byron-core", "on startup"),
 QT_TRANSLATE_NOOP("byron-core", "wallet.dat corrupt, salvage failed"),
 };

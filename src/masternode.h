@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,6 +9,7 @@
 
 #include "base58.h"
 #include "key.h"
+#include "main.h"
 #include "net.h"
 #include "sync.h"
 #include "timedata.h"
@@ -21,8 +22,6 @@
 #define MASTERNODE_EXPIRATION_SECONDS (120 * 60)
 #define MASTERNODE_REMOVAL_SECONDS (130 * 60)
 #define MASTERNODE_CHECK_SECONDS 5
-
-#define MASTERNODE_COLLATERAL 50000
 
 using namespace std;
 
@@ -103,7 +102,7 @@ public:
 };
 
 //
-// The Masternode Class. It contains the input of the BYRON collateral, signature to prove
+// The Masternode Class. For managing the Obfuscation process. It contains the input of the 200000 BYRON, signature to prove
 // it's the one who own that ip address and code for calculating the payment election.
 //
 class CMasternode
@@ -152,6 +151,7 @@ public:
     CMasternode();
     CMasternode(const CMasternode& other);
     CMasternode(const CMasternodeBroadcast& mnb);
+
 
     void swap(CMasternode& first, CMasternode& second) // nothrow
     {
@@ -255,7 +255,17 @@ public:
         return activeState == MASTERNODE_ENABLED;
     }
 
-    int GetMasternodeInputAge();
+    int GetMasternodeInputAge()
+    {
+        if (chainActive.Tip() == NULL) return 0;
+
+        if (cacheInputAge == 0) {
+            cacheInputAge = GetInputAge(vin);
+            cacheInputAgeBlock = chainActive.Tip()->nHeight;
+        }
+
+        return cacheInputAge + (chainActive.Tip()->nHeight - cacheInputAgeBlock);
+    }
 
     std::string GetStatus();
 
@@ -293,7 +303,8 @@ public:
     bool Sign(CKey& keyCollateralAddress);
     bool VerifySignature();
     void Relay();
-    std::string GetStrMessage();
+    std::string GetOldStrMessage();
+    std::string GetNewStrMessage();
 
     ADD_SERIALIZE_METHODS;
 

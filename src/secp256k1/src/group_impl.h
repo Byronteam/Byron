@@ -308,7 +308,7 @@ static void secp256k1_gej_double_var(secp256k1_gej *r, const secp256k1_gej *a, s
     /* Operations: 3 mul, 4 sqr, 0 normalize, 12 mul_int/add/negate.
      *
      * Note that there is an implementation described at
-     *     https://hyperelliptic.org/EFD/g1p/auto-shortw-jacobian-0.html#doubling-dbl-2009-l
+     *     https://hyperelliptic.org/EFD/g1p/auto-shortw-byronobian-0.html#doubling-dbl-2009-l
      * which trades a multiply for a square, but in practice this is actually slower,
      * mainly because it requires more normalizations.
      */
@@ -696,7 +696,7 @@ static int secp256k1_gej_has_quad_y_var(const secp256k1_gej *a) {
         return 0;
     }
 
-    /* We rely on the fact that the Jacobi symbol of 1 / a->z^3 is the same as
+    /* We rely on the fact that the Byronobi symbol of 1 / a->z^3 is the same as
      * that of a->z. Thus a->y / a->z^3 is a quadratic residue iff a->y * a->z
        is */
     secp256k1_fe_mul(&yz, &a->y, &a->z);

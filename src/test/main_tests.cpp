@@ -7,27 +7,26 @@
 #include "primitives/transaction.h"
 #include "main.h"
 
-#include "test/test_byron.h"
-
 #include <boost/test/unit_test.hpp>
 
-BOOST_FIXTURE_TEST_SUITE(main_tests, TestingSetup)
-
-CAmount nMoneySupplyPoWEnd = 500000 * COIN;
+BOOST_AUTO_TEST_SUITE(main_tests)
 
 BOOST_AUTO_TEST_CASE(subsidy_limit_test)
 {
     CAmount nSum = 0;
-    for (int nHeight = 0; nHeight < 1; nHeight += 1) {
-        /* premine in block 1 (500,001 BYRON) */
+    for (int nHeight = 1; nHeight < 2; nHeight += 1) {
         CAmount nSubsidy = GetBlockValue(nHeight);
-        BOOST_CHECK(nSubsidy <= 500000 * COIN);
+        BOOST_CHECK(nSubsidy <= 6000000 * COIN);
         nSum += nSubsidy;
     }
 
-    /*	TODO: Get correct max supply and block values for all stages */
-    /*	For now skip check so test succeeds */
-    /*	BOOST_CHECK(nSum == 50000000000000ULL);	*/
+    for (int nHeight = 2; nHeight < 3; nHeight += 1) {
+        CAmount nSubsidy = GetBlockValue(nHeight);
+        BOOST_CHECK(nSubsidy <= 6000000 * COIN);
+        nSum += nSubsidy;
+    }
+
+    BOOST_CHECK(nSum == 1200000000000000ULL);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

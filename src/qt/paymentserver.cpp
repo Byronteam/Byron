@@ -12,7 +12,6 @@
 
 #include "base58.h"
 #include "chainparams.h"
-#include "main.h"
 #include "ui_interface.h"
 #include "util.h"
 #include "wallet.h"
@@ -81,7 +80,7 @@ namespace // Anon namespace
 //
 static QString ipcServerName()
 {
-    QString name("ByronQt");
+    QString name("BYRONQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path
@@ -240,7 +239,7 @@ bool PaymentServer::ipcSendCommandLine()
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
         if (!socket->waitForConnected(BITCOIN_IPC_CONNECT_TIMEOUT)) {
             delete socket;
-            socket = nullptr;
+            socket = NULL;
             return false;
         }
 
@@ -256,7 +255,7 @@ bool PaymentServer::ipcSendCommandLine()
         socket->disconnectFromServer();
 
         delete socket;
-        socket = nullptr;
+        socket = NULL;
         fResult = true;
     }
 
@@ -327,7 +326,7 @@ void PaymentServer::initNetManager()
 {
     if (!optionsModel)
         return;
-    if (netManager != nullptr)
+    if (netManager != NULL)
         delete netManager;
 
     // netManager is used to fetch paymentrequests given in byron: URIs
@@ -400,7 +399,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
                     emit receivedPaymentRequest(recipient);
             } else
                 emit message(tr("URI handling"),
-                    tr("URI cannot be parsed! This can be caused by an invalid Byron address or malformed URI parameters."),
+                    tr("URI cannot be parsed! This can be caused by an invalid BYRON address or malformed URI parameters."),
                     CClientUIInterface::ICON_WARNING);
 
             return;

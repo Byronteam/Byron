@@ -1,14 +1,14 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "bip38.h"
 #include "init.h"
 #include "main.h"
-#include "rpcserver.h"
+#include "rpc/server.h"
 #include "script/script.h"
 #include "script/standard.h"
 #include "sync.h"
@@ -29,8 +29,6 @@
 #include <univalue.h>
 
 using namespace std;
-
-void EnsureWalletIsUnlocked(bool fAllowAnonOnly);
 
 std::string static EncodeDumpTime(int64_t nTime)
 {
@@ -142,7 +140,7 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
         if (!pwalletMain->AddKeyPubKey(key, pubkey))
             throw JSONRPCError(RPC_WALLET_ERROR, "Error adding key to wallet");
 
-        // whenever a key is imported, we need to scan the whole chain
+        // Whenever a key is imported, we need to scan the whole chain
         pwalletMain->nTimeFirstKey = 1; // 0 would be considered 'no value'
 
         if (fRescan) {
@@ -186,7 +184,7 @@ UniValue importaddress(const UniValue& params, bool fHelp)
         std::vector<unsigned char> data(ParseHex(params[0].get_str()));
         script = CScript(data.begin(), data.end());
     } else {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Byron address or script");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BYRON address or script");
     }
 
     string strLabel = "";
@@ -202,7 +200,7 @@ UniValue importaddress(const UniValue& params, bool fHelp)
         if (::IsMine(*pwalletMain, script) == ISMINE_SPENDABLE)
             throw JSONRPCError(RPC_WALLET_ERROR, "The wallet already contains the private key for this address or script");
 
-        // add to address book or update label
+        // Add to address book or update label
         if (address.IsValid())
             pwalletMain->SetAddressBook(address.Get(), strLabel, "receive");
 
@@ -338,6 +336,7 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
 
             "\nArguments:\n"
             "1. \"byronaddress\"   (string, required) The byron address for the private key\n"
+
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
 
@@ -351,7 +350,7 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     string strAddress = params[0].get_str();
     CBitcoinAddress address;
     if (!address.SetString(strAddress))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Byron address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BYRON address");
     CKeyID keyID;
     if (!address.GetKeyID(keyID))
         throw JSONRPCError(RPC_TYPE_ERROR, "Address does not refer to a key");
@@ -390,7 +389,7 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     pwalletMain->GetKeyBirthTimes(mapKeyBirth);
     pwalletMain->GetAllReserveKeys(setKeyPool);
 
-    // sort time/key pairs
+    // Sort time/key pairs
     std::vector<std::pair<int64_t, CKeyID> > vKeyBirth;
     for (std::map<CKeyID, int64_t>::const_iterator it = mapKeyBirth.begin(); it != mapKeyBirth.end(); it++) {
         vKeyBirth.push_back(std::make_pair(it->second, it->first));
@@ -398,8 +397,8 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     mapKeyBirth.clear();
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
-    // produce output
-    file << strprintf("# Wallet dump created by Byron %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
+    // Produce output
+    file << strprintf("# Wallet dump created by BYRON %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
     file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));
@@ -422,6 +421,7 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     file << "\n";
     file << "# End of dump\n";
     file.close();
+
     return NullUniValue;
 }
 
@@ -429,7 +429,7 @@ UniValue bip38encrypt(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "bip38encrypt \"byronaddress\"\n"
+            "bip38encrypt \"byronaddress\" \"passphrase\"\n"
             "\nEncrypts a private key corresponding to 'byronaddress'.\n" +
             HelpRequiringPassphrase() + "\n"
 
@@ -453,7 +453,7 @@ UniValue bip38encrypt(const UniValue& params, bool fHelp)
 
     CBitcoinAddress address;
     if (!address.SetString(strAddress))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Byron address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BYRON address");
     CKeyID keyID;
     if (!address.GetKeyID(keyID))
         throw JSONRPCError(RPC_TYPE_ERROR, "Address does not refer to a key");
@@ -530,7 +530,7 @@ UniValue bip38decrypt(const UniValue& params, bool fHelp)
         if (!pwalletMain->AddKeyPubKey(key, pubkey))
             throw JSONRPCError(RPC_WALLET_ERROR, "Error adding key to wallet");
 
-        // whenever a key is imported, we need to scan the whole chain
+        // Whenever a key is imported, we need to scan the whole chain
         pwalletMain->nTimeFirstKey = 1; // 0 would be considered 'no value'
         pwalletMain->ScanForWalletTransactions(chainActive.Genesis(), true);
     }

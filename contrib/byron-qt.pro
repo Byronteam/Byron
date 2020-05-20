@@ -5,7 +5,7 @@
 DEFINES += ENABLE_WALLET
 
 TEMPLATE = app
-TARGET =
+TARGET = 
 DEPENDPATH += . \
               src \
               src/compat \
@@ -76,6 +76,8 @@ HEADERS += src/activemasternode.h \
            src/compressor.h \
            src/core_io.h \
            src/crypter.h \
+           src/obfuscation-relay.h \
+           src/obfuscation.h \
            src/byron-config.h \
            src/db.h \
            src/eccryptoverify.h \
@@ -95,8 +97,6 @@ HEADERS += src/activemasternode.h \
            src/masternode.h \
            src/masternodeconfig.h \
            src/masternodeman.h \
-           src/masternode-helpers.h \
-           src/maternode-vote.h \
            src/merkleblock.h \
            src/miner.h \
            src/mruset.h \
@@ -175,6 +175,7 @@ HEADERS += src/activemasternode.h \
            src/qt/coincontroldialog.h \
            src/qt/coincontroltreewidget.h \
            src/qt/csvmodelwriter.h \
+           src/qt/obfuscationconfig.h \
            src/qt/editaddressdialog.h \
            src/qt/guiconstants.h \
            src/qt/guiutil.h \
@@ -339,6 +340,7 @@ HEADERS += src/activemasternode.h \
 FORMS += src/qt/forms/addressbookpage.ui \
          src/qt/forms/askpassphrasedialog.ui \
          src/qt/forms/coincontroldialog.ui \
+         src/qt/forms/obfuscationconfig.ui \
          src/qt/forms/editaddressdialog.ui \
          src/qt/forms/helpmessagedialog.ui \
          src/qt/forms/intro.ui \
@@ -369,6 +371,8 @@ SOURCES += src/activemasternode.cpp \
            src/core_read.cpp \
            src/core_write.cpp \
            src/crypter.cpp \
+           src/obfuscation-relay.cpp \
+           src/obfuscation.cpp \
            src/byron-cli.cpp \
            src/byron-tx.cpp \
            src/byron.cpp \
@@ -390,8 +394,6 @@ SOURCES += src/activemasternode.cpp \
            src/masternode.cpp \
            src/masternodeconfig.cpp \
            src/masternodeman.cpp \
-           src/masternode-helpers.cpp \
-           src/masternode-vote.cpp \
            src/merkleblock.cpp \
            src/miner.cpp \
            src/net.cpp \
@@ -406,7 +408,6 @@ SOURCES += src/activemasternode.cpp \
            src/rpcclient.cpp \
            src/rpcdump.cpp \
            src/rpcmasternode-budget.cpp \
-           src/rpcmasternode-vote.cpp \
            src/rpcmasternode.cpp \
            src/rpcmining.cpp \
            src/rpcmisc.cpp \
@@ -468,6 +469,7 @@ SOURCES += src/activemasternode.cpp \
            src/qt/coincontroldialog.cpp \
            src/qt/coincontroltreewidget.cpp \
            src/qt/csvmodelwriter.cpp \
+           src/qt/obfuscationconfig.cpp \
            src/qt/byron.cpp \
            src/qt/byronstrings.cpp \
            src/qt/editaddressdialog.cpp \
@@ -522,14 +524,12 @@ SOURCES += src/activemasternode.cpp \
            src/test/bip32_tests.cpp \
            src/test/bloom_tests.cpp \
            src/test/checkblock_tests.cpp \
-           src/test/Checkpoints_tests.cpp \
            src/test/coins_tests.cpp \
            src/test/compress_tests.cpp \
            src/test/crypto_tests.cpp \
            src/test/DoS_tests.cpp \
            src/test/getarg_tests.cpp \
            src/test/hash_tests.cpp \
-           src/test/key_tests.cpp \
            src/test/main_tests.cpp \
            src/test/mempool_tests.cpp \
            src/test/miner_tests.cpp \
@@ -542,6 +542,7 @@ SOURCES += src/activemasternode.cpp \
            src/test/sanity_tests.cpp \
            src/test/script_P2SH_tests.cpp \
            src/test/script_tests.cpp \
+           src/test/scriptnum_tests.cpp \
            src/test/serialize_tests.cpp \
            src/test/sighash_tests.cpp \
            src/test/sigopcount_tests.cpp \

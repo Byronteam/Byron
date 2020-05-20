@@ -1,8 +1,8 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -53,54 +53,34 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0,      uint256("0x0000046a0d44551528c3a82e99ebd00e163efc0668b85ebe34d9d5effc7b05d9"));
+    (0, uint256("0x0000092b8ce55c822d19feb674f16b8cccae6908797265c3c52159fa026bcd25"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1569021030, // * UNIX timestamp of last checkpoint block
-    0,    // * total number of transactions between genesis and last checkpoint
+    1588871071, // * UNIX timestamp of last checkpoint block
+    0,          // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
-    boost::assign::map_list_of(0, uint256S("0x001"));
-
+    boost::assign::map_list_of(0, uint256("0x001"));
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1740710,
+    1570470324,
     0,
-    250};
+    250
+};
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
-    boost::assign::map_list_of(0, uint256S("0x001"));
+    boost::assign::map_list_of(0, uint256("0x001"));
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
-    1454124731,
+    1570470444,
     0,
-    100};
-void MineGenesis(CBlock genesis, uint256 bnProofOfWorkLimit) {
-    printf("Mining genesis block...\n");
+    100
+};
 
-	uint256 bnTarget;
-    bool fNegative;
-    bool fOverflow;
-	
-	bnTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow);
-    //for (genesis.nNonce == 0; genesis.GetHash() > bnProofOfWorkLimit; genesis.nNonce++) { } 
-	if(genesis.nNonce == 0){
-		while (genesis.GetHash() > bnTarget){
-			genesis.nNonce++;
-		}
-	}
-
-    printf("Mined genesis block:\n");
-    printf("Merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
-    printf("Nonce: %u\n", genesis.nNonce);
-	printf("Bits: %u\n", genesis.nBits);
-    printf("Hash: %s\n", genesis.GetHash().ToString().c_str());
-	printf("POW: %s\n", bnTarget.ToString().c_str());
-}
 class CMainParams : public CChainParams
 {
 public:
@@ -113,100 +93,95 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x54;
-        pchMessageStart[1] = 0xdc;
-        pchMessageStart[2] = 0x12;
-        pchMessageStart[3] = 0xae;
-        vAlertPubKey = ParseHex("046127ee39038a7919ac83b2ffe694d52df30974adf03b5ab2590c24ca60d8e7cc4b2eb4e205e10ca9175a356006eb92cf91c975f8b1072ef6110d5038eb72365b");
+        pchMessageStart[0] = 0x11;
+        pchMessageStart[1] = 0xc4;
+        pchMessageStart[2] = 0xfd;
+        pchMessageStart[3] = 0x1a;
+        vAlertPubKey = ParseHex("04bc9f12c91b66060847f1d67d17d79318e559230ce12d21732f9bc903b361f9f2026f759d4a4abe6f31edb5ba71275c9cd8408ffd7d88cd8772ed7aa075f3dd0e");
         nDefaultPort = 27215;
-        bnProofOfWorkLimit = ~arith_uint256(0) >> 1;
-        nSubsidyHalvingInterval = 1050000;
+        bnProofOfWorkLimit = ~uint256(0) >> 20; // BYRON starting difficulty is 1 / 2^12
         nMaxReorganizationDepth = 100;
-        nEnforceBlockUpgradeMajority = 750;
-        nRejectBlockOutdatedMajority = 950;
-        nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 3 * 60; // Byron: 1 day
-        nTargetSpacing = 3 * 60;  // Byron: 2 minutes
-        nMaturity = 10;
+        nTargetTimespan = 1 * 60; // BYRON: 1 day
+        nTargetSpacing = 1 * 60;  // BYRON: 1 minute
+        nMaturity = 80;
         nMasternodeCountDrift = 20;
+        nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 400;
-        nModifierUpdateBlock = 1; // we use the version 2 for BYRON
+        nLastPOWBlock = 1000;
+        nModifierUpdateBlock = 100;
+        nEnforceNewSporkKey = 1588871071;
+        nRejectOldSporkKey = 1588871071;
 
-        /**
-         * Build the genesis block. Note that the output of the genesis coinbase cannot
-         * be spent as it did not originally exist in the database.
-         *
-         Mined genesis block:
-		 Merkle root: 67a78d8e0934f8b2c9857467584796eba000d3dabcefaa53b9eca08c5dd222ab
-		 Nonce: 200014
-		 Bits: 504365040
-		 Hash: 0000046a0d44551528c3a82e99ebd00e163efc0668b85ebe34d9d5effc7b05d9
-		 POW: 00000ffff0000000000000000000000000000000000000000000000000000000
-
-         */
-        const char* pszTimestamp = "The Byron is the best for your money 20/09/2019 for your life";
+        const char* pszTimestamp = "Enjoy to the crypto revolution Byron 7 may 2020";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 0 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04f27a74a9da1da2b6c31507cf0accec871d2c1537f2d4161c1ca298222fe48ec8fe930ba8e6aab9e2a99f33a0e7b9394be1910757913ebc097f29816fa5bf9de4") << OP_CHECKSIG;
+        txNew.vout[0].nValue = 250 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0466f8e042492f7e1be50f8fa84bc2d39d0cea242704d219bc6d9cd7d1e20c4abc105e45b0510396978c22a7e9f35d21d6fb10005fc27febc2851ba4f051411865") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
-        genesis.hashPrevBlock.SetNull();
+        genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1569021030;
+        genesis.nTime = 1588871071;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 200014;
-		
-		//MineGenesis(genesis, bnProofOfWorkLimit);
+        genesis.nNonce = 890542;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256S("0x0000046a0d44551528c3a82e99ebd00e163efc0668b85ebe34d9d5effc7b05d9"));
-        assert(genesis.hashMerkleRoot == uint256S("0x67a78d8e0934f8b2c9857467584796eba000d3dabcefaa53b9eca08c5dd222ab"));
 
-        // DNS Seeding
-		vSeeds.push_back(CDNSSeedData("157.230.221.112", "157.230.221.112"));
-		vSeeds.push_back(CDNSSeedData("157.245.88.49", "157.245.88.49"));
-		vSeeds.push_back(CDNSSeedData("159.65.20.114", "159.65.20.114"));
-		vSeeds.push_back(CDNSSeedData("104.248.197.3", "104.248.197.3"));
-		vSeeds.push_back(CDNSSeedData("157.245.236.57", "157.245.236.57"));
-		vSeeds.push_back(CDNSSeedData("157.245.222.14", "157.245.222.14"));
 
-        // Byron addresses start with 'V'
+        assert(hashGenesisBlock == uint256("0x0000092b8ce55c822d19feb674f16b8cccae6908797265c3c52159fa026bcd25"));
+        assert(genesis.hashMerkleRoot == uint256("0xec01c0db9df7e01b39f6647c44bd5d306e1aa1744384d7cf86132beac1a4b5cf"));
+
+        vFixedSeeds.clear();
+
+        vSeeds.push_back(CDNSSeedData("seed1", "193.37.213.195"));
+        vSeeds.push_back(CDNSSeedData("seed2", "85.217.171.11"));
+        vSeeds.push_back(CDNSSeedData("seed3", "185.177.59.59"));
+        vSeeds.push_back(CDNSSeedData("seed4", "91.92.128.42"));
+        vSeeds.push_back(CDNSSeedData("seed5", "185.203.116.114"));
+        vSeeds.push_back(CDNSSeedData("seed6", "185.205.209.40"));
+        vSeeds.push_back(CDNSSeedData("seed7", "185.177.59.154"));        
+        vSeeds.push_back(CDNSSeedData("seed8", "185.141.62.155"));
+        vSeeds.push_back(CDNSSeedData("seed9", "91.92.128.57"));
+        vSeeds.push_back(CDNSSeedData("seed10", "94.156.35.12"));
+                                
+
+
+
+
+ 
+
+
+
+
+
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 26);
-        // Byron script addresses start with '3'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 6);
-        // Byron private keys start with 'K'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 46);
-        // Byron BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // Byron BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // Byron BIP44 coin type is '222' (0x800000de)
-        // BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0xde).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x02)(0x21)(0x31)(0x2B).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x77).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        fMiningRequiresPeers = true;
+        fMiningRequiresPeers = true; // Default true
         fAllowMinDifficultyBlocks = false;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
-        fMineBlocksOnDemand = false;
+        fMineBlocksOnDemand = false; // Default false
         fSkipProofOfWorkCheck = false;
         fTestnetToBeDeprecatedFieldRPC = false;
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "04c9f19249d48878fbf4515c31a58abfdbdf999d9c7855803996c8f6a68ce93144e5ab3ff00305d2c5e5d4d512a036072b3a546d05aa3923ce12b6ae472299e865";
-        strMasternodePoolDummyAddress = "BmUFwbvYDdBZTzWWN8joE43APiNKsKcu2L";
-        nStartMasternodePayments = genesis.nTime + 86400; // 24 hours after genesis creation
-
-        nBudget_Fee_Confirmations = 6; // Number of confirmations for the finalization fee
+        strSporkKey = "045a106cf3aea6d708df936467360a0d8e77dfa08b8e08233d3852de4752ec6a352296b80e7df6949a70ba34efcd5ab0b4ebea9a9b47649c2d32f3eda2010d9564";
+        strSporkKeyOld = "048f591acbc42b77ab04aef7b010d6e23a0f1d4625c94a048e31d379f1a468b9534a8010f751f6bd30e4a9ba262ea8ed09f754f841d448c40a1a6866842cc005ca";
+        strObfuscationPoolDummyAddress = "BWiAhFSVohoo7fSZ1rS5LdsFNcyZ3PAKQ3";
+        nStartMasternodePayments = 1588871071;
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const
@@ -226,59 +201,59 @@ public:
     {
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0x33;
-        pchMessageStart[1] = 0x8a;
-        pchMessageStart[2] = 0xe5;
-        pchMessageStart[3] = 0xa8;
-        vAlertPubKey = ParseHex("04ba89975265af1d4c6295d3587eb4a0e4b758bde1621ef2ab8f92b98e7ed1c85547c9b7a3f145a66aa2abb91db5c13295828e77d823ea6d9b4bb89912425e1efe");
-        nDefaultPort = 32300;
-        nEnforceBlockUpgradeMajority = 51;
-        nRejectBlockOutdatedMajority = 75;
-        nToCheckBlockUpgradeMajority = 100;
+        pchMessageStart[0] = 0xd0;
+        pchMessageStart[1] = 0xcd;
+        pchMessageStart[2] = 0xa9;
+        pchMessageStart[3] = 0x96;
+        vAlertPubKey = ParseHex("047702b6eb08ee32cfbd0cec8197e7287bc46aa3b9b855f268378a8e217eb1f7232dbca8f4e3459758ac2fd476a41266d8ce4ee19e3cacd5169802a9715bf572d1");
+        nDefaultPort = 31244;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Byron: 1 day
-        nTargetSpacing = 2 * 60;  // Byron: 1 minute
-        nLastPOWBlock = 200;
+        nTargetTimespan = 1 * 60; // BYRON: 1 day
+        nTargetSpacing = 1 * 60;  // BYRON: 1 minute
+        nLastPOWBlock = 100;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
-        nModifierUpdateBlock = 1;
+        nModifierUpdateBlock = 101; //approx Mon, 17 Apr 2017 04:00:00 GMT
+        nMaxMoneyOut = 43199500 * COIN;
+        nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
+        nBlockRecalculateAccumulators = 9908000; //Trigger a recalculation of accumulators
+        nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
+        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1534570200;
-        genesis.nNonce = 21148656;
+        genesis.nTime = 1570470324;
+        genesis.nNonce = 1248594;
 
         hashGenesisBlock = genesis.GetHash();
-        //assert(hashGenesisBlock == uint256S("0x000000938f4f20c6ccb3fea36539ade5af73d0bb45c55af64c7f7f1bfa5f3381"));
+        //assert(hashGenesisBlock == uint256("0x0000031593b789b24efaa72a802fcc582f973d1d8871fb888dad1a951d0f1d57"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        // Testnet Byron addresses start with 'g'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 98);
-        // Testnet Byron script addresses start with '5' or '6'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 12);
-        // Testnet private keys start with 'k'
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 108);
-        // Testnet Byron BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Byron BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Byron BIP44 coin type is '1' (All coin's testnet default)
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet byron addresses start with 'x' or 'y'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet byron script addresses start with '8' or '9'
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
+        // Testnet byron BIP32 pubkeys start with 'DRKV'
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
+        // Testnet byron BIP32 prvkeys start with 'DRKP'
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
+        // Testnet byron BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 
         fMiningRequiresPeers = true;
-        fAllowMinDifficultyBlocks = false;
+        fAllowMinDifficultyBlocks = true;
         fDefaultConsistencyChecks = false;
-        fRequireStandard = false;
+        fRequireStandard = true;
         fMineBlocksOnDemand = false;
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
-        strSporkKey = "041bab97de321ccf1e78d10164f90bd87e3070ddb5586389013e9f15c4931e2451f318f1a8f177c5e9a3f5b4b13145f78e8116d2aa7ae14ef27f1f076b02ba852c";
-        strMasternodePoolDummyAddress = "gbJ4Qad4xc77PpLzMx6rUegAs6aUPWkcUq";
-        nStartMasternodePayments = genesis.nTime + 86400; // 24 hours after genesis
+        strSporkKey = "04A8B319388C0F8588D238B9941DC26B26D3F9465266B368A051C5C100F79306A557780101FE2192FE170D7E6DEFDCBEE4C8D533396389C0DAFFDBC842B002243C";
+        strSporkKeyOld = "04348C2F50F90267E64FACC65BFDC9D0EB147D090872FB97ABAE92E9A36E6CA60983E28E741F8E7277B11A7479B626AC115BA31463AC48178A5075C5A9319D4A38";
+        strObfuscationPoolDummyAddress = "y57cqfGRkekRyDRNeJiLtYVEbvhXrNbmox";
+        nStartMasternodePayments = 1420837558; //Fri, 09 Jan 2015 21:05:58 GMT
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
                                        // here because we only have a 8 block finalization window on testnet
     }
@@ -299,38 +274,32 @@ public:
     {
         networkID = CBaseChainParams::REGTEST;
         strNetworkID = "regtest";
-        strNetworkID = "regtest";
-        pchMessageStart[0] = 0x20;
-        pchMessageStart[1] = 0xee;
-        pchMessageStart[2] = 0x32;
-        pchMessageStart[3] = 0xbc;
+        pchMessageStart[0] = 0x93;
+        pchMessageStart[1] = 0x9f;
+        pchMessageStart[2] = 0xb6;
+        pchMessageStart[3] = 0xd8;
         nSubsidyHalvingInterval = 150;
-        nEnforceBlockUpgradeMajority = 750;
-        nRejectBlockOutdatedMajority = 950;
-        nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Byron: 1 day
-        nTargetSpacing = 1 * 60;        // Byron: 1 minute
-        bnProofOfWorkLimit = ~arith_uint256(0) >> 1;
-        nLastPOWBlock = 250;
-        nMaturity = 10;
-        genesis.nTime = 1516926684;
+        nTargetTimespan = 24 * 60 * 60; // BYRON: 1 day
+        nTargetSpacing = 1 * 60;        // BYRON: 1 minutes
+        bnProofOfWorkLimit = ~uint256(0) >> 1;
+
+        genesis.nTime = 1570470444;
         genesis.nBits = 0x207fffff;
-        genesis.nNonce = 20542300;
+        genesis.nNonce = 1;
 
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 227215;
-        //assert(hashGenesisBlock == uint256S("0x229874aa8a92df3347600978e226ba57bc994b9fa291ea50519afafca2d50ed3"));
+        nDefaultPort = 31246;
+        //assert(hashGenesisBlock == uint256("0x55db4c46c531d7399537de526d10fddf1a36fbd7b270c721f0cd1a5e99743881"));
 
-        vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
-        vSeeds.clear();      //! Regtest mode doesn't have any DNS seeds.
+        vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
+        vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
 
         fMiningRequiresPeers = false;
         fAllowMinDifficultyBlocks = true;
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;
         fMineBlocksOnDemand = true;
-        fSkipProofOfWorkCheck = true;
         fTestnetToBeDeprecatedFieldRPC = false;
     }
     const Checkpoints::CCheckpointData& Checkpoints() const
@@ -350,7 +319,7 @@ public:
     {
         networkID = CBaseChainParams::UNITTEST;
         strNetworkID = "unittest";
-        nDefaultPort = 51478;
+        nDefaultPort = 31248;
         vFixedSeeds.clear(); //! Unit test mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Unit test mode doesn't have any DNS seeds.
 
@@ -368,9 +337,6 @@ public:
 
     //! Published setters to allow changing values in unit test cases
     virtual void setSubsidyHalvingInterval(int anSubsidyHalvingInterval) { nSubsidyHalvingInterval = anSubsidyHalvingInterval; }
-    virtual void setEnforceBlockUpgradeMajority(int anEnforceBlockUpgradeMajority) { nEnforceBlockUpgradeMajority = anEnforceBlockUpgradeMajority; }
-    virtual void setRejectBlockOutdatedMajority(int anRejectBlockOutdatedMajority) { nRejectBlockOutdatedMajority = anRejectBlockOutdatedMajority; }
-    virtual void setToCheckBlockUpgradeMajority(int anToCheckBlockUpgradeMajority) { nToCheckBlockUpgradeMajority = anToCheckBlockUpgradeMajority; }
     virtual void setDefaultConsistencyChecks(bool afDefaultConsistencyChecks) { fDefaultConsistencyChecks = afDefaultConsistencyChecks; }
     virtual void setAllowMinDifficultyBlocks(bool afAllowMinDifficultyBlocks) { fAllowMinDifficultyBlocks = afAllowMinDifficultyBlocks; }
     virtual void setSkipProofOfWorkCheck(bool afSkipProofOfWorkCheck) { fSkipProofOfWorkCheck = afSkipProofOfWorkCheck; }

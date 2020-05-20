@@ -1,5 +1,5 @@
-// Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +16,6 @@
 #include "coins.h"
 #include "keystore.h"
 #include "init.h"
-#include "main.h"
 #include "wallet.h"
 #include "script/sign.h"
 #include "script/interpreter.h"
@@ -105,13 +104,13 @@ void MultisigDialog::pasteText()
 void MultisigDialog::deleteFrame()
 {
     QWidget *buttonWidget = qobject_cast<QWidget*>(sender());
-    if (!buttonWidget)return;
+    if(!buttonWidget)return;
 
     //if deleting last raw input/priv key, hide scroll area
-    if (buttonWidget->objectName() == "inputDeleteButton" && ui->inputsList->count() == 1) {
+    if(buttonWidget->objectName() == "inputDeleteButton" && ui->inputsList->count() == 1){
         isFirstRawTx = true;
         ui->txInputsScrollArea->hide();
-    } else if(buttonWidget->objectName() == "keyDeleteButton" && ui->keyList->count() == 1) {
+    }else if(buttonWidget->objectName() == "keyDeleteButton" && ui->keyList->count() == 1){
         isFirstPrivKey = true;
         ui->keyScrollArea->hide();
     }
@@ -391,7 +390,7 @@ bool MultisigDialog::createMultisigTransaction(vector<CTxIn> vUserIn, vector<CTx
 
         for(CTxIn in : vUserIn){
             const CCoins* coins = view.AccessCoins(in.prevout.hash);
-            if(!coins->IsAvailable(in.prevout.n) || coins == nullptr){
+            if(!coins->IsAvailable(in.prevout.n) || coins == NULL){
                 continue;
             }
             CTxOut prevout = coins->vout[in.prevout.n];
@@ -442,7 +441,7 @@ bool MultisigDialog::createMultisigTransaction(vector<CTxIn> vUserIn, vector<CTx
 
         const CCoins* coins = view.AccessCoins(tx.vin[0].prevout.hash);
 
-        if(coins == nullptr || !coins->IsAvailable(tx.vin[0].prevout.n)){
+        if(coins == NULL || !coins->IsAvailable(tx.vin[0].prevout.n)){
             throw runtime_error("Coins unavailable (unconfirmed/spent)");
         }
 
@@ -741,7 +740,7 @@ void MultisigDialog::commitMultisigTx()
         if (!fHaveMempool && !fHaveChain) {
             // push to local node and sync with wallets
             CValidationState state;
-            if (!AcceptToMemoryPool(mempool, state, tx, false, nullptr, !fOverrideFees)) {
+            if (!AcceptToMemoryPool(mempool, state, tx, false, NULL, !fOverrideFees)) {
                 if (state.IsInvalid())
                     throw runtime_error(strprintf("Transaction rejected - %i: %s", state.GetRejectCode(), state.GetRejectReason()));
                 else

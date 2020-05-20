@@ -96,7 +96,7 @@ void random_group_element_test(secp256k1_ge *ge) {
     } while(1);
 }
 
-void random_group_element_jacobian_test(secp256k1_gej *gej, const secp256k1_ge *ge) {
+void random_group_element_byronobian_test(secp256k1_gej *gej, const secp256k1_ge *ge) {
     secp256k1_fe z2, z3;
     do {
         random_field_element_test(&gej->z);
@@ -598,14 +598,14 @@ void test_num_mod(void) {
     CHECK(secp256k1_num_is_zero(&n));
 }
 
-void test_num_jacobi(void) {
+void test_num_byronobi(void) {
     secp256k1_scalar sqr;
     secp256k1_scalar small;
     secp256k1_scalar five;  /* five is not a quadratic residue */
     secp256k1_num order, n;
     int i;
     /* squares mod 5 are 1, 4 */
-    const int jacobi5[10] = { 0, 1, -1, -1, 1, 0, 1, -1, -1, 1 };
+    const int byronobi5[10] = { 0, 1, -1, -1, 1, 0, 1, -1, -1, 1 };
 
     /* check some small values with 5 as the order */
     secp256k1_scalar_set_int(&five, 5);
@@ -613,7 +613,7 @@ void test_num_jacobi(void) {
     for (i = 0; i < 10; ++i) {
         secp256k1_scalar_set_int(&small, i);
         secp256k1_scalar_get_num(&n, &small);
-        CHECK(secp256k1_num_jacobi(&n, &order) == jacobi5[i]);
+        CHECK(secp256k1_num_byronobi(&n, &order) == byronobi5[i]);
     }
 
     /** test large values with 5 as group order */
@@ -628,15 +628,15 @@ void test_num_jacobi(void) {
     } while (secp256k1_num_is_zero(&n));
     /* next force it to be a residue. 2 is a nonresidue mod 5 so we can
      * just multiply by two, i.e. add the number to itself */
-    if (secp256k1_num_jacobi(&n, &order) == -1) {
+    if (secp256k1_num_byronobi(&n, &order) == -1) {
         secp256k1_num_add(&n, &n, &n);
     }
 
     /* test residue */
-    CHECK(secp256k1_num_jacobi(&n, &order) == 1);
+    CHECK(secp256k1_num_byronobi(&n, &order) == 1);
     /* test nonresidue */
     secp256k1_num_add(&n, &n, &n);
-    CHECK(secp256k1_num_jacobi(&n, &order) == -1);
+    CHECK(secp256k1_num_byronobi(&n, &order) == -1);
 
     /** test with secp group order as order */
     secp256k1_scalar_order_get_num(&order);
@@ -644,19 +644,19 @@ void test_num_jacobi(void) {
     secp256k1_scalar_sqr(&sqr, &sqr);
     /* test residue */
     secp256k1_scalar_get_num(&n, &sqr);
-    CHECK(secp256k1_num_jacobi(&n, &order) == 1);
+    CHECK(secp256k1_num_byronobi(&n, &order) == 1);
     /* test nonresidue */
     secp256k1_scalar_mul(&sqr, &sqr, &five);
     secp256k1_scalar_get_num(&n, &sqr);
-    CHECK(secp256k1_num_jacobi(&n, &order) == -1);
+    CHECK(secp256k1_num_byronobi(&n, &order) == -1);
     /* test multiple of the order*/
-    CHECK(secp256k1_num_jacobi(&order, &order) == 0);
+    CHECK(secp256k1_num_byronobi(&order, &order) == 0);
 
     /* check one less than the order */
     secp256k1_scalar_set_int(&small, 1);
     secp256k1_scalar_get_num(&n, &small);
     secp256k1_num_sub(&n, &order, &n);
-    CHECK(secp256k1_num_jacobi(&n, &order) == 1);  /* sage confirms this is 1 */
+    CHECK(secp256k1_num_byronobi(&n, &order) == 1);  /* sage confirms this is 1 */
 }
 
 void run_num_smalltests(void) {
@@ -665,7 +665,7 @@ void run_num_smalltests(void) {
         test_num_negate();
         test_num_add_sub();
         test_num_mod();
-        test_num_jacobi();
+        test_num_byronobi();
     }
 }
 #endif
@@ -1879,7 +1879,7 @@ void ge_equals_ge(const secp256k1_ge *a, const secp256k1_ge *b) {
     CHECK(secp256k1_fe_equal_var(&a->y, &b->y));
 }
 
-/* This compares jacobian points including their Z, not just their geometric meaning. */
+/* This compares byronobian points including their Z, not just their geometric meaning. */
 int gej_xyz_equals_gej(const secp256k1_gej *a, const secp256k1_gej *b) {
     secp256k1_gej a2;
     secp256k1_gej b2;
@@ -1926,7 +1926,7 @@ void test_ge(void) {
     int runs = 4;
 #endif
     /* Points: (infinity, p1, p1, -p1, -p1, p2, p2, -p2, -p2, p3, p3, -p3, -p3, p4, p4, -p4, -p4).
-     * The second in each pair of identical points uses a random Z coordinate in the Jacobian form.
+     * The second in each pair of identical points uses a random Z coordinate in the Byronobian form.
      * All magnitudes are randomized.
      * All 17*17 combinations of points are added to each other, using all applicable methods.
      *
@@ -1958,9 +1958,9 @@ void test_ge(void) {
         secp256k1_ge_neg(&ge[3 + 4 * i], &g);
         secp256k1_ge_neg(&ge[4 + 4 * i], &g);
         secp256k1_gej_set_ge(&gej[1 + 4 * i], &ge[1 + 4 * i]);
-        random_group_element_jacobian_test(&gej[2 + 4 * i], &ge[2 + 4 * i]);
+        random_group_element_byronobian_test(&gej[2 + 4 * i], &ge[2 + 4 * i]);
         secp256k1_gej_set_ge(&gej[3 + 4 * i], &ge[3 + 4 * i]);
-        random_group_element_jacobian_test(&gej[4 + 4 * i], &ge[4 + 4 * i]);
+        random_group_element_byronobian_test(&gej[4 + 4 * i], &ge[4 + 4 * i]);
         for (j = 0; j < 4; j++) {
             random_field_element_magnitude(&ge[1 + j + 4 * i].x);
             random_field_element_magnitude(&ge[1 + j + 4 * i].y);

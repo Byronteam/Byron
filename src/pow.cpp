@@ -7,7 +7,6 @@
 
 #include "pow.h"
 
-#include "arith_uint256.h"
 #include "chain.h"
 #include "chainparams.h"
 #include "main.h"
@@ -20,9 +19,6 @@
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
-    if (Params().NetworkID() == CBaseChainParams::REGTEST)
-        return pindexLast->nBits;
-
     /* current difficulty formula, byron - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
     const CBlockIndex* BlockLastSolved = pindexLast;
     const CBlockIndex* BlockReading = pindexLast;
@@ -34,13 +30,13 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     uint256 PastDifficultyAverage;
     uint256 PastDifficultyAveragePrev;
 
-    if (BlockLastSolved == nullptr || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
+    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
         return Params().ProofOfWorkLimit().GetCompact();
     }
 
     if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
         uint256 bnTargetLimit = (~uint256(0) >> 24);
-        int64_t nTargetSpacing = 3 * 60;
+        int64_t nTargetSpacing = 60;
         int64_t nTargetTimespan = 60 * 40;
 
         int64_t nActualSpacing = 0;
@@ -50,9 +46,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         if (nActualSpacing < 0)
             nActualSpacing = 1;
 
-        // ppcoin: target change every block
-        // ppcoin: retarget with exponential moving toward target spacing
-        arith_uint256 bnNew;
+        uint256 bnNew;
         bnNew.SetCompact(pindexLast->nBits);
 
         int64_t nInterval = nTargetTimespan / nTargetSpacing;
@@ -86,7 +80,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         }
         LastBlockTime = BlockReading->GetBlockTime();
 
-        if (BlockReading->pprev == nullptr) {
+        if (BlockReading->pprev == NULL) {
             assert(BlockReading);
             break;
         }
@@ -117,7 +111,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 {
     bool fNegative;
     bool fOverflow;
-    arith_uint256 bnTarget;
+    uint256 bnTarget;
 
     if (Params().SkipProofOfWorkCheck())
         return true;
@@ -128,27 +122,19 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > Params().ProofOfWorkLimit())
         return error("CheckProofOfWork() : nBits below minimum work");
 
-    // Check proof of work matches claimed amount
-    /*if (UintToArith256(hash) > bnTarget) {
-        if (Params().MineBlocksOnDemand())
-            return false;
-        else
-            return error("CheckProofOfWork() : hash doesn't match nBits");
-    }*/
-
     return true;
 }
 
-arith_uint256 GetBlockProof(const CBlockIndex& block)
+uint256 GetBlockProof(const CBlockIndex& block)
 {
-    arith_uint256 bnTarget;
+    uint256 bnTarget;
     bool fNegative;
     bool fOverflow;
     bnTarget.SetCompact(block.nBits, &fNegative, &fOverflow);
     if (fNegative || fOverflow || bnTarget == 0)
         return 0;
     // We need to compute 2**256 / (bnTarget+1), but we can't represent 2**256
-    // as it's too large for a arith_uint256. However, as 2**256 is at least as large
+    // as it's too large for a uint256. However, as 2**256 is at least as large
     // as bnTarget+1, it is equal to ((2**256 - bnTarget - 1) / (bnTarget+1)) + 1,
     // or ~bnTarget / (nTarget+1) + 1.
     return (~bnTarget / (bnTarget + 1)) + 1;

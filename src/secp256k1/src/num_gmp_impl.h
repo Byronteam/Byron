@@ -144,7 +144,7 @@ static void secp256k1_num_mod_inverse(secp256k1_num *r, const secp256k1_num *a, 
     memset(v, 0, sizeof(v));
 }
 
-static int secp256k1_num_jacobi(const secp256k1_num *a, const secp256k1_num *b) {
+static int secp256k1_num_byronobi(const secp256k1_num *a, const secp256k1_num *b) {
     int ret;
     mpz_t ga, gb;
     secp256k1_num_sanity(a);
@@ -159,7 +159,7 @@ static int secp256k1_num_jacobi(const secp256k1_num *a, const secp256k1_num *b) 
         mpz_neg(ga, ga);
     }
 
-    ret = mpz_jacobi(ga, gb);
+    ret = mpz_byronobi(ga, gb);
 
     mpz_clears(ga, gb, NULL);
 

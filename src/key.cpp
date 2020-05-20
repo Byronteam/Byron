@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2017 The Bitcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -40,43 +40,54 @@ static int ec_privkey_import_der(const secp256k1_context* ctx, unsigned char *ou
     if (end - privkey < 1 || *privkey != 0x30u) {
         return 0;
     }
+
     privkey++;
     /* sequence length constructor */
     if (end - privkey < 1 || !(*privkey & 0x80u)) {
         return 0;
     }
+
     ptrdiff_t lenb = *privkey & ~0x80u; privkey++;
     if (lenb < 1 || lenb > 2) {
         return 0;
     }
+
     if (end - privkey < lenb) {
         return 0;
     }
+
     /* sequence length */
     ptrdiff_t len = privkey[lenb-1] | (lenb > 1 ? privkey[lenb-2] << 8 : 0u);
     privkey += lenb;
     if (end - privkey < len) {
         return 0;
     }
+
     /* sequence element 0: version number (=1) */
     if (end - privkey < 3 || privkey[0] != 0x02u || privkey[1] != 0x01u || privkey[2] != 0x01u) {
         return 0;
     }
+
     privkey += 3;
     /* sequence element 1: octet string, up to 32 bytes */
     if (end - privkey < 2 || privkey[0] != 0x04u) {
         return 0;
     }
+
     ptrdiff_t oslen = privkey[1];
     privkey += 2;
+
     if (oslen > 32 || end - privkey < oslen) {
         return 0;
     }
+
     memcpy(out32 + (32 - oslen), privkey, oslen);
+
     if (!secp256k1_ec_seckey_verify(ctx, out32)) {
         memset(out32, 0, 32);
         return 0;
     }
+
     return 1;
 }
 
@@ -94,10 +105,12 @@ static int ec_privkey_export_der(const secp256k1_context *ctx, unsigned char *pr
     assert(*privkeylen >= CKey::PRIVATE_KEY_SIZE);
     secp256k1_pubkey pubkey;
     size_t pubkeylen = 0;
+
     if (!secp256k1_ec_pubkey_create(ctx, &pubkey, key32)) {
         *privkeylen = 0;
         return 0;
     }
+
     if (compressed) {
         static const unsigned char begin[] = {
             0x30,0x81,0xD3,0x02,0x01,0x01,0x04,0x20
@@ -149,6 +162,7 @@ static int ec_privkey_export_der(const secp256k1_context *ctx, unsigned char *pr
         *privkeylen = ptr - privkey;
         assert(*privkeylen == CKey::PRIVATE_KEY_SIZE);
     }
+
     return 1;
 }
 
@@ -170,8 +184,10 @@ bool CKey::SetPrivKey(const CPrivKey& privkey, bool fCompressedIn)
 {
     if (!ec_privkey_import_der(secp256k1_context_sign, (unsigned char*)begin(), &privkey[0], privkey.size()))
         return false;
+
     fCompressed = fCompressedIn;
     fValid = true;
+
     return true;
 }
 
@@ -193,6 +209,7 @@ CPrivKey CKey::GetPrivKey() const
     int ret = ec_privkey_export_der(secp256k1_context_sign, (unsigned char*)&privkey[0], &privkeylen, begin(), fCompressed ? SECP256K1_EC_COMPRESSED : SECP256K1_EC_UNCOMPRESSED);
     assert(ret);
     privkey.resize(privkeylen);
+
     return privkey;
 }
 
@@ -207,6 +224,7 @@ CPubKey CKey::GetPubKey() const
     secp256k1_ec_pubkey_serialize(secp256k1_context_sign, (unsigned char*)result.begin(), &clen, &pubkey, fCompressed ? SECP256K1_EC_COMPRESSED : SECP256K1_EC_UNCOMPRESSED);
     assert(result.size() == clen);
     assert(result.IsValid());
+
     return result;
 }
 
@@ -214,6 +232,7 @@ bool CKey::Sign(const uint256& hash, std::vector<unsigned char>& vchSig, uint32_
 {
     if (!fValid)
         return false;
+
     vchSig.resize(CPubKey::SIGNATURE_SIZE);
     size_t nSigLen = CPubKey::SIGNATURE_SIZE;
     unsigned char extra_entropy[32] = {0};
@@ -223,6 +242,7 @@ bool CKey::Sign(const uint256& hash, std::vector<unsigned char>& vchSig, uint32_
     assert(ret);
     secp256k1_ecdsa_signature_serialize_der(secp256k1_context_sign, (unsigned char*)vchSig.data(), &nSigLen, &sig);
     vchSig.resize(nSigLen);
+
     return true;
 }
 
@@ -231,6 +251,7 @@ bool CKey::VerifyPubKey(const CPubKey& pubkey) const
     if (pubkey.IsCompressed() != fCompressed) {
         return false;
     }
+
     unsigned char rnd[8];
     std::string str = "Bitcoin key verification\n";
     GetRandBytes(rnd, sizeof(rnd));
@@ -238,6 +259,7 @@ bool CKey::VerifyPubKey(const CPubKey& pubkey) const
     CHash256().Write((unsigned char*)str.data(), str.size()).Write(rnd, sizeof(rnd)).Finalize(hash.begin());
     std::vector<unsigned char> vchSig;
     Sign(hash, vchSig);
+
     return pubkey.Verify(hash, vchSig);
 }
 
@@ -245,6 +267,7 @@ bool CKey::SignCompact(const uint256& hash, std::vector<unsigned char>& vchSig) 
 {
     if (!fValid)
         return false;
+
     vchSig.resize(CPubKey::COMPACT_SIGNATURE_SIZE);
     int rec = -1;
     secp256k1_ecdsa_recoverable_signature sig;
@@ -254,6 +277,7 @@ bool CKey::SignCompact(const uint256& hash, std::vector<unsigned char>& vchSig) 
     assert(ret);
     assert(rec != -1);
     vchSig[0] = 27 + rec + (fCompressed ? 4 : 0);
+
     return true;
 }
 
@@ -261,6 +285,7 @@ bool CKey::Load(const CPrivKey& privkey, const CPubKey& vchPubKey, bool fSkipChe
 {
     if (!ec_privkey_import_der(secp256k1_context_sign, (unsigned char*)begin(), privkey.data(), privkey.size()))
         return false;
+
     fCompressed = vchPubKey.IsCompressed();
     fValid = true;
 
@@ -288,6 +313,7 @@ bool CKey::Derive(CKey& keyChild, ChainCode &ccChild, unsigned int nChild, const
     bool ret = secp256k1_ec_privkey_tweak_add(secp256k1_context_sign, (unsigned char*)keyChild.begin(), vout.data());
     keyChild.fCompressed = true;
     keyChild.fValid = ret;
+
     return ret;
 }
 
@@ -297,6 +323,7 @@ bool CExtKey::Derive(CExtKey& out, unsigned int nChild) const
     CKeyID id = key.GetPubKey().GetID();
     memcpy(&out.vchFingerprint[0], &id, 4);
     out.nChild = nChild;
+
     return key.Derive(out.key, out.chaincode, nChild, chaincode);
 }
 
@@ -321,6 +348,7 @@ CExtPubKey CExtKey::Neuter() const
     ret.nChild = nChild;
     ret.pubkey = key.GetPubKey();
     ret.chaincode = chaincode;
+
     return ret;
 }
 
@@ -352,6 +380,7 @@ bool ECC_InitSanityCheck()
     CKey key;
     key.MakeNewKey(true);
     CPubKey pubkey = key.GetPubKey();
+
     return key.VerifyPubKey(pubkey);
 }
 
@@ -362,7 +391,6 @@ void ECC_Start() {
     assert(ctx != nullptr);
 
     {
-        // Pass in a random blinding seed to the secp256k1 context.
         std::vector<unsigned char, secure_allocator<unsigned char>> vseed(32);
         GetRandBytes(vseed.data(), 32);
         bool ret = secp256k1_context_randomize(ctx, vseed.data());

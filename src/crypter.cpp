@@ -1,4 +1,6 @@
 // Copyright (c) 2009-2013 The Bitcoin developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,12 +9,13 @@
 #include "script/script.h"
 #include "script/standard.h"
 #include "util.h"
+#include "init.h"
+#include "uint256.h"
 
 #include <boost/foreach.hpp>
 #include <openssl/aes.h>
 #include <openssl/evp.h>
-#include <string>
-#include <vector>
+#include "wallet.h"
 
 bool CCrypter::SetKeyFromPassphrase(const SecureString& strKeyData, const std::vector<unsigned char>& chSalt, const unsigned int nRounds, const unsigned int nDerivationMethod)
 {
@@ -31,6 +34,7 @@ bool CCrypter::SetKeyFromPassphrase(const SecureString& strKeyData, const std::v
     }
 
     fKeySet = true;
+
     return true;
 }
 
@@ -43,6 +47,7 @@ bool CCrypter::SetKey(const CKeyingMaterial& chNewKey, const std::vector<unsigne
     memcpy(&chIV[0], &chNewIV[0], sizeof chIV);
 
     fKeySet = true;
+
     return true;
 }
 
@@ -60,7 +65,7 @@ bool CCrypter::Encrypt(const CKeyingMaterial& vchPlaintext, std::vector<unsigned
     bool fOk = true;
 
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, chKey, chIV) != 0;
+    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, chKey, chIV) != 0;
     if (fOk) fOk = EVP_EncryptUpdate(ctx, &vchCiphertext[0], &nCLen, &vchPlaintext[0], nLen) != 0;
     if (fOk) fOk = EVP_EncryptFinal_ex(ctx, (&vchCiphertext[0]) + nCLen, &nFLen) != 0;
     EVP_CIPHER_CTX_free(ctx);
@@ -68,6 +73,7 @@ bool CCrypter::Encrypt(const CKeyingMaterial& vchPlaintext, std::vector<unsigned
     if (!fOk) return false;
 
     vchCiphertext.resize(nCLen + nFLen);
+
     return true;
 }
 
@@ -76,7 +82,7 @@ bool CCrypter::Decrypt(const std::vector<unsigned char>& vchCiphertext, CKeyingM
     if (!fKeySet)
         return false;
 
-    // plaintext will always be equal to or lesser than length of ciphertext
+    // Plaintext will always be equal to or lesser than length of ciphertext
     int nLen = vchCiphertext.size();
     int nPLen = nLen, nFLen = 0;
 
@@ -85,7 +91,7 @@ bool CCrypter::Decrypt(const std::vector<unsigned char>& vchCiphertext, CKeyingM
     bool fOk = true;
 
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, chKey, chIV) != 0;
+    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, chKey, chIV) != 0;
     if (fOk) fOk = EVP_DecryptUpdate(ctx, &vchPlaintext[0], &nPLen, &vchCiphertext[0], nLen) != 0;
     if (fOk) fOk = EVP_DecryptFinal_ex(ctx, (&vchPlaintext[0]) + nPLen, &nFLen) != 0;
     EVP_CIPHER_CTX_free(ctx);
@@ -93,6 +99,7 @@ bool CCrypter::Decrypt(const std::vector<unsigned char>& vchCiphertext, CKeyingM
     if (!fOk) return false;
 
     vchPlaintext.resize(nPLen + nFLen);
+
     return true;
 }
 
@@ -132,7 +139,7 @@ bool EncryptAES256(const SecureString& sKey, const SecureString& sPlaintext, con
     bool fOk = true;
 
     ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
+    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
     if (fOk) fOk = EVP_EncryptUpdate(ctx, (unsigned char*)&sCiphertext[0], &nCLen, (const unsigned char*)&sPlaintext[0], nLen);
     if (fOk) fOk = EVP_EncryptFinal_ex(ctx, (unsigned char*)(&sCiphertext[0]) + nCLen, &nFLen);
     EVP_CIPHER_CTX_free(ctx);
@@ -140,6 +147,7 @@ bool EncryptAES256(const SecureString& sKey, const SecureString& sPlaintext, con
     if (!fOk) return false;
 
     sCiphertext.resize(nCLen + nFLen);
+
     return true;
 }
 
@@ -151,12 +159,13 @@ bool DecryptSecret(const CKeyingMaterial& vMasterKey, const std::vector<unsigned
     memcpy(&chIV[0], &nIV, WALLET_CRYPTO_KEY_SIZE);
     if (!cKeyCrypter.SetKey(vMasterKey, chIV))
         return false;
+
     return cKeyCrypter.Decrypt(vchCiphertext, *((CKeyingMaterial*)&vchPlaintext));
 }
 
 bool DecryptAES256(const SecureString& sKey, const std::string& sCiphertext, const std::string& sIV, SecureString& sPlaintext)
 {
-    // plaintext will always be equal to or lesser than length of ciphertext
+    // Plaintext will always be equal to or lesser than length of ciphertext
     int nLen = sCiphertext.size();
     int nPLen = nLen, nFLen = 0;
 
@@ -173,7 +182,7 @@ bool DecryptAES256(const SecureString& sKey, const std::string& sCiphertext, con
     bool fOk = true;
 
     ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
+    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
     if (fOk) fOk = EVP_DecryptUpdate(ctx, (unsigned char*)&sPlaintext[0], &nPLen, (const unsigned char*)&sCiphertext[0], nLen);
     if (fOk) fOk = EVP_DecryptFinal_ex(ctx, (unsigned char*)(&sPlaintext[0]) + nPLen, &nFLen);
     EVP_CIPHER_CTX_free(ctx);
@@ -181,6 +190,7 @@ bool DecryptAES256(const SecureString& sKey, const std::string& sCiphertext, con
     if (!fOk) return false;
 
     sPlaintext.resize(nPLen + nFLen);
+
     return true;
 }
 
@@ -188,11 +198,15 @@ bool DecryptAES256(const SecureString& sKey, const std::string& sCiphertext, con
 bool CCryptoKeyStore::SetCrypted()
 {
     LOCK(cs_KeyStore);
+
     if (fUseCrypto)
         return true;
+
     if (!mapKeys.empty())
         return false;
+
     fUseCrypto = true;
+
     return true;
 }
 
@@ -207,6 +221,7 @@ bool CCryptoKeyStore::Lock()
     }
 
     NotifyStatusChanged(this);
+
     return true;
 }
 
@@ -242,16 +257,20 @@ bool CCryptoKeyStore::Unlock(const CKeyingMaterial& vMasterKeyIn)
             if (fDecryptionThoroughlyChecked)
                 break;
         }
+
         if (keyPass && keyFail) {
             LogPrintf("The wallet is probably corrupted: Some keys decrypt but not all.");
             assert(false);
         }
+
         if (keyFail || !keyPass)
             return false;
         vMasterKey = vMasterKeyIn;
         fDecryptionThoroughlyChecked = true;
     }
+
     NotifyStatusChanged(this);
+
     return true;
 }
 
@@ -301,10 +320,13 @@ bool CCryptoKeyStore::GetKey(const CKeyID& address, CKey& keyOut) const
             const CPubKey& vchPubKey = (*mi).second.first;
             const std::vector<unsigned char>& vchCryptedSecret = (*mi).second.second;
             CKeyingMaterial vchSecret;
+
             if (!DecryptSecret(vMasterKey, vchCryptedSecret, vchPubKey.GetHash(), vchSecret))
                 return false;
+
             if (vchSecret.size() != 32)
                 return false;
+
             keyOut.Set(vchSecret.begin(), vchSecret.end(), vchPubKey.IsCompressed());
             return true;
         }

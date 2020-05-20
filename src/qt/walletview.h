@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,6 @@
 #include "amount.h"
 #include "askpassphrasedialog.h"
 #include "masternodelist.h"
-#include "proposallist.h"
 
 #include <QStackedWidget>
 #include <ui_interface.h>
@@ -72,7 +71,6 @@ private:
     MasternodeList* masternodeListPage;
 
     TransactionView* transactionView;
-    ProposalList *proposalList;
 
     QProgressDialog* progressDialog;
     QLabel* transactionSum;
@@ -84,8 +82,6 @@ public slots:
     void gotoHistoryPage();
     /** Switch to masternode page */
     void gotoMasternodePage();
-    /** Switch to proposal page */
-    void gotoProposalPage();
     /** Switch to explorer page */
     void gotoBlockExplorerPage();
     /** Switch to receive coins page */

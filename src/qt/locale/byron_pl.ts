@@ -185,6 +185,9 @@
     </message>
 </context>
 <context>
+    <name>BanTableModel</name>
+    </context>
+<context>
     <name>Bip38ToolDialog</name>
     <message>
         <source>BIP 38 Tool</source>
@@ -223,10 +226,6 @@
         <translation>Zakodowany klucz:</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this BYRON address</source>
-        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres BYRON jest w twoim posiadaniu</translation>
-    </message>
-    <message>
         <source>Encrypt &amp;Key</source>
         <translation>Kodowanie &amp;klucz</translation>
     </message>
@@ -237,10 +236,6 @@
     <message>
         <source>&amp;BIP 38 Decrypt</source>
         <translation>&amp;BIP 38 Zakoduj</translation>
-    </message>
-    <message>
-        <source>Reset all verify message fields</source>
-        <translation>Resetuj wszystkie zweryfikowane pola tekstowe</translation>
     </message>
     <message>
         <source>Decrypted Key:</source>
@@ -515,7 +510,7 @@
     </message>
     <message>
         <source>Byron Core</source>
-        <translation>&amp;Rdzeń Byron</translation>
+        <translation>&amp;Rdzeń BYRON</translation>
     </message>
     <message>
         <source>Send coins to a BYRON address</source>
@@ -542,8 +537,8 @@
         <translation>Pokaż informacje o rdzeniu bitcoina</translation>
     </message>
     <message>
-        <source>Modify configuration options for Byron</source>
-        <translation>Modyfikuj opcje konfiguracji Byron</translation>
+        <source>Modify configuration options for BYRON</source>
+        <translation>Modyfikuj opcje konfiguracji BYRON</translation>
     </message>
     <message>
         <source>Sign messages with your BYRON addresses to prove you own them</source>
@@ -578,8 +573,8 @@
         <translation>Otwórz &amp;Plik konfiguracji Masternode</translation>
     </message>
     <message>
-        <source>Open a byron: URI or payment request</source>
-        <translation>Otwórz byron: URI i żądanie zapłaty</translation>
+        <source>Open a BYRON: URI or payment request</source>
+        <translation>Otwórz BYRON: URI i żądanie zapłaty</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -590,12 +585,12 @@
         <translation>Okno eksplorera bloków</translation>
     </message>
     <message>
-        <source>Show the Byron Core help message to get a list with possible Byron command-line options</source>
-        <translation>Pokaż wiadomość pomocy rdzenia Byron, aby dostać listę możliwych opcji Byron command-line</translation>
+        <source>Show the Byron Core help message to get a list with possible BYRON command-line options</source>
+        <translation>Pokaż wiadomość pomocy rdzenia BYRON, aby dostać listę możliwych opcji BYRON command-line</translation>
     </message>
     <message>
         <source>Byron Core client</source>
-        <translation>Rdzeń Byron klient</translation>
+        <translation>Rdzeń BYRON klient</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -905,7 +900,7 @@ MultiWysyłlka: %1</translation>
     <name>HelpMessageDialog</name>
     <message>
         <source>Byron Core</source>
-        <translation>&amp;Rdzeń Byron</translation>
+        <translation>&amp;Rdzeń BYRON</translation>
     </message>
     </context>
 <context>
@@ -920,7 +915,7 @@ MultiWysyłlka: %1</translation>
     </message>
     <message>
         <source>Byron Core</source>
-        <translation>&amp;Rdzeń Byron</translation>
+        <translation>&amp;Rdzeń BYRON</translation>
     </message>
     <message>
         <source>Error</source>
@@ -936,10 +931,6 @@ MultiWysyłlka: %1</translation>
     <message>
         <source>Form</source>
         <translation>Forma</translation>
-    </message>
-    <message>
-        <source>My Masternodes</source>
-        <translation>Moje Masternode</translation>
     </message>
     <message>
         <source>Address</source>
@@ -1093,6 +1084,10 @@ MultiWysyłlka: %1</translation>
         <translation>Podgląd MultiWysyłki</translation>
     </message>
     <message>
+        <source>(no label)</source>
+        <translation>(brak zakładki)</translation>
+    </message>
+    <message>
         <source>The entered address:
 </source>
         <translation>Wprowadzony adres:
@@ -1119,6 +1114,40 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
 </translation>
     </message>
 </context>
+<context>
+    <name>MultisigDialog</name>
+    <message>
+        <source>Status:</source>
+        <translation>Status:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Liczba:</translation>
+    </message>
+    </context>
+<context>
+    <name>ObfuscationConfig</name>
+    <message>
+        <source>Basic Privacy</source>
+        <translation>Podstawowa prywatność</translation>
+    </message>
+    <message>
+        <source>High Privacy</source>
+        <translation>Wysoka prywatność</translation>
+    </message>
+    <message>
+        <source>Maximum Privacy</source>
+        <translation>Maksymalna prywatność</translation>
+    </message>
+    <message>
+        <source>Please select a privacy level.</source>
+        <translation>Proszę wybrać poziom prywatności</translation>
+    </message>
+    </context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1161,12 +1190,12 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Zezwól na przychodzące połączenia</translation>
     </message>
     <message>
-        <source>Automatically start Byron after logging in to the system.</source>
-        <translation>Automatycznie uruchom Byron po zalogowaniu do systemu</translation>
+        <source>Automatically start BYRON after logging in to the system.</source>
+        <translation>Automatycznie uruchom BYRON po zalogowaniu do systemu</translation>
     </message>
     <message>
-        <source>&amp;Start Byron on system login</source>
-        <translation>&amp;Uruchom Byron podczas logowania do systemu</translation>
+        <source>&amp;Start BYRON on system login</source>
+        <translation>&amp;Uruchom BYRON podczas logowania do systemu</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1185,12 +1214,18 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>&amp;Sieć</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Byron.</source>
-        <translation>Język interfejsu użytkownika może być wybrany tutaj. Ustawienia ulegną zmianie po restarcie Byron</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting BYRON.</source>
+        <translation>Język interfejsu użytkownika może być wybrany tutaj. Ustawienia ulegną zmianie po restarcie BYRON</translation>
     </message>
     <message>
-        <source>Connect to the Byron network through a SOCKS5 proxy.</source>
-        <translation>Połącz z siecią Byron poprzez SOCKS5 proxy.</translation>
+        <source>Language missing or translation incomplete? Help contributing translations here:
+https://www.transifex.com/byron-project/byron-project-translations</source>
+        <translation>Brakuje języka bądź nieukończona pełnego tłumaczenia? Pomóż w tłumaczeniu tutaj:
+https://www.transifex.com/byron-project/byron-project-translations </translation>
+    </message>
+    <message>
+        <source>Connect to the BYRON network through a SOCKS5 proxy.</source>
+        <translation>Połącz z siecią BYRON poprzez SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1219,6 +1254,10 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
     <message>
         <source>User Interface &amp;language:</source>
         <translation>Interfejs użytkownika &amp;Język.</translation>
+    </message>
+    <message>
+        <source>User Interface Theme:</source>
+        <translation>Motyw interfejsu użytkownika:</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
@@ -1276,7 +1315,7 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <source>The supplied proxy address is invalid.</source>
         <translation>Podany adres proxy jest nieprawidłowy</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>OverviewPage</name>
     <message>
@@ -1304,10 +1343,6 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Całość:</translation>
     </message>
     <message>
-        <source>Your current total balance</source>
-        <translation>Twój całkowity bilans</translation>
-    </message>
-    <message>
         <source>Current total balance in watch-only addresses</source>
         <translation>Obecny całkowity bilans w adresach tylko do obejrzenia</translation>
     </message>
@@ -1320,14 +1355,14 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Możliwy do wysłania:</translation>
     </message>
     <message>
-        <source>Recent transactions</source>
+        <source>Recent Transactions</source>
         <translation>Ostatnie transakcje</translation>
     </message>
     <message>
         <source>out of sync</source>
         <translation>Brak synchronizacji</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>PaymentServer</name>
     <message>
@@ -1354,6 +1389,73 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Czas PinguCzas pingu</translation>
     </message>
 </context>
+<context>
+    <name>PrivacyDialog</name>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Resetuj</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Liczba:</translation>
+    </message>
+    <message>
+        <source>Choose previously used address</source>
+        <translation>Wybierz poprzednio używany adres</translation>
+    </message>
+    <message>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
+    </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <translation>Wklej adres ze schowka</translation>
+    </message>
+    <message>
+        <source>Alt+P</source>
+        <translation>Alt+P</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation>Priorytet:</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation>TekstZakładka</translation>
+    </message>
+    <message>
+        <source>Fee:</source>
+        <translation>Opłata:</translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation>nie</translation>
+    </message>
+    <message>
+        <source>medium</source>
+        <translation>średni</translation>
+    </message>
+    <message>
+        <source>Change:</source>
+        <translation>Zmiana:</translation>
+    </message>
+    <message>
+        <source>out of sync</source>
+        <translation>Brak synchronizacji</translation>
+    </message>
+    <message>
+        <source>Copy quantity</source>
+        <translation>Kopiuj ilość</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation>Kopiuj liczbę</translation>
+    </message>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -1547,14 +1649,6 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Usługi</translation>
     </message>
     <message>
-        <source>Starting Height</source>
-        <translation>Wysokość rozpoczęcia</translation>
-    </message>
-    <message>
-        <source>Sync Height</source>
-        <translation>Wysokość synchronizacji</translation>
-    </message>
-    <message>
         <source>Connection Time</source>
         <translation>Czas połączenia</translation>
     </message>
@@ -1642,7 +1736,7 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <source>Unknown</source>
         <translation>Nieznane</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
@@ -1836,7 +1930,7 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
     <name>SplashScreen</name>
     <message>
         <source>Byron Core</source>
-        <translation>&amp;Rdzeń Byron</translation>
+        <translation>&amp;Rdzeń BYRON</translation>
     </message>
     </context>
 <context>

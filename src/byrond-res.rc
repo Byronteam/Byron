@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Byron"
-            VALUE "FileDescription",    "byrond (OSS daemon/client for Byron)"
+            VALUE "CompanyName",        "BYRON"
+            VALUE "FileDescription",    "byrond (OSS daemon/client for BYRON)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "byrond"
             VALUE "LegalCopyright",     COPYRIGHT_STR

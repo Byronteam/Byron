@@ -7,12 +7,18 @@
         <file alias="de">locale/byron_de.qm</file>
         <file alias="en">locale/byron_en.qm</file>
         <file alias="en_US">locale/byron_en_US.qm</file>
+        <file alias="eo">locale/byron_eo.qm</file>
         <file alias="es">locale/byron_es.qm</file>
+        <file alias="es_ES">locale/byron_es_ES.qm</file>
         <file alias="fi">locale/byron_fi.qm</file>
         <file alias="fr_FR">locale/byron_fr_FR.qm</file>
+        <file alias="hi_IN">locale/byron_hi_IN.qm</file>
+        <file alias="hr">locale/byron_hr.qm</file>
+        <file alias="hr_HR">locale/byron_hr_HR.qm</file>
         <file alias="it">locale/byron_it.qm</file>
         <file alias="ja">locale/byron_ja.qm</file>
         <file alias="ko_KR">locale/byron_ko_KR.qm</file>
+        <file alias="lt_LT">locale/byron_lt_LT.qm</file>
         <file alias="nl">locale/byron_nl.qm</file>
         <file alias="pl">locale/byron_pl.qm</file>
         <file alias="pt">locale/byron_pt.qm</file>
@@ -23,6 +29,7 @@
         <file alias="sv">locale/byron_sv.qm</file>
         <file alias="tr">locale/byron_tr.qm</file>
         <file alias="uk">locale/byron_uk.qm</file>
+        <file alias="vi">locale/byron_vi.qm</file>
         <file alias="zh_CN">locale/byron_zh_CN.qm</file>
         <file alias="zh_TW">locale/byron_zh_TW.qm</file>
     </qresource>

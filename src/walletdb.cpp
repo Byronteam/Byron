@@ -1,18 +1,18 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "walletdb.h"
 
 #include "base58.h"
-#include "main.h"
 #include "protocol.h"
 #include "serialize.h"
 #include "sync.h"
+#include "txdb.h"
 #include "util.h"
 #include "utiltime.h"
 #include "wallet.h"
@@ -78,7 +78,7 @@ bool CWalletDB::WriteKey(const CPubKey& vchPubKey, const CPrivKey& vchPrivKey, c
             keyMeta, false))
         return false;
 
-    // hash pubkey/privkey to accelerate wallet load
+    // Hash pubkey/privkey to accelerate wallet load
     std::vector<unsigned char> vchKey;
     vchKey.reserve(vchPubKey.size() + vchPrivKey.size());
     vchKey.insert(vchKey.end(), vchPubKey.begin(), vchPubKey.end());
@@ -160,14 +160,14 @@ bool CWalletDB::WriteOrderPosNext(int64_t nOrderPosNext)
     return Write(std::string("orderposnext"), nOrderPosNext);
 }
 
-// presstab HyperStake
+// Presstab HyperStake
 bool CWalletDB::WriteStakeSplitThreshold(uint64_t nStakeSplitThreshold)
 {
     nWalletDBUpdated++;
     return Write(std::string("stakeSplitThreshold"), nStakeSplitThreshold);
 }
 
-//presstab HyperStake
+// Presstab HyperStake
 bool CWalletDB::WriteMultiSend(std::vector<std::pair<std::string, int> > vMultiSend)
 {
     nWalletDBUpdated++;
@@ -180,7 +180,7 @@ bool CWalletDB::WriteMultiSend(std::vector<std::pair<std::string, int> > vMultiS
     }
     return ret;
 }
-//presstab HyperStake
+// Presstab HyperStake
 bool CWalletDB::EraseMultiSend(std::vector<std::pair<std::string, int> > vMultiSend)
 {
     nWalletDBUpdated++;
@@ -193,7 +193,7 @@ bool CWalletDB::EraseMultiSend(std::vector<std::pair<std::string, int> > vMultiS
     }
     return ret;
 }
-//presstab HyperStake
+// Presstab HyperStake
 bool CWalletDB::WriteMSettings(bool fMultiSendStake, bool fMultiSendMasternode, int nLastMultiSendHeight)
 {
     nWalletDBUpdated++;
@@ -202,7 +202,7 @@ bool CWalletDB::WriteMSettings(bool fMultiSendStake, bool fMultiSendMasternode, 
 
     return Write(std::string("msettingsv2"), pSettings, true);
 }
-//presstab HyperStake
+// Presstab HyperStake
 bool CWalletDB::WriteMSDisabledAddresses(std::vector<std::string> vDisabledAddresses)
 {
     nWalletDBUpdated++;
@@ -213,7 +213,7 @@ bool CWalletDB::WriteMSDisabledAddresses(std::vector<std::string> vDisabledAddre
     }
     return ret;
 }
-//presstab HyperStake
+// Presstab HyperStake
 bool CWalletDB::EraseMSDisabledAddresses(std::vector<std::string> vDisabledAddresses)
 {
     nWalletDBUpdated++;
@@ -224,6 +224,7 @@ bool CWalletDB::EraseMSDisabledAddresses(std::vector<std::string> vDisabledAddre
     }
     return ret;
 }
+
 bool CWalletDB::WriteAutoCombineSettings(bool fEnable, CAmount nCombineThreshold)
 {
     nWalletDBUpdated++;
@@ -439,7 +440,8 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
             CWalletTx wtx;
             ssValue >> wtx;
             CValidationState state;
-            if (!(CheckTransaction(wtx, state) && (wtx.GetHash() == hash) && state.IsValid()))
+
+            if (!(CheckTransaction(wtx, false, state) && (wtx.GetHash() == hash) && state.IsValid()))
                 return false;
 
             // Undo serialize changes in 31600
@@ -507,7 +509,7 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
             }
             CKey key;
             CPrivKey pkey;
-            uint256 hash;
+            uint256 hash = 0;
 
             if (strType == "key") {
                 wss.nKeys++;
@@ -530,7 +532,7 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
 
             bool fSkipCheck = false;
 
-            if (!hash.IsNull()) {
+            if (hash != 0) {
                 // hash pubkey/privkey to accelerate wallet load
                 std::vector<unsigned char> vchKey;
                 vchKey.reserve(vchPubKey.size() + pkey.size());
@@ -902,10 +904,36 @@ void ThreadFlushWalletDB(const string& strFile)
     }
 }
 
-bool BackupWallet(const CWallet& wallet, const string& strDest)
+void NotifyBacked(const CWallet& wallet, bool fSuccess, string strMessage)
 {
-    if (!wallet.fFileBacked)
+    LogPrint(nullptr, strMessage.data());
+    wallet.NotifyWalletBacked(fSuccess, strMessage);
+}
+
+bool BackupWallet(const CWallet& wallet, const filesystem::path& strDest, bool fEnableCustom)
+{
+    filesystem::path pathCustom;
+    filesystem::path pathWithFile;
+    if (!wallet.fFileBacked) {
         return false;
+    } else if(fEnableCustom) {
+        pathWithFile = GetArg("-backuppath", "");
+        if(!pathWithFile.empty()) {
+            if(!pathWithFile.has_extension()) {
+                pathCustom = pathWithFile;
+                pathWithFile /= wallet.GetUniqueWalletBackupName(false);
+            } else {
+                pathCustom = pathWithFile.parent_path();
+            }
+            try {
+                filesystem::create_directories(pathCustom);
+            } catch(const filesystem::filesystem_error& e) {
+                NotifyBacked(wallet, false, strprintf("%s\n", e.what()));
+                pathCustom = "";
+            }
+        }
+    }
+
     while (true) {
         {
             LOCK(bitdb.cs_db);
@@ -916,37 +944,106 @@ bool BackupWallet(const CWallet& wallet, const string& strDest)
                 bitdb.mapFileUseCount.erase(wallet.strWalletFile);
 
                 // Copy wallet.dat
-                filesystem::path pathSrc = GetDataDir() / wallet.strWalletFile;
                 filesystem::path pathDest(strDest);
-                if (filesystem::is_directory(pathDest)) {
+                filesystem::path pathSrc = GetDataDir() / wallet.strWalletFile;
+                if (is_directory(pathDest)) {
                     if(!exists(pathDest)) create_directory(pathDest);
                     pathDest /= wallet.strWalletFile;
                 }
+                bool defaultPath = AttemptBackupWallet(wallet, pathSrc.string(), pathDest.string());
 
-                try {
-                    if (boost::filesystem::equivalent(pathSrc, pathDest)) {
-                        LogPrintf("cannot backup to wallet source file %s\n", pathDest.string());
-                        return false;
+                if(defaultPath && !pathCustom.empty()) {
+                    int nThreshold = GetArg("-custombackupthreshold", DEFAULT_CUSTOMBACKUPTHRESHOLD);
+                    if (nThreshold > 0) {
+
+                        typedef std::multimap<std::time_t, filesystem::path> folder_set_t;
+                        folder_set_t folderSet;
+                        filesystem::directory_iterator end_iter;
+
+                        pathCustom.make_preferred();
+                        // Build map of backup files for current(!) wallet sorted by last write time
+
+                        filesystem::path currentFile;
+                        for (filesystem::directory_iterator dir_iter(pathCustom); dir_iter != end_iter; ++dir_iter) {
+                            // Only check regular files
+                            if (filesystem::is_regular_file(dir_iter->status())) {
+                                currentFile = dir_iter->path().filename();
+                                // Only add the backups for the current wallet, e.g. wallet.dat.*
+                                if (dir_iter->path().stem().string() == wallet.strWalletFile) {
+                                    folderSet.insert(folder_set_t::value_type(filesystem::last_write_time(dir_iter->path()), *dir_iter));
+                                }
+                            }
+                        }
+
+                        int counter = 0; //TODO: add seconds to avoid naming conflicts
+                        for (auto entry : folderSet) {
+                            counter++;
+                            if(entry.second == pathWithFile) {
+                                pathWithFile += "(1)";
+                            }
+                        }
+
+                        if (counter >= nThreshold) {
+                            std::time_t oldestBackup = 0;
+                            for(auto entry : folderSet) {
+                                if(oldestBackup == 0 || entry.first < oldestBackup) {
+                                    oldestBackup = entry.first;
+                                }
+                            }
+
+                            try {
+                                auto entry = folderSet.find(oldestBackup);
+                                if (entry != folderSet.end()) {
+                                    filesystem::remove(entry->second);
+                                    LogPrintf("Old backup deleted: %s\n", (*entry).second);
+                                }
+                            } catch (filesystem::filesystem_error& error) {
+                                string strMessage = strprintf("Failed to delete backup %s\n", error.what());
+                                LogPrint(nullptr, strMessage.data());
+                                NotifyBacked(wallet, false, strMessage);
+                            }
+                        }
                     }
-
-#if BOOST_VERSION >= 158000
-                    filesystem::copy_file(pathSrc, pathDest, filesystem::copy_option::overwrite_if_exists);
-#else
-                    std::ifstream src(pathSrc.string(), std::ios::binary);
-                    std::ofstream dst(pathDest.string(), std::ios::binary);
-                    dst << src.rdbuf();
-#endif
-                    LogPrintf("copied wallet.dat to %s\n", pathDest.string());
-                    return true;
-                } catch (const filesystem::filesystem_error& e) {
-                    LogPrintf("error copying wallet.dat to %s - %s\n", pathDest.string(), e.what());
-                    return false;
+                    AttemptBackupWallet(wallet, pathSrc.string(), pathWithFile.string());
                 }
+
+                return defaultPath;
             }
         }
         MilliSleep(100);
     }
     return false;
+}
+
+bool AttemptBackupWallet(const CWallet& wallet, const filesystem::path& pathSrc, const filesystem::path& pathDest)
+{
+    bool retStatus;
+    string strMessage;
+    try {
+        if (boost::filesystem::equivalent(pathSrc, pathDest)) {
+            LogPrintf("cannot backup to wallet source file %s\n", pathDest.string());
+            return false;
+        }
+#if BOOST_VERSION >= 105800 /* BOOST_LIB_VERSION 1_58 */
+        filesystem::copy_file(pathSrc.c_str(), pathDest, filesystem::copy_option::overwrite_if_exists);
+#else
+        std::ifstream src(pathSrc.c_str(),  std::ios::binary | std::ios::in);
+        std::ofstream dst(pathDest.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
+        dst << src.rdbuf();
+        dst.flush();
+        src.close();
+        dst.close();
+#endif
+        strMessage = strprintf("copied wallet.dat to %s\n", pathDest.string());
+        LogPrint(nullptr, strMessage.data());
+        retStatus = true;
+    } catch (const filesystem::filesystem_error& e) {
+        retStatus = false;
+        strMessage = strprintf("%s\n", e.what());
+        LogPrint(nullptr, strMessage.data());
+    }
+    NotifyBacked(wallet, retStatus, strMessage);
+    return retStatus;
 }
 
 //
@@ -964,7 +1061,7 @@ bool CWalletDB::Recover(CDBEnv& dbenv, std::string filename, bool fOnlyKeys)
     int64_t now = GetTime();
     std::string newFilename = strprintf("wallet.%d.bak", now);
 
-    int result = dbenv.dbenv->dbrename(nullptr, filename.c_str(), nullptr,
+    int result = dbenv.dbenv.dbrename(NULL, filename.c_str(), NULL,
         newFilename.c_str(), DB_AUTO_COMMIT);
     if (result == 0)
         LogPrintf("Renamed %s to %s\n", filename, newFilename);
@@ -982,8 +1079,8 @@ bool CWalletDB::Recover(CDBEnv& dbenv, std::string filename, bool fOnlyKeys)
     LogPrintf("Salvage(aggressive) found %u records\n", salvagedData.size());
 
     bool fSuccess = allOK;
-    boost::scoped_ptr<Db> pdbCopy(new Db(dbenv.dbenv, 0));
-    int ret = pdbCopy->open(nullptr, // Txn pointer
+    boost::scoped_ptr<Db> pdbCopy(new Db(&dbenv.dbenv, 0));
+    int ret = pdbCopy->open(NULL, // Txn pointer
         filename.c_str(),         // Filename
         "main",                   // Logical db name
         DB_BTREE,                 // Database type

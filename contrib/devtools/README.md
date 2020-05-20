@@ -18,7 +18,7 @@ For example:
   ./github-merge.py 3077
 
 (in any git repository) will help you merge pull request #3077 for the
-byron/byron repository.
+BYRON-Project/BYRON repository.
 
 What it does:
 * Fetch master and the pull request.
@@ -34,24 +34,18 @@ pullreq gets updated while you're reviewing it, but before you click
 merge), and when using GPG signatures, that even a compromised GitHub
 couldn't mess with the sources.
 
-gen-manpages.sh
-===============
-
-A small script to automatically create manpages in ../../doc/man by running the release binaries with the -help option.
-This requires help2man which can be found at: https://www.gnu.org/software/help2man/
-
 Setup
 ---------
-Configuring the github-merge tool for the Byron repository is done in the following way:
+Configuring the github-merge tool for the BYRON repository is done in the following way:
 
-    git config githubmerge.repository byron/byron
+    git config githubmerge.repository BYRON-Project/BYRON
     git config githubmerge.testcmd "make -j4 check" (adapt to whatever you want to use for testing)
     git config --global user.signingkey mykeyid (if you want to GPG sign)
 
 optimize-pngs.py
 ================
 
-A script to optimize png files in the Byron
+A script to optimize png files in the BYRON
 repository (requires pngcrush).
 
 fix-copyright-headers.py

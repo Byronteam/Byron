@@ -20,7 +20,7 @@ typedef struct {
 #define SECP256K1_GE_CONST(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {SECP256K1_FE_CONST((a),(b),(c),(d),(e),(f),(g),(h)), SECP256K1_FE_CONST((i),(j),(k),(l),(m),(n),(o),(p)), 0}
 #define SECP256K1_GE_CONST_INFINITY {SECP256K1_FE_CONST(0, 0, 0, 0, 0, 0, 0, 0), SECP256K1_FE_CONST(0, 0, 0, 0, 0, 0, 0, 0), 1}
 
-/** A group element of the secp256k1 curve, in jacobian coordinates. */
+/** A group element of the secp256k1 curve, in byronobian coordinates. */
 typedef struct {
     secp256k1_fe x; /* actual X: x/z^2 */
     secp256k1_fe y; /* actual Y: y/z^3 */
@@ -61,18 +61,18 @@ static int secp256k1_ge_is_valid_var(const secp256k1_ge *a);
 
 static void secp256k1_ge_neg(secp256k1_ge *r, const secp256k1_ge *a);
 
-/** Set a group element equal to another which is given in jacobian coordinates */
+/** Set a group element equal to another which is given in byronobian coordinates */
 static void secp256k1_ge_set_gej(secp256k1_ge *r, secp256k1_gej *a);
 
-/** Set a batch of group elements equal to the inputs given in jacobian coordinates */
+/** Set a batch of group elements equal to the inputs given in byronobian coordinates */
 static void secp256k1_ge_set_all_gej_var(secp256k1_ge *r, const secp256k1_gej *a, size_t len, const secp256k1_callback *cb);
 
-/** Set a batch of group elements equal to the inputs given in jacobian
+/** Set a batch of group elements equal to the inputs given in byronobian
  *  coordinates (with known z-ratios). zr must contain the known z-ratios such
  *  that mul(a[i].z, zr[i+1]) == a[i+1].z. zr[0] is ignored. */
 static void secp256k1_ge_set_table_gej_var(secp256k1_ge *r, const secp256k1_gej *a, const secp256k1_fe *zr, size_t len);
 
-/** Bring a batch inputs given in jacobian coordinates (with known z-ratios) to
+/** Bring a batch inputs given in byronobian coordinates (with known z-ratios) to
  *  the same global z "denominator". zr must contain the known z-ratios such
  *  that mul(a[i].z, zr[i+1]) == a[i+1].z. zr[0] is ignored. The x and y
  *  coordinates of the result are stored in r, the common z coordinate is
@@ -82,13 +82,13 @@ static void secp256k1_ge_globalz_set_table_gej(size_t len, secp256k1_ge *r, secp
 /** Set a group element (affine) equal to the point at infinity. */
 static void secp256k1_ge_set_infinity(secp256k1_ge *r);
 
-/** Set a group element (jacobian) equal to the point at infinity. */
+/** Set a group element (byronobian) equal to the point at infinity. */
 static void secp256k1_gej_set_infinity(secp256k1_gej *r);
 
-/** Set a group element (jacobian) equal to another which is given in affine coordinates. */
+/** Set a group element (byronobian) equal to another which is given in affine coordinates. */
 static void secp256k1_gej_set_ge(secp256k1_gej *r, const secp256k1_ge *a);
 
-/** Compare the X coordinate of a group element (jacobian). */
+/** Compare the X coordinate of a group element (byronobian). */
 static int secp256k1_gej_eq_x_var(const secp256k1_fe *x, const secp256k1_gej *a);
 
 /** Set r equal to the inverse of a (i.e., mirrored around the X axis) */
@@ -141,7 +141,7 @@ static void secp256k1_ge_from_storage(secp256k1_ge *r, const secp256k1_ge_storag
 /** If flag is true, set *r equal to *a; otherwise leave it. Constant-time. */
 static void secp256k1_ge_storage_cmov(secp256k1_ge_storage *r, const secp256k1_ge_storage *a, int flag);
 
-/** Rescale a jacobian point by b which must be non-zero. Constant-time. */
+/** Rescale a byronobian point by b which must be non-zero. Constant-time. */
 static void secp256k1_gej_rescale(secp256k1_gej *r, const secp256k1_fe *b);
 
 #endif /* SECP256K1_GROUP_H */

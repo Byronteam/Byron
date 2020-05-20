@@ -1,4 +1,7 @@
 // Copyright (c) 2012 Pieter Wuille
+// Copyright (c) 2012-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,15 +25,16 @@
  */
 class CAddrInfo : public CAddress
 {
+public:
+    //! last try whatsoever by us (memory only)
+    int64_t nLastTry;
+
 private:
     //! where knowledge about this address first came from
     CNetAddr source;
 
     //! last successful connection by us
     int64_t nLastSuccess;
-
-    //! last try whatsoever by us:
-    // int64_t CAddress::nLastTry
 
     //! connection attempts since last successful attempt
     int nAttempts;
@@ -200,11 +204,11 @@ private:
 
 protected:
     //! Find an entry.
-    CAddrInfo* Find(const CNetAddr& addr, int* pnId = nullptr);
+    CAddrInfo* Find(const CNetAddr& addr, int* pnId = NULL);
 
     //! find an entry, creating it if necessary.
     //! nTime and nServices of the found node are updated, if necessary.
-    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId = nullptr);
+    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId = NULL);
 
     //! Swap two elements in vRandom.
     void SwapRandom(unsigned int nRandomPos1, unsigned int nRandomPos2);
@@ -229,7 +233,7 @@ protected:
 
     //! Select an address to connect to.
     //! nUnkBias determines how much to favor new addresses over tried ones (min=0, max=100)
-    CAddress Select_();
+    CAddrInfo Select_();
 
 #ifdef DEBUG_ADDRMAN
     //! Perform consistency check. Returns an error code or zero.
@@ -292,7 +296,7 @@ public:
             mapUnkIds[(*it).first] = nIds;
             const CAddrInfo& info = (*it).second;
             if (info.nRefCount) {
-                assert(nIds != nNew); // this means nNew was wrong, oh ow
+                assert(nIds != nNew); // this means nNew was wrong
                 s << info;
                 nIds++;
             }
@@ -301,7 +305,7 @@ public:
         for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end(); it++) {
             const CAddrInfo& info = (*it).second;
             if (info.fInTried) {
-                assert(nIds != nTried); // this means nTried was wrong, oh ow
+                assert(nIds != nTried); // this means nTried was wrong
                 s << info;
                 nIds++;
             }
@@ -531,9 +535,9 @@ public:
      * Choose an address to connect to.
      * nUnkBias determines how much "new" entries are favored over "tried" ones (0-100).
      */
-    CAddress Select()
+    CAddrInfo Select()
     {
-        CAddress addrRet;
+        CAddrInfo addrRet;
         {
             LOCK(cs);
             Check();

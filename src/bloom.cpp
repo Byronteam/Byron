@@ -1,4 +1,6 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,9 +36,9 @@ CBloomFilter::CBloomFilter(unsigned int nElements, double nFPRate, unsigned int 
  */
 	isFull(false),
 	isEmpty(false),
-  nHashFuncs(min((unsigned int)(vData.size() * 8 / nElements * LN2), MAX_HASH_FUNCS)),
-  nTweak(nTweakIn),
-  nFlags(nFlagsIn)
+    nHashFuncs(min((unsigned int)(vData.size() * 8 / nElements * LN2), MAX_HASH_FUNCS)),
+    nTweak(nTweakIn),
+    nFlags(nFlagsIn)
 {
 }
 
@@ -117,7 +119,7 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
 {
     bool fFound = false;
     // Match if the filter contains the hash of tx
-    //  for finding tx when they appear in a block
+    // for finding tx when they appear in a block
     if (isFull)
         return true;
     if (isEmpty)

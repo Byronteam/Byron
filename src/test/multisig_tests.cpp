@@ -15,8 +15,6 @@
 #include "wallet_ismine.h"
 #endif
 
-#include "test/test_byron.h"
-
 #include <boost/assign/std/vector.hpp>
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
@@ -26,7 +24,7 @@ using namespace boost::assign;
 
 typedef vector<unsigned char> valtype;
 
-BOOST_FIXTURE_TEST_SUITE(multisig_tests, TestingSetup)
+BOOST_AUTO_TEST_SUITE(multisig_tests)
 
 CScript
 sign_multisig(CScript scriptPubKey, vector<CKey> keys, CTransaction transaction, int whichIn)

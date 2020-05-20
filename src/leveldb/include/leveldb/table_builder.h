@@ -47,7 +47,7 @@ class TableBuilder {
   void Add(const Slice& key, const Slice& value);
 
   // Advanced operation: flush any buffered key/value pairs to file.
-  // Can be used to ensure that two adjacent entries never live in
+  // Can be used to ensure that two adbyronent entries never live in
   // the same data block.  Most clients should not need to use this method.
   // REQUIRES: Finish(), Abandon() have not been called
   void Flush();

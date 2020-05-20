@@ -104,7 +104,7 @@
         <translation>&amp;Edit</translation>
     </message>
     <message>
-        <location line="+187"/>
+        <location line="+182"/>
         <source>Export Address List</source>
         <translation>Export Address List</translation>
     </message>
@@ -127,7 +127,7 @@
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+198"/>
+        <location filename="../addresstablemodel.cpp" line="+199"/>
         <source>Label</source>
         <translation>Label</translation>
     </message>
@@ -171,11 +171,11 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>For staking only</source>
-        <translation>For staking only</translation>
+        <source>For anonymization and staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+44"/>
+        <location filename="../askpassphrasedialog.cpp" line="+48"/>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</translation>
     </message>
@@ -185,7 +185,7 @@
         <translation>Encrypt wallet</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+5"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>This operation needs your wallet passphrase to unlock the wallet.</translation>
     </message>
@@ -215,13 +215,13 @@
         <translation>Enter the old and new passphrase to the wallet.</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+52"/>
         <source>Confirm wallet encryption</source>
         <translation>Confirm wallet encryption</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Byron will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</source>
+        <source>BYRON will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -294,6 +294,19 @@
     </message>
 </context>
 <context>
+    <name>BanTableModel</name>
+    <message>
+        <location filename="../bantablemodel.cpp" line="+87"/>
+        <source>IP/Netmask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Banned Until</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Bip38ToolDialog</name>
     <message>
         <location filename="../forms/bip38tooldialog.ui" line="+14"/>
@@ -306,19 +319,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Enter a BYRON Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <location line="+362"/>
+        <location line="+30"/>
+        <location line="+400"/>
         <source>Address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-355"/>
-        <source>The BYRON address to sign the message with</source>
+        <location line="-424"/>
+        <source>Enter a BYRON Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>The BYRON address to encrypt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -332,55 +345,68 @@
         <translation type="unfinished">Alt+A</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+7"/>
+        <location line="+220"/>
         <source>Paste address from clipboard</source>
         <translation type="unfinished">Paste address from clipboard</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-210"/>
+        <location line="+220"/>
         <source>Alt+P</source>
         <translation type="unfinished">Alt+P</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <location line="+185"/>
+        <location line="-200"/>
+        <location line="+220"/>
         <source>Passphrase: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-164"/>
-        <location line="+146"/>
+        <location line="-193"/>
+        <location line="+149"/>
         <source>Encrypted Key:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-124"/>
+        <location line="-127"/>
         <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Copy the current signature to the system clipboard</translation>
     </message>
     <message>
-        <location line="+21"/>
-        <source>Sign the message to prove you own this BYRON address</source>
+        <location line="+18"/>
+        <source>Encrypt the private key for this BYRON address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+17"/>
+        <location line="+171"/>
+        <source>Reset all fields</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-72"/>
+        <source>The encrypted private key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+55"/>
+        <source>Decrypt the entered key using the passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-168"/>
         <source>Encrypt &amp;Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Reset all sign message fields</source>
-        <translation type="unfinished">Reset all sign message fields</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+139"/>
+        <location line="+17"/>
+        <location line="+171"/>
         <source>Clear &amp;All</source>
         <translation type="unfinished">Clear &amp;All</translation>
     </message>
     <message>
-        <location line="-80"/>
+        <location line="-112"/>
         <source>&amp;BIP 38 Decrypt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -390,27 +416,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
-        <source>The BYRON address the message was signed with</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Verify the message to ensure it was signed with the specified BYRON address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+89"/>
         <source>Decrypt &amp;Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Reset all verify message fields</source>
-        <translation type="unfinished">Reset all verify message fields</translation>
-    </message>
-    <message>
-        <location line="+63"/>
+        <location line="+77"/>
         <source>Decrypted Key:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -420,12 +431,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../bip38tooldialog.cpp" line="+31"/>
+        <location filename="../bip38tooldialog.cpp" line="+29"/>
         <source>Click &quot;Decrypt Key&quot; to compute key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location line="+89"/>
         <source>The entered passphrase is invalid. </source>
         <translation type="unfinished"></translation>
     </message>
@@ -452,17 +463,17 @@
     </message>
     <message>
         <location line="+7"/>
-        <location line="+57"/>
+        <location line="+63"/>
         <source>Wallet unlock was cancelled.</source>
         <translation type="unfinished">Wallet unlock was cancelled.</translation>
     </message>
     <message>
-        <location line="-50"/>
+        <location line="-56"/>
         <source>Private key for the entered address is not available.</source>
         <translation type="unfinished">Private key for the entered address is not available.</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+39"/>
         <source>Failed to decrypt.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -505,7 +516,7 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+127"/>
+        <location filename="../bitcoingui.cpp" line="+122"/>
         <source>Wallet</source>
         <translation>Wallet</translation>
     </message>
@@ -515,7 +526,7 @@
         <translation>Node</translation>
     </message>
     <message>
-        <location line="+161"/>
+        <location line="+174"/>
         <source>&amp;Overview</source>
         <translation>&amp;Overview</translation>
     </message>
@@ -545,6 +556,11 @@
         <translation>Browse transaction history</translation>
     </message>
     <message>
+        <location line="+11"/>
+        <source>Privacy Actions for zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+42"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
@@ -555,13 +571,12 @@
         <translation>Quit application</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <location line="+2"/>
+        <location line="+6"/>
         <source>About &amp;Qt</source>
         <translation>About &amp;Qt</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>Show information about Qt</source>
         <translation>Show information about Qt</translation>
     </message>
@@ -761,7 +776,7 @@
         <translation>&amp;Command-line options</translation>
     </message>
     <message numerus="yes">
-        <location line="+463"/>
+        <location line="+482"/>
         <source>Processed %n blocks of transaction history.</source>
         <translation>
             <numerusform>Processed %n block of transaction history.</numerusform>
@@ -779,7 +794,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-480"/>
+        <location line="+233"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonymization and staking only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Tor is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-762"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
@@ -804,13 +829,13 @@
         <translation>Tabs toolbar</translation>
     </message>
     <message>
-        <location line="-427"/>
-        <location line="+890"/>
+        <location line="-436"/>
+        <location line="+918"/>
         <source>Byron Core</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-707"/>
+        <location line="-722"/>
         <source>Send coins to a BYRON address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -845,8 +870,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Modify configuration options for Byron</source>
+        <location line="+6"/>
+        <source>Modify configuration options for BYRON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -896,7 +921,7 @@
     </message>
     <message>
         <location line="+17"/>
-        <source>Open a byron: URI or payment request</source>
+        <source>Open a BYRON: URI or payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -911,17 +936,17 @@
     </message>
     <message>
         <location line="+4"/>
-        <source>Show the Byron Core help message to get a list with possible Byron command-line options</source>
+        <source>Show the Byron Core help message to get a list with possible BYRON command-line options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+214"/>
+        <location line="+233"/>
         <source>Byron Core client</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
         <location line="+212"/>
-        <source>%n active connection(s) to Byron network</source>
+        <source>%n active connection(s) to BYRON network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
@@ -1049,7 +1074,7 @@ Address: %4
 </translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Staking is active
  MultiSend: %1</source>
         <translation type="unfinished"></translation>
@@ -1073,12 +1098,22 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+9"/>
+        <source>AutoMint is currently enabled and set to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>AutoMint is disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+20"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
     </message>
@@ -1116,7 +1151,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../blockexplorer.cpp" line="+476"/>
+        <location filename="../blockexplorer.cpp" line="+480"/>
         <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (byron.conf).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1124,7 +1159,7 @@ Address: %4
 <context>
     <name>ClientModel</name>
     <message>
-        <location filename="../clientmodel.cpp" line="+77"/>
+        <location filename="../clientmodel.cpp" line="+81"/>
         <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1247,7 +1282,7 @@ Address: %4
         <translation>Priority</translation>
     </message>
     <message>
-        <location filename="../coincontroldialog.cpp" line="+52"/>
+        <location filename="../coincontroldialog.cpp" line="+60"/>
         <source>Copy address</source>
         <translation>Copy address</translation>
     </message>
@@ -1313,12 +1348,12 @@ Address: %4
         <translation>Copy change</translation>
     </message>
     <message>
-        <location line="+163"/>
+        <location line="+147"/>
         <source>Please switch to &quot;List mode&quot; to use this function.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+220"/>
+        <location line="+216"/>
         <source>highest</source>
         <translation>highest</translation>
     </message>
@@ -1338,13 +1373,8 @@ Address: %4
         <translation>medium-high</translation>
     </message>
     <message>
-        <location line="+238"/>
-        <source>Can vary +/- %1 ubyron per input.</source>
-        <translation>Can vary +/- %1 ubyron per input.</translation>
-    </message>
-    <message>
         <location filename="../forms/coincontroldialog.ui" line="-334"/>
-        <location filename="../coincontroldialog.cpp" line="-236"/>
+        <location filename="../coincontroldialog.cpp" line="+2"/>
         <source>medium</source>
         <translation>medium</translation>
     </message>
@@ -1421,7 +1451,12 @@ Address: %4
         <translation>This label turns red, if any recipient receives an amount smaller than %1.</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+8"/>
+        <source>Can vary +/- %1 ubyron per input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+46"/>
         <location line="+81"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
@@ -1621,7 +1656,7 @@ Address: %4
     </message>
     <message>
         <location line="+10"/>
-        <source>Byron Core will download and store a copy of the Byron block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <source>Byron Core will download and store a copy of the BYRON block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1668,17 +1703,17 @@ Address: %4
         <translation type="unfinished">Form</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>My Masternodes</source>
+        <location line="+59"/>
+        <source>MASTERNODES</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+101"/>
         <source>Note: Status of your masternodes in local wallet can potentially be slightly incorrect.&lt;br /&gt;Always wait for wallet to sync additional data and then double check from another node&lt;br /&gt;if your node should be running but you still see &quot;MISSING&quot; in &quot;Status&quot; field.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+71"/>
         <source>Alias</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1743,7 +1778,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../masternodelist.cpp" line="+45"/>
+        <location filename="../masternodelist.cpp" line="+52"/>
         <source>Start alias</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1796,7 +1831,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+96"/>
         <source>Enter whole numbers 1 - 100</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1806,12 +1841,12 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+30"/>
         <source>Enter Address to Send to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-106"/>
         <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other BYRON addresses after it matures.
 To Add: enter percentage to give and BYRON address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
@@ -1819,7 +1854,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+207"/>
         <source>Add to MultiSend Vector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1829,7 +1864,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+34"/>
         <source>Deactivate MultiSend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1839,7 +1874,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-128"/>
         <source>Choose an address from the address book</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1849,7 +1884,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished">Alt+A</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-66"/>
         <source>Percentage of stake to send</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1859,7 +1894,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+27"/>
         <source>Address to send portion of stake to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1869,7 +1904,17 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+52"/>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Enter a label for this address to add it to your address book</source>
+        <translation type="unfinished">Enter a label for this address to add it to your address book</translation>
+    </message>
+    <message>
+        <location line="+65"/>
         <source>Delete Address From MultiSend Vector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1879,7 +1924,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+11"/>
         <source>Activate MultiSend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1889,7 +1934,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-47"/>
         <source>View MultiSend Vector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1899,7 +1944,7 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-154"/>
         <source>Send For Stakes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1909,43 +1954,99 @@ MultiSend will not be activated unless you have clicked Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../multisenddialog.cpp" line="+92"/>
-        <source>The entered address:
-</source>
+        <location filename="../multisenddialog.cpp" line="+64"/>
+        <source>(no label)</source>
+        <translation type="unfinished">(no label)</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>MultiSend Active for Stakes and Masternode Rewards</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source> is invalid.
+        <location line="+2"/>
+        <source>MultiSend Active for Stakes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MultiSend Active for Masternode Rewards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MultiSend Not Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>The entered address: %1 is invalid.
 Please check the address and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
-        <source>The total amount of your MultiSend vector is over 100% of your stake reward
-</source>
+        <source>The total amount of your MultiSend vector is over 100% of your stake reward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>Please Enter 1 - 100 for percent.</source>
+        <location line="+40"/>
+        <source>Saved the MultiSend to memory, but failed saving properties to the database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+20"/>
-        <source>MultiSend Vector
-</source>
+        <location line="+4"/>
+        <source>MultiSend Vector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
-        <source>Removed </source>
+        <location line="+21"/>
+        <source>Removed %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Could not locate address
-</source>
+        <source>Could not locate address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Unable to activate MultiSend, check MultiSend vector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Need to select to send on stake and/or masternode rewards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>MultiSend activated but writing settings to DB failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MultiSend activated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>First Address Not Valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>MultiSend deactivated but writing settings to DB failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MultiSend deactivated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-97"/>
+        <source>Please Enter 1 - 100 for percent.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1957,7 +2058,7 @@ Please check the address and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+19"/>
         <source>Create MultiSignature &amp;Address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2004,12 +2105,12 @@ Please check the address and try again.</source>
     <message>
         <location line="+14"/>
         <location line="+345"/>
-        <location line="+183"/>
+        <location line="+179"/>
         <source>Status:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-491"/>
+        <location line="-487"/>
         <source>Use below to quickly import an address by its redeem. Don&apos;t forget to add a label before clicking import!
 Keep in mind, the wallet will rescan the blockchain to find transactions containing the new address.
 Please be patient after clicking import.</source>
@@ -2087,16 +2188,7 @@ Please be patient after clicking import.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+48"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Noto Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
+        <location line="+76"/>
         <source>&amp;Sign MultiSignature Tx</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2141,7 +2233,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../multisigdialog.cpp" line="+250"/>
+        <location filename="../multisigdialog.cpp" line="+299"/>
         <source>Invalid Tx Hash.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2152,22 +2244,107 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+535"/>
-        <source>Maximum possible addresses reached. (16)</source>
+        <source>Maximum possible addresses reached. (15)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+110"/>
         <source>Vout Position: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+57"/>
         <source>Amount: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+26"/>
         <source>Maximum (15)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ObfuscationConfig</name>
+    <message>
+        <location filename="../forms/obfuscationconfig.ui" line="+14"/>
+        <source>Configure Obfuscation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Basic Privacy</source>
+        <translation type="unfinished">Basic Privacy</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>High Privacy</source>
+        <translation type="unfinished">High Privacy</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Maximum Privacy</source>
+        <translation type="unfinished">Maximum Privacy</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Please select a privacy level.</source>
+        <translation type="unfinished">Please select a privacy level.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Use 2 separate masternodes to mix funds up to 200000 BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Use 8 separate masternodes to mix funds up to 200000 BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Use 16 separate masternodes</source>
+        <translation type="unfinished">Use 16 separate masternodes</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>This option is the quickest and will cost about ~0.025 BYRON to anonymize 200000 BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>This option is moderately fast and will cost about 0.05 BYRON to anonymize 200000 BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
+        <translation type="unfinished">This is the slowest and most secure option. Using maximum anonymity will cost</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>0.1 BYRON per 200000 BYRON you anonymize.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../obfuscationconfig.cpp" line="+47"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <source>Obfuscation Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening BYRON&apos;s configuration screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening BYRON&apos;s configuration screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening BYRON&apos;s configuration screen.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2194,7 +2371,7 @@ p, li { white-space: pre-wrap; }
         <translation>Select payment request file</translation>
     </message>
     <message>
-        <location filename="../openuridialog.cpp" line="+47"/>
+        <location filename="../openuridialog.cpp" line="+45"/>
         <source>Select payment request file to open</source>
         <translation>Select payment request file to open</translation>
     </message>
@@ -2232,18 +2409,18 @@ p, li { white-space: pre-wrap; }
         <translation>(0 = auto, &lt;0 = leave that many cores free)</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+115"/>
         <source>W&amp;allet</source>
         <translation>W&amp;allet</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+53"/>
         <source>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</source>
         <translation>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</translation>
     </message>
     <message>
         <location line="+33"/>
-        <source>Automatically open the Byron client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the BYRON client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2267,17 +2444,17 @@ p, li { white-space: pre-wrap; }
         <translation>Expert</translation>
     </message>
     <message>
-        <location line="-176"/>
-        <source>Automatically start Byron after logging in to the system.</source>
+        <location line="-210"/>
+        <source>Automatically start BYRON after logging in to the system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Byron on system login</source>
+        <source>&amp;Start BYRON on system login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+179"/>
+        <location line="+213"/>
         <source>Whether to show coin control features or not.</source>
         <translation>Whether to show coin control features or not.</translation>
     </message>
@@ -2308,7 +2485,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+192"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Byron.</source>
+        <source>The user interface language can be set here. This setting will take effect after restarting BYRON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Language missing or translation incomplete? Help contributing translations here:
+https://www.transifex.com/byron-project/byron-project-translations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2317,8 +2500,44 @@ p, li { white-space: pre-wrap; }
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <location line="+114"/>
-        <source>Connect to the Byron network through a SOCKS5 proxy.</source>
+        <location line="-169"/>
+        <source>Enable automatic minting of BYRON units to zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable zBYRON Automint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Percentage of incoming BYRON which get automatically converted to zBYRON via Zerocoin Protocol (min: 10%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Percentage of autominted zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <location line="+16"/>
+        <source>Wait with automatic conversion to Zerocoin until enough BYRON for this denomination is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <source>Preferred Automint zBYRON Denomination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Stake split threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+98"/>
+        <source>Connect to the BYRON network through a SOCKS5 proxy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2377,6 +2596,11 @@ p, li { white-space: pre-wrap; }
         <translation>User Interface &amp;language:</translation>
     </message>
     <message>
+        <location line="+53"/>
+        <source>User Interface Theme:</source>
+        <translation>User Interface Theme:</translation>
+    </message>
+    <message>
         <location line="+21"/>
         <source>&amp;Unit to show amounts in:</source>
         <translation>&amp;Unit to show amounts in:</translation>
@@ -2393,6 +2617,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+14"/>
+        <location line="+6"/>
+        <source>Hide empty balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Hide orphan stakes in transaction lists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Hide orphan stakes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <location line="+13"/>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</translation>
@@ -2428,8 +2668,8 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+87"/>
-        <source>I don&apos;t care</source>
+        <location filename="../optionsdialog.cpp" line="+89"/>
+        <source>Any</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2438,12 +2678,12 @@ p, li { white-space: pre-wrap; }
         <translation>default</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+46"/>
         <source>none</source>
         <translation>none</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+96"/>
         <source>Confirm options reset</source>
         <translation>Confirm options reset</translation>
     </message>
@@ -2464,9 +2704,19 @@ p, li { white-space: pre-wrap; }
         <translation>This change would require a client restart.</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+28"/>
         <source>The supplied proxy address is invalid.</source>
         <translation>The supplied proxy address is invalid.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>The supplied proxy port is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>The supplied proxy settings are invalid.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2477,78 +2727,126 @@ p, li { white-space: pre-wrap; }
         <translation>Form</translation>
     </message>
     <message>
-        <location line="+43"/>
-        <source>BYRON Balances</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+259"/>
+        <location line="+297"/>
+        <location line="+192"/>
+        <location line="+403"/>
         <source>Available:</source>
         <translation>Available:</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <location line="+702"/>
+        <location line="-579"/>
+        <location line="+192"/>
         <source>Your current spendable balance</source>
         <translation>Your current spendable balance</translation>
     </message>
     <message>
-        <location line="-661"/>
+        <location line="-160"/>
+        <source>Total Balance, including all unavailable coins.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>BYRON Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+130"/>
         <source>Pending:</source>
         <translation>Pending:</translation>
     </message>
     <message>
-        <location line="-236"/>
-        <location line="+820"/>
+        <location line="+16"/>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
         <translation>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</translation>
     </message>
     <message>
-        <location line="-708"/>
-        <location line="+1118"/>
+        <location line="+41"/>
+        <location line="+351"/>
         <source>Immature:</source>
         <translation>Immature:</translation>
     </message>
     <message>
-        <location line="-1147"/>
+        <location line="-335"/>
         <source>Staked or masternode rewards that has not yet matured</source>
         <translation>Staked or masternode rewards that has not yet matured</translation>
     </message>
     <message>
-        <location line="-153"/>
-        <location line="+1393"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Byron network after a connection is established, but this process has not completed yet.</source>
+        <location line="+85"/>
+        <source>Current locked balance in watch-only addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1348"/>
+        <location line="+16"/>
+        <location line="+19"/>
+        <source>Your current BYRON balance, unconfirmed and immature transactions included</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+96"/>
+        <source>zBYRON Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <location line="+17"/>
+        <source>Mature: more than 20 confirmation and more than 1 mint of the same denomination after it was minted.
+These zBYRON are spendable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+17"/>
+        <location line="+14"/>
+        <location line="+17"/>
+        <source>Unconfirmed: less than 20 confirmations
+Immature: confirmed, but less than 1 mint of the same denomination after it was minted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-725"/>
+        <location line="+852"/>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the BYRON network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-999"/>
+        <source>OVERVIEW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+134"/>
+        <source>Combined Balance (including unconfirmed and immature coins)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Combined Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+355"/>
         <source>Unconfirmed transactions to watch-only addresses</source>
         <translation>Unconfirmed transactions to watch-only addresses</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+57"/>
         <source>Staked or masternode rewards in watch-only addresses that has not yet matured</source>
         <translation>Staked or masternode rewards in watch-only addresses that has not yet matured</translation>
     </message>
     <message>
-        <location line="+42"/>
-        <location line="+807"/>
-        <location line="+255"/>
+        <location line="-315"/>
+        <location line="+394"/>
+        <location line="+261"/>
         <source>Total:</source>
         <translation>Total:</translation>
     </message>
     <message>
-        <location line="-1001"/>
-        <source>Your current total balance</source>
-        <translation>Your current total balance</translation>
-    </message>
-    <message>
-        <location line="+25"/>
+        <location line="-220"/>
         <source>Current total balance in watch-only addresses</source>
         <translation>Current total balance in watch-only addresses</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-285"/>
         <source>Watch-only:</source>
         <translation>Watch-only:</translation>
     </message>
@@ -2558,67 +2856,72 @@ p, li { white-space: pre-wrap; }
         <translation>Your current balance in watch-only addresses</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-61"/>
         <source>Spendable:</source>
         <translation>Spendable:</translation>
     </message>
     <message>
-        <location line="+525"/>
-        <source>Combined Balances (including unconfirmed and immature coins)</source>
+        <location line="+191"/>
+        <location line="+19"/>
+        <source>Locked BYRON or Masternode collaterals. These are excluded from zBYRON minting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Combined Balances&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+74"/>
-        <source>Total Balance, including unconfirmed and immature coins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>BYRON:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location line="+66"/>
-        <source>0 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-10"/>
-        <location line="+33"/>
-        <location line="+189"/>
-        <location line="+31"/>
-        <location line="+44"/>
-        <source>0.000 000 00 BYRON</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-284"/>
+        <location line="-16"/>
         <source>Locked:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+127"/>
-        <source>Recent transactions</source>
-        <translation>Recent transactions</translation>
+        <location line="+260"/>
+        <source>Unconfirmed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overviewpage.cpp" line="+135"/>
+        <location line="+58"/>
+        <location line="+19"/>
+        <source>Your current zBYRON balance, unconfirmed and immature zBYRON included.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+84"/>
+        <source>Recent Transactions</source>
+        <translation>Recent Transactions</translation>
+    </message>
+    <message>
+        <location filename="../overviewpage.cpp" line="+132"/>
         <location line="+1"/>
         <source>out of sync</source>
         <translation>out of sync</translation>
+    </message>
+    <message>
+        <location line="+111"/>
+        <source>Current percentage of zBYRON.
+If AutoMint is enabled this percentage will settle around the configured AutoMint percentage (default = 10%).
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>AutoMint is currently enabled and set to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>To disable AutoMint add &apos;enablezeromint=0&apos; in byron.conf.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>AutoMint is currently disabled.
+To enable AutoMint change &apos;enablezeromint=0&apos; to &apos;enablezeromint=1&apos; in byron.conf</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PaymentServer</name>
     <message>
-        <location filename="../paymentserver.cpp" line="+297"/>
-        <location line="+209"/>
+        <location filename="../paymentserver.cpp" line="+292"/>
+        <location line="+205"/>
         <location line="+33"/>
         <location line="+104"/>
         <location line="+12"/>
@@ -2649,13 +2952,13 @@ p, li { white-space: pre-wrap; }
         <translation>Invalid payment address %1</translation>
     </message>
     <message>
-        <location line="-108"/>
+        <location line="-104"/>
         <source>Cannot start byron: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+114"/>
-        <source>URI cannot be parsed! This can be caused by an invalid Byron address or malformed URI parameters.</source>
+        <location line="+110"/>
+        <source>URI cannot be parsed! This can be caused by an invalid BYRON address or malformed URI parameters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2739,7 +3042,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../peertablemodel.cpp" line="+113"/>
+        <location filename="../peertablemodel.cpp" line="+114"/>
         <source>Address/Hostname</source>
         <translation>Address/Hostname</translation>
     </message>
@@ -2755,6 +3058,872 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>PrivacyDialog</name>
+    <message>
+        <location filename="../forms/privacydialog.ui" line="+184"/>
+        <source>Zerocoin Actions:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the BYRON network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+190"/>
+        <location filename="../privacydialog.cpp" line="+172"/>
+        <location line="+112"/>
+        <source>Mint zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+351"/>
+        <location line="+30"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-371"/>
+        <location line="+651"/>
+        <source>zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-644"/>
+        <source>Available for minting are coins which are confirmed and not locked or Masternode collaterals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Available for Minting:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>0.000 000 00 BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Reset Zerocoin Wallet DB. Deletes transactions that did not make it into the blockchain.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Reset</source>
+        <translation type="unfinished">Reset</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Coin Control...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Quantity:</source>
+        <translation type="unfinished">Quantity:</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Amount:</source>
+        <translation type="unfinished">Amount:</translation>
+    </message>
+    <message>
+        <location line="+91"/>
+        <source>Rescan the complete blockchain for  Zerocoin mints and their meta-data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>ReScan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Status and/or Mesages from the last Mint Action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-600"/>
+        <source>PRIVACY</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+308"/>
+        <location line="+52"/>
+        <source>Enter an amount of BYRON to convert to zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+301"/>
+        <source>zBYRON Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>zBYRON Selected:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Quantity Selected:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <location filename="../privacydialog.cpp" line="+563"/>
+        <source>Spend zBYRON. Without &apos;Pay To:&apos; address creates payments to yourself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../privacydialog.cpp" line="-514"/>
+        <location line="+4"/>
+        <location line="+12"/>
+        <location line="+84"/>
+        <location line="+32"/>
+        <location line="+11"/>
+        <location line="+4"/>
+        <source>Spend zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Available (mature and spendable) zBYRON for spending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Available Balance:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Available (mature and spendable) zBYRON for spending
+
+zBYRON are mature when they have more than 20 confirmations AND more than 2 mints of the same denomination after them were minted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-548"/>
+        <location line="+49"/>
+        <location line="+504"/>
+        <location line="+421"/>
+        <location line="+544"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <location line="+31"/>
+        <source>0 zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1190"/>
+        <source>Security Level for Zerocoin Transactions. More is better, but needs more time and resources.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Security Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Security Level 1 - 100 (default: 42)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Pay &amp;To:</source>
+        <translation type="unfinished">Pay &amp;To:</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>The BYRON address to send the payment to. Creates local payment to yourself when empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Choose previously used address</source>
+        <translation type="unfinished">Choose previously used address</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Alt+A</source>
+        <translation type="unfinished">Alt+A</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Paste address from clipboard</source>
+        <translation type="unfinished">Paste address from clipboard</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Alt+P</source>
+        <translation type="unfinished">Alt+P</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>&amp;Label:</source>
+        <translation type="unfinished">&amp;Label:</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Enter a label for this address to add it to the list of used addresses</source>
+        <translation type="unfinished">Enter a label for this address to add it to the list of used addresses</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>A&amp;mount:</source>
+        <translation type="unfinished">A&amp;mount:</translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>Convert Change to Zerocoin (might cost additional fees)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>If checked, the wallet tries to minimize the returning change instead of minimizing the number of spent denominations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Minimize Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Information about the available Zerocoin funds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Zerocoin Stats:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-893"/>
+        <location line="+25"/>
+        <location line="+936"/>
+        <location line="+38"/>
+        <source>Total Balance including unconfirmed and immature zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-996"/>
+        <location line="+961"/>
+        <source>Total Zerocoin  Balance:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Denominations with value 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <source>Unconfirmed: less than 20 confirmations
+Immature: confirmed, but less than 1 mint of the same denomination after it was minted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Show the current status of automatic zBYRON minting.
+
+To change the status (restart required):
+- enable: add &apos;enablezeromint=1&apos; to byron.conf
+- disable: add &apos;enablezeromint=0&apos; to byron.conf
+
+To change the percentage (no restart required):
+- menu Settings-&gt;Options-&gt;Percentage of autominted zBYRON
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>AutoMint Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1410"/>
+        <location line="+1459"/>
+        <source>Global Supply:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Denom. 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 5:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 10:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 50:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 100:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 500:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 1000:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Denom. 5000:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-722"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <location line="+53"/>
+        <source>0 x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1324"/>
+        <source>Show zBYRON denominations list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Show Denominations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+967"/>
+        <source>Denominations with value 5:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 5:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Denominations with value 10:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 10:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Denominations with value 50:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 50:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Denominations with value 100:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 100:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Denominations with value 500:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 500:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Denominations with value 1000:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 1000:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Denominations with value 5000:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Denom. with value 5000:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+443"/>
+        <source>Hide Denominations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+147"/>
+        <source>Priority:</source>
+        <translation type="unfinished">Priority:</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Fee:</source>
+        <translation type="unfinished">Fee:</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Dust:</source>
+        <translation type="unfinished">Dust:</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>no</source>
+        <translation type="unfinished">no</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Bytes:</source>
+        <translation type="unfinished">Bytes:</translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>Insufficient funds!</source>
+        <translation type="unfinished">Insufficient funds!</translation>
+    </message>
+    <message>
+        <location line="+75"/>
+        <location filename="../privacydialog.cpp" line="-438"/>
+        <location line="+1"/>
+        <location line="+545"/>
+        <location line="+1"/>
+        <source>Coins automatically selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>medium</source>
+        <translation type="unfinished">medium</translation>
+    </message>
+    <message>
+        <location line="+80"/>
+        <source>Coin Control Features</source>
+        <translation type="unfinished">Coin Control Features</translation>
+    </message>
+    <message>
+        <location line="+72"/>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
+        <translation type="unfinished">If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Custom change address</source>
+        <translation type="unfinished">Custom change address</translation>
+    </message>
+    <message>
+        <location line="+83"/>
+        <source>Amount After Fee:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Change:</source>
+        <translation type="unfinished">Change:</translation>
+    </message>
+    <message>
+        <location filename="../privacydialog.cpp" line="-545"/>
+        <source>out of sync</source>
+        <translation type="unfinished">out of sync</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+129"/>
+        <source>Mint Status: Okay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-123"/>
+        <source>Copy quantity</source>
+        <translation type="unfinished">Copy quantity</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy amount</source>
+        <translation type="unfinished">Copy amount</translation>
+    </message>
+    <message>
+        <location line="+192"/>
+        <source>Starting ResetMintZerocoin: rescanning complete blockchain, this will need up to 30 minutes depending on your hardware.
+Please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+171"/>
+        <source>Spending Zerocoin.
+Computationally expensive, might need several minutes depending on the selected Security Level and your hardware.
+Please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>) needed.
+Maximum allowed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>zBYRON Spend #: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>zBYRON Mint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+293"/>
+        <source> &lt;b&gt;enabled&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source> &lt;b&gt;disabled&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source> Configured target percentage: &lt;b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+4"/>
+        <source>zBYRON is currently disabled due to maintenance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-666"/>
+        <location line="+112"/>
+        <source>zBYRON is currently undergoing maintenance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-221"/>
+        <source>Denom. with value &lt;b&gt;1&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;5&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;10&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;50&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;100&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;500&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;1000&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. with value &lt;b&gt;5000&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+740"/>
+        <source>AutoMint Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-737"/>
+        <source>Denom. &lt;b&gt;1&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;5&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;10&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;50&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;100&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;500&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;1000&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Denom. &lt;b&gt;5000&lt;/b&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+103"/>
+        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Message: Enter an amount &gt; 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Minting </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Successfully minted </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source> zBYRON in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source> sec. Used denominations:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <location line="+15"/>
+        <location line="+260"/>
+        <source>Duration: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-275"/>
+        <location line="+15"/>
+        <location line="+260"/>
+        <source> sec.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-265"/>
+        <source>Starting ResetSpentZerocoin: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+68"/>
+        <source>No &apos;Pay To&apos; address provided, creating local payment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Invalid BYRON Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Invalid Send Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Confirm additional Fees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Are you sure you want to send?&lt;br /&gt;&lt;br /&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source> to address </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source> to a newly generated (unused and therefore anonymous) local address &lt;br /&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>with Security Level </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Confirm send coins</source>
+        <translation type="unfinished">Confirm send coins</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <location line="+32"/>
+        <source>Version 1 zBYRON require a security level of 100 to successfully spend.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-31"/>
+        <location line="+32"/>
+        <source>Failed to spend zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Failed to fetch mint associated with serial hash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Too much inputs (</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>
+Either mint higher denominations (so fewer inputs are needed) or reduce the amount to spend.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+4"/>
+        <source>Spend zBYRON failed with status = </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location line="+362"/>
+        <source>PrivacyDialog</source>
+        <comment>Enter an amount of BYRON to convert to zBYRON</comment>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location line="-334"/>
+        <source>denomination: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>serial: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spend is 1 of : </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>value out: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>address: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Sending successful, return code: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>txid: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>fee: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../bitcoinunits.cpp" line="+252"/>
@@ -2762,12 +3931,12 @@ p, li { white-space: pre-wrap; }
         <translation>Amount</translation>
     </message>
     <message>
-        <location filename="../guiutil.cpp" line="+113"/>
+        <location filename="../guiutil.cpp" line="+105"/>
         <source>Enter a BYRON address (e.g. %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+776"/>
+        <location line="+773"/>
         <source>%1 d</source>
         <translation>%1 d</translation>
     </message>
@@ -2783,11 +3952,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+2"/>
+        <location line="+40"/>
         <source>%1 s</source>
         <translation>%1 s</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="-25"/>
         <source>NETWORK</source>
         <translation>NETWORK</translation>
     </message>
@@ -2820,7 +3990,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QRImageWidget</name>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+35"/>
+        <location filename="../receiverequestdialog.cpp" line="+33"/>
         <source>&amp;Save Image...</source>
         <translation>&amp;Save Image...</translation>
     </message>
@@ -2879,7 +4049,7 @@ p, li { white-space: pre-wrap; }
         <location line="+23"/>
         <location line="+36"/>
         <location line="+23"/>
-        <location line="+454"/>
+        <location line="+522"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -2892,12 +4062,19 @@ p, li { white-space: pre-wrap; }
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
-        <location line="+91"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+26"/>
+        <location line="+23"/>
+        <location line="+78"/>
+        <location line="+26"/>
+        <location line="+29"/>
+        <location line="+29"/>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
     <message>
-        <location line="-913"/>
+        <location line="-1147"/>
         <source>Number of connections</source>
         <translation>Number of connections</translation>
     </message>
@@ -2958,7 +4135,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+79"/>
-        <source>Open the Byron debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the BYRON debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3007,14 +4184,24 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Peers</translation>
     </message>
     <message>
-        <location line="+41"/>
-        <location filename="../rpcconsole.cpp" line="+263"/>
-        <location line="+481"/>
+        <location line="+50"/>
+        <source>Banned peers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <location filename="../rpcconsole.cpp" line="+329"/>
+        <location line="+727"/>
         <source>Select a peer to view detailed information.</source>
         <translation>Select a peer to view detailed information.</translation>
     </message>
     <message>
         <location line="+25"/>
+        <source>Whitelisted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
         <source>Direction</source>
         <translation>Direction</translation>
     </message>
@@ -3034,17 +4221,7 @@ p, li { white-space: pre-wrap; }
         <translation>Services</translation>
     </message>
     <message>
-        <location line="+23"/>
-        <source>Starting Height</source>
-        <translation>Starting Height</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Sync Height</source>
-        <translation>Sync Height</translation>
-    </message>
-    <message>
-        <location line="+23"/>
+        <location line="+92"/>
         <source>Ban Score</source>
         <translation>Ban Score</translation>
     </message>
@@ -3079,22 +4256,67 @@ p, li { white-space: pre-wrap; }
         <translation>Ping Time</translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+89"/>
         <source>&amp;Wallet Repair</source>
         <translation>&amp;Wallet Repair</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+347"/>
         <source>Delete local Blockchain Folders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="-309"/>
         <source>Wallet In Use:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="-334"/>
+        <source>Starting Block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Synced Headers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Synced Blocks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+184"/>
+        <source>The duration of a currently outstanding ping.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ping Wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Time Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+101"/>
+        <source>Custom Backup Path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Custom zBYRON Backup Path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Custom Backups Threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+48"/>
         <source>Salvage wallet</source>
         <translation>Salvage wallet</translation>
     </message>
@@ -3154,7 +4376,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-246"/>
+        <location line="-333"/>
         <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</source>
         <translation>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</translation>
     </message>
@@ -3164,7 +4386,7 @@ p, li { white-space: pre-wrap; }
         <translation>Wallet repair options.</translation>
     </message>
     <message>
-        <location line="+199"/>
+        <location line="+286"/>
         <source>Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3174,7 +4396,7 @@ p, li { white-space: pre-wrap; }
         <translation>Rebuild index</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-206"/>
+        <location filename="../rpcconsole.cpp" line="-376"/>
         <source>In:</source>
         <translation>In:</translation>
     </message>
@@ -3184,12 +4406,50 @@ p, li { white-space: pre-wrap; }
         <translation>Out:</translation>
     </message>
     <message>
-        <location line="-36"/>
-        <source>Welcome to the Byron RPC console.</source>
+        <location line="-39"/>
+        <source>Welcome to the BYRON RPC console.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-66"/>
+        <location line="-218"/>
+        <source>&amp;Disconnect Node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>Ban Node for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <source>1 &amp;hour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1 &amp;day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1 &amp;week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1 &amp;year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>&amp;Unban Node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+95"/>
         <source>This will delete your local blockchain folders and the wallet will synchronize the complete Blockchain from scratch.&lt;br /&gt;&lt;br /&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3214,9 +4474,9 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+63"/>
-        <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
-        <translation>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</translation>
+        <location line="+70"/>
+        <source>Use up and down arrows to navigate history, and %1 to clear screen.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3224,7 +4484,12 @@ p, li { white-space: pre-wrap; }
         <translation>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</translation>
     </message>
     <message>
-        <location line="+138"/>
+        <location line="+2"/>
+        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+141"/>
         <source>%1 B</source>
         <translation>%1 B</translation>
     </message>
@@ -3244,7 +4509,12 @@ p, li { white-space: pre-wrap; }
         <translation>%1 GB</translation>
     </message>
     <message>
-        <location line="+128"/>
+        <location line="+123"/>
+        <source>(node id: %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>via %1</source>
         <translation>via %1</translation>
     </message>
@@ -3255,7 +4525,7 @@ p, li { white-space: pre-wrap; }
         <translation>never</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Inbound</source>
         <translation>Inbound</translation>
     </message>
@@ -3265,21 +4535,26 @@ p, li { white-space: pre-wrap; }
         <translation>Outbound</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Unknown</source>
-        <translation>Unknown</translation>
+        <location line="+2"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+1"/>
-        <source>Fetching...</source>
-        <translation>Fetching...</translation>
+        <location line="+0"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+6"/>
+        <source>Unknown</source>
+        <translation>Unknown</translation>
     </message>
 </context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <location filename="../forms/receivecoinsdialog.ui" line="+34"/>
+        <location filename="../forms/receivecoinsdialog.ui" line="+263"/>
         <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
         <translation>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</translation>
     </message>
@@ -3289,28 +4564,49 @@ p, li { white-space: pre-wrap; }
         <translation>R&amp;euse an existing receiving address (not recommended)</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="-30"/>
         <source>&amp;Message:</source>
         <translation>&amp;Message:</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location line="+21"/>
+        <location line="-87"/>
+        <location line="+16"/>
         <source>An optional label to associate with the new receiving address.</source>
         <translation>An optional label to associate with the new receiving address.</translation>
     </message>
     <message>
-        <location line="-37"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Byron network.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Byron network.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+7"/>
+        <location line="+25"/>
+        <source>Your receiving address. You can copy and use it to receive coins on this wallet. A new one will be generated once it is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-22"/>
+        <source>&amp;Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>A&amp;mount:</source>
+        <translation type="unfinished">A&amp;mount:</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the BYRON network.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-175"/>
+        <source>RECEIVE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+191"/>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the BYRON network.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-107"/>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
         <translation>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</translation>
     </message>
@@ -3320,18 +4616,13 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Label:</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+52"/>
         <location line="+22"/>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation>An optional amount to request. Leave this empty or zero to not request a specific amount.</translation>
     </message>
     <message>
-        <location line="-19"/>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Amount:</translation>
-    </message>
-    <message>
-        <location line="+34"/>
+        <location line="+62"/>
         <source>&amp;Request payment</source>
         <translation>&amp;Request payment</translation>
     </message>
@@ -3346,7 +4637,12 @@ p, li { white-space: pre-wrap; }
         <translation>Clear</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+27"/>
+        <source>Receiving Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+55"/>
         <source>Requested payments history</source>
         <translation>Requested payments history</translation>
     </message>
@@ -3371,7 +4667,7 @@ p, li { white-space: pre-wrap; }
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../receivecoinsdialog.cpp" line="+38"/>
+        <location filename="../receivecoinsdialog.cpp" line="+41"/>
         <source>Copy label</source>
         <translation>Copy label</translation>
     </message>
@@ -3384,6 +4680,11 @@ p, li { white-space: pre-wrap; }
         <location line="+1"/>
         <source>Copy amount</source>
         <translation>Copy amount</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy address</source>
+        <translation type="unfinished">Copy address</translation>
     </message>
 </context>
 <context>
@@ -3457,7 +4758,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
-        <location filename="../recentrequeststablemodel.cpp" line="+27"/>
+        <location filename="../recentrequeststablemodel.cpp" line="+28"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -3472,17 +4773,22 @@ p, li { white-space: pre-wrap; }
         <translation>Message</translation>
     </message>
     <message>
-        <location line="+87"/>
+        <location line="+0"/>
+        <source>Address</source>
+        <translation type="unfinished">Address</translation>
+    </message>
+    <message>
+        <location line="+89"/>
         <source>Amount</source>
         <translation>Amount</translation>
     </message>
     <message>
-        <location line="-50"/>
+        <location line="-52"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>(no message)</source>
         <translation>(no message)</translation>
     </message>
@@ -3495,20 +4801,25 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>SendCoinsDialog</name>
     <message>
-        <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+231"/>
+        <location filename="../forms/sendcoinsdialog.ui" line="+17"/>
+        <location filename="../sendcoinsdialog.cpp" line="+234"/>
         <location line="+25"/>
-        <location line="+397"/>
+        <location line="+413"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+65"/>
+        <source>SEND</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+156"/>
         <source>Coin Control Features</source>
         <translation>Coin Control Features</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+70"/>
         <source>Insufficient funds!</source>
         <translation>Insufficient funds!</translation>
     </message>
@@ -3563,7 +4874,7 @@ p, li { white-space: pre-wrap; }
         <translation>Change:</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+62"/>
         <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
         <translation>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</translation>
     </message>
@@ -3573,12 +4884,12 @@ p, li { white-space: pre-wrap; }
         <translation>Custom change address</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+76"/>
         <source>Split UTXO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+25"/>
         <source># of outputs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3593,7 +4904,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+193"/>
+        <location line="+167"/>
+        <source>SwiftX technology allows for near instant transactions - A flat fee of 0.01 BYRON applies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+176"/>
         <source>Transaction Fee:</source>
         <translation>Transaction Fee:</translation>
     </message>
@@ -3613,7 +4929,7 @@ p, li { white-space: pre-wrap; }
         <translation>Minimize</translation>
     </message>
     <message>
-        <location line="+81"/>
+        <location line="+135"/>
         <source>per kilobyte</source>
         <translation>per kilobyte</translation>
     </message>
@@ -3628,27 +4944,27 @@ p, li { white-space: pre-wrap; }
         <translation>(read the tooltip)</translation>
     </message>
     <message>
-        <location line="+228"/>
+        <location line="-82"/>
         <source>Custom:</source>
         <translation>Custom:</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="-211"/>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
         <translation>(Smart fee not initialized yet. This usually takes a few blocks...)</translation>
     </message>
     <message>
-        <location line="+197"/>
-        <source>SwiftTX</source>
+        <location line="-101"/>
+        <source>SwiftX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-352"/>
+        <location line="+7"/>
         <source>Confirmation time:</source>
         <translation>Confirmation time:</translation>
     </message>
     <message>
-        <location line="-947"/>
+        <location line="-750"/>
         <source>Open Coin Control...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3658,7 +4974,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+772"/>
+        <location line="+1062"/>
         <source>If the custom fee is set to 1000 uBYRONs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uBYRONs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 uBYRONs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3670,26 +4986,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+33"/>
         <location line="+13"/>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Byron transactions than the network can process.</source>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for BYRON transactions than the network can process.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+163"/>
+        <location line="-374"/>
         <source>normal</source>
         <translation>normal</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+44"/>
         <source>fast</source>
         <translation>fast</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+360"/>
         <source>Recommended</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+115"/>
         <source>Send as zero-fee transaction if possible</source>
         <translation>Send as zero-fee transaction if possible</translation>
     </message>
@@ -3699,7 +5015,7 @@ p, li { white-space: pre-wrap; }
         <translation>(confirmation may take longer)</translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+71"/>
         <source>Confirm the send action</source>
         <translation>Confirm the send action</translation>
     </message>
@@ -3729,12 +5045,17 @@ p, li { white-space: pre-wrap; }
         <translation>Add &amp;Recipient</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+35"/>
+        <source>Anonymized BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Balance:</source>
         <translation>Balance:</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-571"/>
+        <location filename="../sendcoinsdialog.cpp" line="-590"/>
         <source>Copy quantity</source>
         <translation>Copy quantity</translation>
     </message>
@@ -3774,7 +5095,7 @@ p, li { white-space: pre-wrap; }
         <translation>Copy change</translation>
     </message>
     <message>
-        <location line="+143"/>
+        <location line="+146"/>
         <source>The split block tool does not work when sending to outside addresses. Try again.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3784,23 +5105,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
-        <location line="+3"/>
-        <source>using</source>
-        <translation>using</translation>
-    </message>
-    <message>
-        <location line="+622"/>
-        <source>Warning: Invalid Byron address</source>
+        <location line="+653"/>
+        <source>Warning: Invalid BYRON address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-619"/>
-        <source>any available funds (not recommended)</source>
-        <translation>any available funds (not recommended)</translation>
-    </message>
-    <message>
-        <location line="+28"/>
+        <location line="-615"/>
         <location line="+4"/>
         <location line="+4"/>
         <location line="+3"/>
@@ -3828,12 +5138,12 @@ p, li { white-space: pre-wrap; }
         <translation>Confirm send coins</translation>
     </message>
     <message>
-        <location line="+230"/>
+        <location line="+247"/>
         <source>A fee %1 times higher than %2 per kB is considered an insanely high fee.</source>
         <translation>A fee %1 times higher than %2 per kB is considered an insanely high fee.</translation>
     </message>
     <message numerus="yes">
-        <location line="+114"/>
+        <location line="+121"/>
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation>
             <numerusform>Estimated to begin confirmation within %n block.</numerusform>
@@ -3841,13 +5151,13 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message>
-        <location line="-145"/>
+        <location line="-152"/>
         <source>The recipient address is not valid, please recheck.</source>
         <translation>The recipient address is not valid, please recheck.</translation>
     </message>
     <message>
-        <location line="-329"/>
-        <source>and SwiftTX</source>
+        <location line="-346"/>
+        <source>using SwiftX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3861,7 +5171,7 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;b&gt;(%1 of %2 entries displayed)&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+205"/>
+        <location line="+222"/>
         <source>The amount to pay must be larger than 0.</source>
         <translation>The amount to pay must be larger than 0.</translation>
     </message>
@@ -3891,12 +5201,27 @@ p, li { white-space: pre-wrap; }
         <translation>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+8"/>
+        <source>Error: The wallet was unlocked only to anonymize coins.</source>
+        <translation>Error: The wallet was unlocked only to anonymize coins.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Error: The wallet was unlocked only to anonymize coins. Unlock canceled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+86"/>
         <source>Pay only the minimum fee of %1</source>
         <translation>Pay only the minimum fee of %1</translation>
     </message>
     <message>
-        <location line="+166"/>
+        <location line="+13"/>
+        <source>Estimated to get 6 confirmations near instantly with &lt;b&gt;SwiftX&lt;/b&gt;!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+158"/>
         <source>Warning: Unknown change address</source>
         <translation>Warning: Unknown change address</translation>
     </message>
@@ -3974,7 +5299,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+10"/>
-        <source>A message that was attached to the byron: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Byron network.</source>
+        <source>A message that was attached to the BYRON: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the BYRON network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4000,7 +5325,7 @@ p, li { white-space: pre-wrap; }
         <translation>This is a verified payment request.</translation>
     </message>
     <message>
-        <location filename="../sendcoinsentry.cpp" line="+31"/>
+        <location filename="../sendcoinsentry.cpp" line="+30"/>
         <source>Enter a label for this address to add it to your address book</source>
         <translation>Enter a label for this address to add it to your address book</translation>
     </message>
@@ -4036,24 +5361,24 @@ p, li { white-space: pre-wrap; }
         <translation>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+15"/>
         <source>The BYRON address to sign the message with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+210"/>
+        <location line="+195"/>
         <source>Choose previously used address</source>
         <translation>Choose previously used address</translation>
     </message>
     <message>
-        <location line="-200"/>
-        <location line="+210"/>
+        <location line="-185"/>
+        <location line="+195"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location line="-200"/>
+        <location line="-188"/>
         <source>Paste address from clipboard</source>
         <translation>Paste address from clipboard</translation>
     </message>
@@ -4063,7 +5388,7 @@ p, li { white-space: pre-wrap; }
         <translation>Alt+P</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+9"/>
         <source>Enter the message you want to sign here</source>
         <translation>Enter the message you want to sign here</translation>
     </message>
@@ -4073,27 +5398,27 @@ p, li { white-space: pre-wrap; }
         <translation>Signature</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+24"/>
         <source>Copy the current signature to the system clipboard</source>
         <translation>Copy the current signature to the system clipboard</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+18"/>
         <source>Sign the message to prove you own this BYRON address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+103"/>
         <source>The BYRON address the message was signed with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+34"/>
         <source>Verify the message to ensure it was signed with the specified BYRON address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-140"/>
+        <location line="-134"/>
         <source>Sign &amp;Message</source>
         <translation>Sign &amp;Message</translation>
     </message>
@@ -4104,12 +5429,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
-        <location line="+143"/>
+        <location line="+137"/>
         <source>Clear &amp;All</source>
         <translation>Clear &amp;All</translation>
     </message>
     <message>
-        <location line="-84"/>
+        <location line="-78"/>
         <source>&amp;Verify Message</source>
         <translation>&amp;Verify Message</translation>
     </message>
@@ -4119,7 +5444,7 @@ p, li { white-space: pre-wrap; }
         <translation>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</translation>
     </message>
     <message>
-        <location line="+61"/>
+        <location line="+55"/>
         <source>Verify &amp;Message</source>
         <translation>Verify &amp;Message</translation>
     </message>
@@ -4134,7 +5459,7 @@ p, li { white-space: pre-wrap; }
         <translation>Click &quot;Sign Message&quot; to generate signature</translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+79"/>
         <location line="+73"/>
         <source>The entered address is invalid.</source>
         <translation>The entered address is invalid.</translation>
@@ -4224,16 +5549,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>The PIVX Core developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>The Byron Core developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../networkstyle.cpp" line="+19"/>
+        <location filename="../networkstyle.cpp" line="+20"/>
         <source>[testnet]</source>
         <translation>[testnet]</translation>
     </message>
@@ -4241,7 +5561,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TrafficGraphWidget</name>
     <message>
-        <location filename="../trafficgraphwidget.cpp" line="+78"/>
+        <location filename="../trafficgraphwidget.cpp" line="+79"/>
         <source>KB/s</source>
         <translation>KB/s</translation>
     </message>
@@ -4287,46 +5607,46 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="-37"/>
-        <source>%1/offline (verified via SwiftTX)</source>
+        <source>%1/offline (verified via SwiftX)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>%1/confirmed (verified via SwiftTX)</source>
+        <source>%1/confirmed (verified via SwiftX)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>%1 confirmations (verified via SwiftTX)</source>
+        <source>%1 confirmations (verified via SwiftX)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>%1/offline (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <source>%1/offline (SwiftX verification in progress - %2 of %3 signatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>%1/confirmed (SwiftTX verification in progress - %2 of %3 signatures )</source>
+        <source>%1/confirmed (SwiftX verification in progress - %2 of %3 signatures )</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>%1 confirmations (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <source>%1 confirmations (SwiftX verification in progress - %2 of %3 signatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>%1/offline (SwiftTX verification failed)</source>
+        <source>%1/offline (SwiftX verification failed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>%1/confirmed (SwiftTX verification failed)</source>
+        <source>%1/confirmed (SwiftX verification failed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+29"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -4522,7 +5842,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+213"/>
+        <location filename="../transactiontablemodel.cpp" line="+215"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -4600,7 +5920,77 @@ p, li { white-space: pre-wrap; }
         <translation>Received from</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="+2"/>
+        <source>Received via Obfuscation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>BYRON Stake</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>zBYRON Stake</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Obfuscation Denominate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Obfuscation Collateral Payment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Obfuscation Create Denominations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Converted BYRON to zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Spent zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Received BYRON from zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Minted Change as zBYRON from zBYRON Spend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Converted zBYRON to BYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>Anonymous (zBYRON Transaction)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Anonymous (zBYRON Stake)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-86"/>
         <source>Sent to</source>
         <translation>Sent to</translation>
     </message>
@@ -4615,27 +6005,27 @@ p, li { white-space: pre-wrap; }
         <translation>Payment to yourself</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Minted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+6"/>
         <source>Mined</source>
         <translation>Mined</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+10"/>
+        <source>Obfuscated</source>
+        <translation>Obfuscated</translation>
+    </message>
+    <message>
+        <location line="+44"/>
         <source>watch-only</source>
         <translation>watch-only</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+27"/>
         <source>(n/a)</source>
         <translation>(n/a)</translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+211"/>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
         <translation>Transaction status. Hover over this field to show number of confirmations.</translation>
     </message>
@@ -4668,7 +6058,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransactionView</name>
     <message>
-        <location filename="../transactionview.cpp" line="+68"/>
+        <location filename="../transactionview.cpp" line="+69"/>
         <location line="+17"/>
         <source>All</source>
         <translation>All</translation>
@@ -4719,7 +6109,7 @@ p, li { white-space: pre-wrap; }
         <translation>Sent to</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+11"/>
         <source>To yourself</source>
         <translation>To yourself</translation>
     </message>
@@ -4739,22 +6129,37 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Zerocoin Mint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zerocoin Spend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Zerocoin Spend to Self</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+1"/>
         <source>Other</source>
         <translation>Other</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
         <source>Enter address or label to search</source>
         <translation>Enter address or label to search</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <source>Min amount</source>
         <translation>Min amount</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+35"/>
         <source>Copy address</source>
         <translation>Copy address</translation>
     </message>
@@ -4784,7 +6189,12 @@ p, li { white-space: pre-wrap; }
         <translation>Show transaction details</translation>
     </message>
     <message>
-        <location line="+195"/>
+        <location line="+1"/>
+        <source>Hide orphan stakes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+228"/>
         <source>Export Transaction History</source>
         <translation>Export Transaction History</translation>
     </message>
@@ -4844,7 +6254,17 @@ p, li { white-space: pre-wrap; }
         <translation>Exporting Successful</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-310"/>
+        <source>Received BYRON from zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Zerocoin Spend, Change in zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+307"/>
         <source>The transaction history was successfully saved to %1.</source>
         <translation>The transaction history was successfully saved to %1.</translation>
     </message>
@@ -4862,7 +6282,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+102"/>
+        <location filename="../bitcoingui.cpp" line="+120"/>
         <source>Unit to show amounts in. Click to select another unit.</source>
         <translation>Unit to show amounts in. Click to select another unit.</translation>
     </message>
@@ -4870,7 +6290,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>WalletFrame</name>
     <message>
-        <location filename="../walletframe.cpp" line="+25"/>
+        <location filename="../walletframe.cpp" line="+26"/>
         <source>No wallet has been loaded.</source>
         <translation>No wallet has been loaded.</translation>
     </message>
@@ -4878,7 +6298,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>WalletModel</name>
     <message>
-        <location filename="../walletmodel.cpp" line="+317"/>
+        <location filename="../walletmodel.cpp" line="+334"/>
         <location line="+9"/>
         <location line="+9"/>
         <source>Send Coins</source>
@@ -4887,14 +6307,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="-18"/>
         <location line="+9"/>
-        <source>SwiftTX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 BYRON.</source>
+        <source>SwiftX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 BYRON.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WalletView</name>
     <message>
-        <location filename="../walletview.cpp" line="+51"/>
+        <location filename="../walletview.cpp" line="+63"/>
+        <source>HISTORY</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
@@ -4909,7 +6334,7 @@ p, li { white-space: pre-wrap; }
         <translation>Selected amount:</translation>
     </message>
     <message>
-        <location line="+256"/>
+        <location line="+257"/>
         <source>Backup Wallet</source>
         <translation>Backup Wallet</translation>
     </message>
@@ -4917,26 +6342,6 @@ p, li { white-space: pre-wrap; }
         <location line="+1"/>
         <source>Wallet Data (*.dat)</source>
         <translation>Wallet Data (*.dat)</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Backup Failed</source>
-        <translation>Backup Failed</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>There was an error trying to save the wallet data to %1.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Backup Successful</source>
-        <translation>Backup Successful</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>The wallet data was successfully saved to %1.</translation>
     </message>
 </context>
 <context>
@@ -4953,11 +6358,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+4"/>
-        <source>An error occurred while setting up the RPC address %s port %u for listening: %s</source>
-        <translation type="unfinished">An error occurred while setting up the RPC address %s port %u for listening: %s</translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
         <translation type="unfinished">Bind to given address and always listen on it. Use [host]:port notation for IPv6</translation>
     </message>
@@ -4970,6 +6370,11 @@ p, li { white-space: pre-wrap; }
         <location line="+3"/>
         <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
         <translation type="unfinished">Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Calculated accumulator checkpoint is not what is recorded by block index</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4997,12 +6402,32 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+6"/>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
         <translation type="unfinished">Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+5"/>
+        <source>Enable automatic wallet backups triggered after each zBYRON minting (0-1, default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enable or disable staking functionality for BYRON inputs (0-1, default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Enable or disable staking functionality for zBYRON inputs (0-1, default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Enable spork administration functionality with the appropriate private key.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5015,6 +6440,11 @@ p, li { white-space: pre-wrap; }
         <location line="+3"/>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
         <translation type="unfinished">Error: Listening for incoming connections failed (listen returned error %s)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error: The transaction is larger than the maximum allowed transaction size!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
@@ -5037,7 +6467,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Execute command when the best block changes (%s in cmd is replaced by block hash)</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+8"/>
         <source>Fees (in BYRON/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5053,11 +6483,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
+        <source>Found unconfirmed denominated outputs, will wait till they confirm to continue.</source>
+        <translation type="unfinished">Found unconfirmed denominated outputs, will wait till they confirm to continue.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation type="unfinished">If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>In this mode -genproclimit controls how many blocks are generated immediately.</source>
         <translation type="unfinished">In this mode -genproclimit controls how many blocks are generated immediately.</translation>
     </message>
@@ -5100,6 +6535,11 @@ p, li { white-space: pre-wrap; }
         <location line="+3"/>
         <source>Number of seconds to keep misbehaving peers from reconnecting (default: %u)</source>
         <translation type="unfinished">Number of seconds to keep misbehaving peers from reconnecting (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
@@ -5147,7 +6587,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Show N confirmations for a successfully locked transaction (0-9999, default: %u)</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+12"/>
         <source>Support filtering of blocks and transaction with bloom filters (default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5158,27 +6598,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+4"/>
-        <source>To use byrond, or the -server option to byron-qt, you must set an rpcpassword in the configuration file:
-%s
-It is recommended you use the following random password:
-rpcuser=byronrpc
-rpcpassword=%s
-(you do not need to remember this password)
-The username and password MUST NOT be the same.
-If the file does not exist, create it with owner-readable-only file permissions.
-It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.com
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Unable to bind to %s on this computer. Byron Core is probably already running.</source>
+        <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Unable to locate enough funds for this transaction that are not equal 10000 BYRON.</source>
+        <source>Unable to bind to %s on this computer. Byron Core is probably already running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200000 BYRON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unable to locate enough funds for this transaction that are not equal 200000 BYRON.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5239,7 +6679,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     <message>
         <location line="+3"/>
         <source>(27215 could be used only on mainnet)</source>
-        <translation type="unfinished">(27215 could be used only on mainnet)</translation>
+        <translation type="unfinished">(51472 could be used only on mainnet)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5273,11 +6713,6 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
-        <source>Acceptable ciphers (default: %s)</source>
-        <translation type="unfinished">Acceptable ciphers (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Add a node to connect to and attempt to keep the connection open</source>
         <translation type="unfinished">Add a node to connect to and attempt to keep the connection open</translation>
     </message>
@@ -5297,6 +6732,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Always query for peer addresses via DNS lookup (default: %u)</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Append comment to the user agent string</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+2"/>
         <source>Attempt to recover private keys from a corrupt wallet.dat</source>
         <translation type="unfinished">Attempt to recover private keys from a corrupt wallet.dat</translation>
@@ -5313,8 +6753,23 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Calculating missing accumulators...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Can&apos;t denominate: no compatible inputs left.</source>
+        <translation type="unfinished">Can&apos;t denominate: no compatible inputs left.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Can&apos;t find random Masternode.</source>
         <translation type="unfinished">Can&apos;t find random Masternode.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Can&apos;t mix while sync in progress.</source>
+        <translation type="unfinished">Can&apos;t mix while sync in progress.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5342,7 +6797,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Cannot write default address</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Collateral not valid.</source>
         <translation type="unfinished">Collateral not valid.</translation>
     </message>
@@ -5378,23 +6833,13 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
-        <source>Copyright (C) 2015-%i The PIVX Core Developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copyright (C) 2017-%i The Byron Core Developers</source>
+        <source>Copyright (C) 2015-%i The Byron Core Developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Corrupted block database detected</source>
         <translation type="unfinished">Corrupted block database detected</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Could not parse -rpcbind value %s as network address</source>
-        <translation type="unfinished">Could not parse -rpcbind value %s as network address</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5442,13 +6887,18 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Done loading</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Enable automatic Zerocoin minting (0-1, default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+2"/>
-        <source>Enable publish hash transaction (locked via SwiftTX) in &lt;address&gt;</source>
+        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enable publish raw transaction (locked via SwiftTX) in &lt;address&gt;</source>
+        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5513,6 +6963,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Error writing zerocoinDB to disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
@@ -5522,12 +6977,17 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Error: A fatal internal error occured, see debug.log for details</translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Error: Can&apos;t select current denominated inputs</source>
+        <translation type="unfinished">Error: Can&apos;t select current denominated inputs</translation>
+    </message>
+    <message>
         <location line="+1"/>
         <source>Error: Disk space is low!</source>
         <translation type="unfinished">Error: Disk space is low!</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Error: Unsupported argument -tor found, use -onion.</source>
         <translation type="unfinished">Error: Unsupported argument -tor found, use -onion.</translation>
     </message>
@@ -5538,12 +6998,22 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Error: You already have pending entries in the Obfuscation pool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to calculate accumulator checkpoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation type="unfinished">Failed to listen on any port. Use -listen=0 if you want this.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Failed to read block index</source>
+        <source>Failed to parse host:port string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5552,12 +7022,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Failed to read block</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Failed to write block index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Fee (in BYRON/kB) to add to transactions you send (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5658,11 +7123,6 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
-        <source>Invalid -proxy address or hostname: &apos;%s&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</source>
         <translation type="unfinished">Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
@@ -5722,17 +7182,42 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Invalid script detected.</translation>
     </message>
     <message>
-        <location line="+98"/>
-        <source>SwiftTX options:</source>
+        <location line="+49"/>
+        <source>Percentage of automatically minted Zerocoin  (1-100, default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-273"/>
+        <location line="+9"/>
+        <source>Reindex the BYRON and zBYRON money supply statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Reindexing zerocoin database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Reindexing zerocoin failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Selected coins value is less than payment target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>SwiftX options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-274"/>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-152"/>
+        <location line="-175"/>
         <source> mints deleted
 </source>
         <translation type="unfinished"></translation>
@@ -5750,16 +7235,16 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+38"/>
-        <source>Disable all Byron specific functionality (Masternodes, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <source>Disable all BYRON specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>Enable SwiftTX, show confirmations for locked transactions (bool, default: %s)</source>
+        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+18"/>
         <source>Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5774,12 +7259,42 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
+        <location line="+14"/>
+        <source>Execute command when the best block changes and its size is over (%s in cmd is replaced by block hash, %d with the block size)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location line="+3"/>
+        <source>Failed to find coin set amongst held coins with less than maxNumber of Spends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>In rare cases, a spend with 7 coins exceeds our maximum allowable transaction size, please retry spend using 6 or less coins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Preferred Denomination for automatically minted Zerocoin  (1/5/10/50/100/500/1000/5000), 0 for no preference. default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Specify custom backup path to add a copy of any automatic zBYRON backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup. If backuppath is set as well, 4 backups will happen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+61"/>
         <source>&lt;category&gt; can be:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5789,7 +7304,12 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+13"/>
+        <source>CoinSpend: Accumulator witness does not verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Display the stake modifier calculations in the debug.log file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5824,9 +7344,59 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+16"/>
+        <source>Error: A fatal internal error occurred, see debug.log for details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Error: No valid utxo!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Failed to create mint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to deserialize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to find Zerocoins in wallet.dat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Failed to select a zerocoin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to wipe zerocoinDB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to write coin serial number into wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
         <translation type="unfinished">Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Last Obfuscation was too recent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Last successful Obfuscation action was too recent.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5890,6 +7460,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Location of the auth cookie (default: data dir)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Lock is already in place.</source>
         <translation type="unfinished">Lock is already in place.</translation>
     </message>
@@ -5897,6 +7472,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <location line="+1"/>
         <source>Lock masternodes from masternode configuration file (default: %u)</source>
         <translation type="unfinished">Lock masternodes from masternode configuration file (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lookup(): Invalid -proxy address or hostname: &apos;%s&apos;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5930,8 +7510,23 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Mint did not make it into blockchain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Missing input transaction information.</source>
         <translation type="unfinished">Missing input transaction information.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mixing in progress...</source>
+        <translation type="unfinished">Mixing in progress...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Need address because change is not exact</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5947,6 +7542,16 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <location line="+1"/>
         <source>No compatible Masternode found.</source>
         <translation type="unfinished">No compatible Masternode found.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No funds detected in need of denominating.</source>
+        <translation type="unfinished">No funds detected in need of denominating.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No matching denominations found for mixing.</source>
+        <translation type="unfinished">No matching denominations found for mixing.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5980,6 +7585,26 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Number of custom location backups to retain (default: %d)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Obfuscation is idle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Obfuscation request complete:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Obfuscation request incomplete:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Only accept block chain matching built-in checkpoints (default: %u)</source>
         <translation type="unfinished">Only accept block chain matching built-in checkpoints (default: %u)</translation>
     </message>
@@ -5999,7 +7624,12 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Password for JSON-RPC connections</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+122"/>
+        <source>isValid(): Invalid -proxy address or hostname: &apos;%s&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-120"/>
         <source>Preparing for resync...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6015,18 +7645,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
-        <source>RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation type="unfinished">RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>RPC server options:</source>
         <translation type="unfinished">RPC server options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>RPC support for HTTP persistent connections (default: %d)</source>
-        <translation type="unfinished">RPC support for HTTP persistent connections (default: %d)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6049,7 +7669,12 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Receive and display P2P network alerts (default: %u)</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
+        <source>Reindex the accumulator database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Relay and mine data carrier transactions (default: %u)</source>
         <translation type="unfinished">Relay and mine data carrier transactions (default: %u)</translation>
     </message>
@@ -6070,6 +7695,16 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>ResetMintZerocoin finished: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ResetSpentZerocoin finished: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Run a thread to flush wallet periodically (default: %u)</source>
         <translation type="unfinished">Run a thread to flush wallet periodically (default: %u)</translation>
     </message>
@@ -6079,19 +7714,9 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <translation type="unfinished">Run in the background as a daemon and accept commands</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
         <translation type="unfinished">Send transactions as zero-fee transactions if possible (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Server certificate file (default: %s)</source>
-        <translation type="unfinished">Server certificate file (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Server private key (default: %s)</source>
-        <translation type="unfinished">Server private key (default: %s)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6210,6 +7835,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Spend Valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Spend unconfirmed change when sending transactions (default: %u)</source>
         <translation type="unfinished">Spend unconfirmed change when sending transactions (default: %u)</translation>
     </message>
@@ -6275,6 +7905,31 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Syncing zBYRON wallet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The coin spend has been used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The new spend coin transaction did not verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The selected mint coin is an invalid coin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The transaction did not verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>This help message</source>
         <translation type="unfinished">This help message</translation>
     </message>
@@ -6300,12 +7955,27 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Too many spends needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Tor control port password (default: empty)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction Mint Started</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6350,13 +8020,33 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Try to spend with a higher security level to include more coins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Trying to spend an already spent serial #, try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
         <translation type="unfinished">Unable to bind to %s on this computer (bind returned error %s)</translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Unable to find transaction containing mint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Unable to sign spork message, wrong key?</source>
         <translation type="unfinished">Unable to sign spork message, wrong key?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unable to start HTTP server. See debug log for details.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6372,11 +8062,6 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <location line="+1"/>
         <source>Upgrade wallet to latest format</source>
         <translation type="unfinished">Upgrade wallet to latest format</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Use OpenSSL (https) for JSON-RPC connections</source>
-        <translation type="unfinished">Use OpenSSL (https) for JSON-RPC connections</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6400,8 +8085,23 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>User Agent comment (%s) contains unsafe characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Username for JSON-RPC connections</source>
         <translation type="unfinished">Username for JSON-RPC connections</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Value is below the smallest available denomination (= 1) of zBYRON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Value more than Obfuscation pool maximum allows.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6412,6 +8112,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
         <location line="+1"/>
         <source>Verifying wallet...</source>
         <translation type="unfinished">Verifying wallet...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Version 1 zBYRON require a security level of 100 to successfully spend.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6465,6 +8170,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>You don&apos;t have enough Zerocoins in your wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation type="unfinished">You need to rebuild the database using -reindex to change -txindex</translation>
     </message>
@@ -6490,6 +8200,11 @@ for example: alertnotify=echo %%s | mail -s &quot;Byron Alert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
+        <source>Zerocoin options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>on startup</source>
         <translation type="unfinished">on startup</translation>
     </message>

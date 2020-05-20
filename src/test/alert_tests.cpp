@@ -15,8 +15,6 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include "test/test_byron.h"
-
 #include <fstream>
 
 #include <boost/filesystem/operations.hpp>
@@ -80,7 +78,7 @@
 }
 #endif
 
-struct ReadAlerts : public TestingSetup
+struct ReadAlerts
 {
     ReadAlerts()
     {

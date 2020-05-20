@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -51,8 +51,8 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
         ui->passEdit1->hide();
         setWindowTitle(tr("Encrypt wallet"));
         break;
-    case Mode::UnlockStaking:
-        ui->stakingCheckBox->show();
+    case Mode::UnlockAnonymize:
+        ui->anonymizationCheckBox->show();
     case Mode::Unlock: // Ask passphrase
         ui->warningLabel->setText(tr("This operation needs your wallet passphrase to unlock the wallet."));
         ui->passLabel2->hide();
@@ -75,15 +75,18 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
         break;
     }
 
-    // Set checkbox "For staking only" depending on from where we were called
-    if (context == Context::Unlock_Menu || context == Context::BIP_38)
-        ui->stakingCheckBox->setChecked(true);
-    else
-        ui->stakingCheckBox->setChecked(false);
+    // Set checkbox "For anonymization and staking only" depending on from where we were called
+    if (context == Context::Unlock_Menu || context == Context::BIP_38) {
+        ui->anonymizationCheckBox->setChecked(true);
+    }
+    else {
+        ui->anonymizationCheckBox->setChecked(false);
+    }
 
     // It doesn't make sense to show the checkbox for sending BYRON because you wouldn't check it anyway.
-    if (context == Context::Send_BYRON)
-        ui->stakingCheckBox->hide();
+    if (context == Context::Send_BYRON) {
+        ui->anonymizationCheckBox->hide();
+    }
 
     textChanged();
     connect(ui->passEdit1, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
@@ -129,7 +132,7 @@ void AskPassphraseDialog::accept()
                 if (model->setWalletEncrypted(true, newpass1)) {
                     QMessageBox::warning(this, tr("Wallet encrypted"),
                         "<qt>" +
-                            tr("Byron will close now to finish the encryption process. "
+                            tr("BYRON will close now to finish the encryption process. "
                                "Remember that encrypting your wallet cannot fully protect "
                                "your BYRONs from being stolen by malware infecting your computer.") +
                             "<br><br><b>" +
@@ -152,9 +155,9 @@ void AskPassphraseDialog::accept()
             QDialog::reject(); // Cancelled
         }
     } break;
-    case Mode::UnlockStaking:
+    case Mode::UnlockAnonymize:
     case Mode::Unlock:
-        if (!model->setWalletLocked(false, oldpass, ui->stakingCheckBox->isChecked())) {
+        if (!model->setWalletLocked(false, oldpass, ui->anonymizationCheckBox->isChecked())) {
             QMessageBox::critical(this, tr("Wallet unlock failed"),
                 tr("The passphrase entered for the wallet decryption was incorrect."));
         } else {
@@ -195,7 +198,7 @@ void AskPassphraseDialog::textChanged()
     case Mode::Encrypt: // New passphrase x2
         acceptable = !ui->passEdit2->text().isEmpty() && !ui->passEdit3->text().isEmpty();
         break;
-    case Mode::UnlockStaking: // Old passphrase x1
+    case Mode::UnlockAnonymize: // Old passphrase x1
     case Mode::Unlock:          // Old passphrase x1
     case Mode::Decrypt:
         acceptable = !ui->passEdit1->text().isEmpty();

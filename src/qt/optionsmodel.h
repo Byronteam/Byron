@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -39,20 +39,22 @@ public:
         DisplayUnit,         // BitcoinUnits::Unit
         ThirdPartyTxUrls,    // QString
         Digits,              // QString
+        Theme,               // QString
         Language,            // QString
         CoinControlFeatures, // bool
         ThreadsScriptVerif,  // int
         DatabaseCache,       // int
         SpendZeroConfChange, // bool
+        ZeromintEnable,      // bool
+        ZeromintPercentage,  // int
+        ZeromintPrefDenom,   // int
         HideZeroBalances,    // bool
+        HideOrphans,    // bool
+        AnonymizeBYRONAmount, //int
         ShowMasternodesTab,  // bool
         Listen,              // bool
         StakeSplitThreshold, // int
-        ShowBudgetProposalsTab,     // bool
-        ShowCommunityProposalsTab,  // bool
-        /*  Insert new options here (before OptionIDRowCount) */
-
-        OptionIDRowCount
+        OptionIDRowCount,
     };
 
     void Init();
@@ -89,16 +91,21 @@ private:
     QString strThirdPartyTxUrls;
     bool fCoinControlFeatures;
     bool fHideZeroBalances;
+    bool fHideOrphans;
     /* settings that were overriden by command-line */
     QString strOverriddenByCommandLine;
 
-    /// Add option to list of GUI options overridden through command line/config file
+    // Add option to list of GUI options overridden through command line/config file
     void addOverriddenOption(const std::string& option);
 
 signals:
     void displayUnitChanged(int unit);
+    void zeromintEnableChanged(bool);
+    void preferredDenomChanged(int);
+    void anonymizeBYRONAmountChanged(int);
     void coinControlFeaturesChanged(bool);
     void hideZeroBalancesChanged(bool);
+    void hideOrphansChanged(bool);
 };
 
 #endif // BITCOIN_QT_OPTIONSMODEL_H

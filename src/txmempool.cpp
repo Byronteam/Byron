@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -95,8 +95,10 @@ public:
     {
         if (fee < CFeeRate(0))
             return false;
+
         if (fee.GetFeePerK() > minRelayFee.GetFeePerK() * 10000)
             return false;
+
         return true;
     }
     static bool AreSane(const std::vector<CFeeRate>& vecFee, const CFeeRate& minRelayFee)
@@ -105,6 +107,7 @@ public:
             if (!AreSane(fee, minRelayFee))
                 return false;
         }
+
         return true;
     }
     static bool AreSane(const double priority)
@@ -117,6 +120,7 @@ public:
             if (!AreSane(priority))
                 return false;
         }
+
         return true;
     }
 
@@ -138,10 +142,12 @@ public:
             throw runtime_error("Corrupt fee value in estimates file.");
         std::vector<double> vecPriority;
         filein >> vecPriority;
+
         if (AreSane(vecPriority))
             prioritySamples.insert(prioritySamples.end(), vecPriority.begin(), vecPriority.end());
         else
             throw runtime_error("Corrupt priority value in estimates file.");
+
         if (feeSamples.size() + prioritySamples.size() > 0)
             LogPrint("estimatefee", "Read %d fee samples and %d priority samples\n",
                 feeSamples.size(), prioritySamples.size());
@@ -232,16 +238,17 @@ public:
                 std::random_shuffle(e.begin(), e.end());
                 e.resize(10);
             }
+
             BOOST_FOREACH (const CTxMemPoolEntry* entry, e) {
-                // Fees are stored and reported as BYRON-per-kb:
+                // Fees are stored and reported as BTC-per-kb:
                 CFeeRate feeRate(entry->GetFee(), entry->GetTxSize());
                 double dPriority = entry->GetPriority(entry->GetHeight()); // Want priority when it went IN
                 seenTxConfirm(feeRate, minRelayFee, dPriority, i);
             }
         }
 
-        //After new samples are added, we have to clear the sorted lists,
-        //so they'll be resorted the next time someone asks for an estimate
+        // After new samples are added, we have to clear the sorted lists,
+        //s o they'll be resorted the next time someone asks for an estimate
         sortedFeeSamples.clear();
         sortedPrioritySamples.clear();
 
@@ -288,6 +295,7 @@ public:
         for (int i = 0; i < nBlocksToConfirm; i++)
             nPrevSize += history.at(i).FeeSamples();
         size_t index = min(nPrevSize + nBucketSize / 2, sortedFeeSamples.size() - 1);
+
         return sortedFeeSamples[index];
     }
     double estimatePriority(int nBlocksToConfirm)
@@ -303,6 +311,7 @@ public:
             std::sort(sortedPrioritySamples.begin(), sortedPrioritySamples.end(),
                 std::greater<double>());
         }
+
         if (sortedPrioritySamples.size() < 11)
             return -1.0;
 
@@ -317,6 +326,7 @@ public:
         for (int i = 0; i < nBlocksToConfirm; i++)
             nPrevSize += history.at(i).PrioritySamples();
         size_t index = min(nPrevSize + nBucketSize / 2, sortedPrioritySamples.size() - 1);
+
         return sortedPrioritySamples[index];
     }
 
@@ -382,9 +392,9 @@ void CTxMemPool::pruneSpent(const uint256& hashTx, CCoins& coins)
 
     std::map<COutPoint, CInPoint>::iterator it = mapNextTx.lower_bound(COutPoint(hashTx, 0));
 
-    // iterate over all COutPoints in mapNextTx whose hash equals the provided hashTx
+    // Iterate over all COutPoints in mapNextTx whose hash equals the provided hashTx
     while (it != mapNextTx.end() && it->first.hash == hashTx) {
-        coins.Spend(it->first.n); // and remove those outputs from coins
+        coins.Spend(it->first.n); // And remove those outputs from coins
         it++;
     }
 }
@@ -411,11 +421,14 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry& entry)
     {
         mapTx[hash] = entry;
         const CTransaction& tx = mapTx[hash].GetTx();
+
         for (unsigned int i = 0; i < tx.vin.size(); i++)
             mapNextTx[tx.vin[i].prevout] = CInPoint(&tx, i);
+        
         nTransactionsUpdated++;
         totalTxSize += entry.GetTxSize();
     }
+
     return true;
 }
 
@@ -577,7 +590,7 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
         else {
             CValidationState state;
             CTxUndo undo;
-            assert(CheckInputs(tx, state, mempoolDuplicate, false, 0, false, nullptr));
+            assert(CheckInputs(tx, state, mempoolDuplicate, false, 0, false, NULL));
             UpdateCoins(tx, state, mempoolDuplicate, undo, 1000000);
         }
     }
@@ -591,7 +604,7 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
             stepsSinceLastRemove++;
             assert(stepsSinceLastRemove < waitingOnDependants.size());
         } else {
-            assert(CheckInputs(entry->GetTx(), state, mempoolDuplicate, false, 0, false, nullptr));
+            assert(CheckInputs(entry->GetTx(), state, mempoolDuplicate, false, 0, false, NULL));
             CTxUndo undo;
             UpdateCoins(entry->GetTx(), state, mempoolDuplicate, undo, 1000000);
             stepsSinceLastRemove = 0;
@@ -620,12 +633,22 @@ void CTxMemPool::queryHashes(vector<uint256>& vtxid)
         vtxid.push_back((*mi).first);
 }
 
+void CTxMemPool::getTransactions(std::set<uint256>& setTxid)
+{
+    setTxid.clear();
+
+    LOCK(cs);
+    for (map<uint256, CTxMemPoolEntry>::iterator mi = mapTx.begin(); mi != mapTx.end(); ++mi)
+        setTxid.insert((*mi).first);
+}
+
 bool CTxMemPool::lookup(uint256 hash, CTransaction& result) const
 {
     LOCK(cs);
     map<uint256, CTxMemPoolEntry>::const_iterator i = mapTx.find(hash);
     if (i == mapTx.end()) return false;
     result = i->second.GetTx();
+
     return true;
 }
 
@@ -651,6 +674,7 @@ bool CTxMemPool::WriteFeeEstimates(CAutoFile& fileout) const
         LogPrintf("CTxMemPool::WriteFeeEstimates() : unable to write policy estimator data (non-fatal)");
         return false;
     }
+
     return true;
 }
 
@@ -668,6 +692,7 @@ bool CTxMemPool::ReadFeeEstimates(CAutoFile& filein)
         LogPrintf("CTxMemPool::ReadFeeEstimates() : unable to read policy estimator data (non-fatal)");
         return false;
     }
+
     return true;
 }
 
@@ -712,6 +737,7 @@ bool CCoinsViewMemPool::GetCoins(const uint256& txid, CCoins& coins) const
         coins = CCoins(tx, MEMPOOL_HEIGHT);
         return true;
     }
+    
     return (base->GetCoins(txid, coins) && !coins.IsPruned());
 }
 

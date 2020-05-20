@@ -243,7 +243,7 @@ static int secp256k1_ecdsa_sig_verify(const secp256k1_ecmult_context *ctx, const
      *    <=> exists h. (xr + h * n < p && xr + h * n == X(pr))
      *    [Since 2 * n > p, h can only be 0 or 1]
      *    <=> (xr == X(pr)) || (xr + n < p && xr + n == X(pr))
-     *    [In Jacobian coordinates, X(pr) is pr.x / pr.z^2 mod p]
+     *    [In Byronobian coordinates, X(pr) is pr.x / pr.z^2 mod p]
      *    <=> (xr == pr.x / pr.z^2 mod p) || (xr + n < p && xr + n == pr.x / pr.z^2 mod p)
      *    [Multiplying both sides of the equations by pr.z^2 mod p]
      *    <=> (xr * pr.z^2 mod p == pr.x) || (xr + n < p && (xr + n) * pr.z^2 mod p == pr.x)

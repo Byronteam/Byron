@@ -465,7 +465,7 @@ int main(void) {
     secp256k1_gej_set_infinity(&groupj[0]);
     secp256k1_ge_set_gej(&group[0], &groupj[0]);
     for (i = 1; i < EXHAUSTIVE_TEST_ORDER; i++) {
-        /* Set a different random z-value for each Jacobian point */
+        /* Set a different random z-value for each Byronobian point */
         secp256k1_fe z;
         random_fe(&z);
 

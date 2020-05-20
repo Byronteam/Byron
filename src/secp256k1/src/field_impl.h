@@ -305,7 +305,7 @@ static int secp256k1_fe_is_quad_var(const secp256k1_fe *a) {
     secp256k1_fe_get_b32(b, &c);
     secp256k1_num_set_bin(&n, b, 32);
     secp256k1_num_set_bin(&m, prime, 32);
-    return secp256k1_num_jacobi(&n, &m) >= 0;
+    return secp256k1_num_byronobi(&n, &m) >= 0;
 #else
     secp256k1_fe r;
     return secp256k1_fe_sqrt(&r, a);

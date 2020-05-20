@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2018 The PIVX developers
-// Copyright (c) 2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,7 +24,7 @@ X509 *parse_b64der_cert(const char* cert_data)
     std::vector<unsigned char> data = DecodeBase64(cert_data);
     assert(data.size() > 0);
     const unsigned char* dptr = &data[0];
-    X509 *cert = d2i_X509(nullptr, &dptr, data.size());
+    X509 *cert = d2i_X509(NULL, &dptr, data.size());
     assert(cert);
     return cert;
 }
@@ -65,7 +65,7 @@ void PaymentServerTests::paymentServerTests()
 {
     SelectParams(CBaseChainParams::MAIN);
     OptionsModel optionsModel;
-    PaymentServer* server = new PaymentServer(nullptr, false);
+    PaymentServer* server = new PaymentServer(NULL, false);
     X509_STORE* caStore = X509_STORE_new();
     X509_STORE_add_cert(caStore, parse_b64der_cert(caCert_BASE64));
     PaymentServer::LoadRootCAs(caStore);

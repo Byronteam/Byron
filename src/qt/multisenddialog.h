@@ -1,10 +1,10 @@
 // Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_MULTISENDDIALOG_H
-#define BITCOIN_QT_MULTISENDDIALOG_H
+#ifndef BYRON_QT_MULTISENDDIALOG_H
+#define BYRON_QT_MULTISENDDIALOG_H
 
 #include <QDialog>
 
@@ -39,4 +39,4 @@ private:
     WalletModel* model;
 };
 
-#endif // BITCOIN_QT_MULTISENDDIALOG_H
+#endif // BYRON_QT_MULTISENDDIALOG_H

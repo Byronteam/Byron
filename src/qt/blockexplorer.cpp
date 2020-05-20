@@ -1,5 +1,5 @@
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,7 +21,7 @@
 #include <QMessageBox>
 #include <set>
 
-extern double GetDifficulty(const CBlockIndex* blockindex = nullptr);
+extern double GetDifficulty(const CBlockIndex* blockindex = NULL);
 
 inline std::string utostr(unsigned int n)
 {
@@ -101,7 +101,7 @@ static std::string makeHTMLTable(const std::string* pCells, int nRows, int nColu
     return Table;
 }
 
-static std::string TxToRow(const CTransaction& tx, const CScript& Highlight = CScript(), const std::string& Prepend = std::string(), int64_t* pSum = nullptr)
+static std::string TxToRow(const CTransaction& tx, const CScript& Highlight = CScript(), const std::string& Prepend = std::string(), int64_t* pSum = NULL)
 {
     std::string InAmounts, InAddresses, OutAmounts, OutAddresses;
     int64_t Delta = 0;
@@ -181,7 +181,7 @@ const CBlockIndex* getexplorerBlockIndex(int64_t height)
 
 std::string getexplorerBlockHash(int64_t Height)
 {
-    std::string genesisblockhash = "0000041e482b9b9691d98eefb48473405c0b8ec31b76df3797c74a78680ef818";
+    std::string genesisblockhash = "0x70cf0649885d477e3ddc0deb91caedbb76f26e120b9fc7e94050393247c87dd7";
     CBlockIndex* pindexBest = mapBlockIndex[chainActive.Tip()->GetBlockHash()];
     if ((Height < 0) || (Height > pindexBest->nHeight)) {
         return genesisblockhash;
@@ -218,7 +218,7 @@ std::string BlockToString(CBlockIndex* pBlock)
         if (tx.IsCoinBase())
             Reward += Out;
         else if (In < 0)
-            Fees = -MAX_MONEY;
+            Fees = -Params().MaxMoneyOut();
         else {
             Fees += In - Out;
             OutVolume += Out;
@@ -247,8 +247,6 @@ std::string BlockToString(CBlockIndex* pBlock)
             _("Version"), itostr(block.nVersion),
             _("Hash"), "<pre>" + block.GetHash().GetHex() + "</pre>",
             _("Merkle Root"), "<pre>" + block.hashMerkleRoot.GetHex() + "</pre>",
-            // _("Hash Whole Block"), "<pre>" + block.hashWholeBlock.GetHex() + "</pre>"
-            // _("Miner Signature"), "<pre>" + block.MinerSignature.ToString() + "</pre>"
         };
 
     std::string BlockContent = makeHTMLTable(BlockContentCells, sizeof(BlockContentCells) / (2 * sizeof(std::string)), 2);
@@ -265,25 +263,6 @@ std::string BlockToString(CBlockIndex* pBlock)
     Content += ">&nbsp;►</a></h2>";
     Content += BlockContent;
     Content += "</br>";
-    /*
-    if (block.nHeight > getThirdHardforkBlock())
-    {
-        std::vector<std::string> votes[2];
-        for (int i = 0; i < 2; i++)
-        {
-            for (unsigned int j = 0; j < block.vvotes[i].size(); j++)
-            {
-                votes[i].push_back(block.vvotes[i][j].hash.ToString() + ':' + itostr(block.vvotes[i][j].n));
-            }
-        }
-        Content += "<h3>" + _("Votes +") + "</h3>";
-        Content += makeHTMLTable(&votes[1][0], votes[1].size(), 1);
-        Content += "</br>";
-        Content += "<h3>" + _("Votes -") + "</h3>";
-        Content += makeHTMLTable(&votes[0][0], votes[0].size(), 1);
-        Content += "</br>";
-    }
-    */
     Content += "<h2>" + _("Transactions") + "</h2>";
     Content += TxContent;
 
@@ -313,7 +292,7 @@ std::string TxToString(uint256 BlockHash, const CTransaction& tx)
             COutPoint Out = tx.vin[i].prevout;
             CTxOut PrevOut = getPrevOut(tx.vin[i].prevout);
             if (PrevOut.nValue < 0)
-                Input = -MAX_MONEY;
+                Input = -Params().MaxMoneyOut();
             else
                 Input += PrevOut.nValue;
             std::string InputsContentCells[] =
@@ -393,40 +372,11 @@ std::string AddressToString(const CBitcoinAddress& Address)
     std::string TxContent = table + makeHTMLTableRow(TxLabels, sizeof(TxLabels) / sizeof(std::string));
 
     std::set<COutPoint> PrevOuts;
-    /*
-    CScript AddressScript;
-    AddressScript.SetDestination(Address.Get());
 
-    CAmount Sum = 0;
-    bool fAddrIndex = false;
-
-    if (!fAddrIndex)
-        return ""; // it will take too long to find transactions by address
-    else
-    {
-        std::vector<CDiskTxPos> Txs;
-        paddressmap->GetTxs(Txs, AddressScript.GetID());
-        BOOST_FOREACH (const CDiskTxPos& pos, Txs)
-        {
-            CTransaction tx;
-            CBlock block;
-            uint256 bhash = block.GetHash();
-            GetTransaction(pos.nTxOffset, tx, bhash);
-            std::map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(block.GetHash());
-            if (mi == mapBlockIndex.end())
-                continue;
-            CBlockIndex* pindex = (*mi).second;
-            if (!pindex || !chainActive.Contains(pindex))
-                continue;
-            std::string Prepend = "<a href=\"" + itostr(pindex->nHeight) + "\">" + TimeToString(pindex->nTime) + "</a>";
-            TxContent += TxToRow(tx, AddressScript, Prepend, &Sum);
-        }
-    }
-    */
     TxContent += "</table>";
 
     std::string Content;
-    Content += "<h1 style='color:#333;'>" + _("Transactions to/from") + "&nbsp;<span>" + Address.ToString() + "</span></h1>";
+    Content += "<h1>" + _("Transactions to/from") + "&nbsp;<span>" + Address.ToString() + "</span></h1>";
     Content += TxContent;
     return Content;
 }
@@ -439,7 +389,7 @@ BlockExplorer::BlockExplorer(QWidget* parent) : QMainWindow(parent),
     ui->setupUi(this);
 
     this->setStyleSheet(GUIUtil::loadStyleSheet());
-
+    
     connect(ui->pushSearch, SIGNAL(released()), this, SLOT(onSearch()));
     connect(ui->content, SIGNAL(linkActivated(const QString&)), this, SLOT(goTo(const QString&)));
     connect(ui->back, SIGNAL(released()), this, SLOT(back()));
@@ -477,7 +427,7 @@ void BlockExplorer::showEvent(QShowEvent*)
         m_History.push_back(text);
         updateNavButtons();
 
-        if (!GetBoolArg("-txindex", false)) {
+        if (!GetBoolArg("-txindex", true)) {
             QString Warning = tr("Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (byron.conf).");
             QMessageBox::warning(this, "Byron Core Blockchain Explorer", Warning, QMessageBox::Ok);
         }
@@ -509,7 +459,7 @@ bool BlockExplorer::switchTo(const QString& query)
         return true;
     }
 
-    // If the query is neither an integer nor a block hash, assume a transaction hash
+    // If the query is neither an integer nor a block hash, assume a transaction hash.
     CTransaction tx;
     uint256 hashBlock = 0;
     if (GetTransaction(hash, tx, hashBlock, true)) {
@@ -517,7 +467,7 @@ bool BlockExplorer::switchTo(const QString& query)
         return true;
     }
 
-    // If the query is not an integer, nor a block hash, nor a transaction hash, assume an address
+    // If the query is not an integer, nor a block hash, nor a transaction hash, assume an address.
     CBitcoinAddress Address;
     Address.SetString(query.toUtf8().constData());
     if (Address.IsValid()) {
@@ -555,8 +505,9 @@ void BlockExplorer::setBlock(CBlockIndex* pBlock)
 
 void BlockExplorer::setContent(const std::string& Content)
 {
-    QString CSS = "body {font-size:12px; color:#333; bgcolor:#fafafa;}\n a, span { font-family: monospace; }\n span.addr {color:#333; font-weight: bold;}\n table tr td {padding: 3px; border: 1px solid black; background-color: #fafafa;}\n td.d0 {font-weight: bold; color:#333;}\n h2, h3 { white-space:nowrap; color:#333;}\n a { color:#337ab7; text-decoration:none; }\n a.nav {color:#337ab7;}\n";
+    QString CSS = "body {font-size:12px; color: #666; bgcolor: #fff;}\n a, span { font-family: monospace; }\n span.addr {color: #333; font-weight: bold;}\n table tr td {padding: 3px; border: 1px solid #cfd3d5; background-color: #fff;}\n td.d0 { font-weight: bold; color: #666; }\n h2, h3 { white-space: nowrap; color: #333;}\n a { color: #666; text-decoration: none; }\n a.nav { color: #333; }\n";
     QString FullContent = "<html><head><style type=\"text/css\">" + CSS + "</style></head>" + "<body>" + Content.c_str() + "</body></html>";
+
     ui->content->setText(FullContent);
 }
 

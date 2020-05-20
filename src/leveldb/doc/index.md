@@ -311,7 +311,7 @@ Performance can be tuned by changing the default values of the types defined in
 
 ### Block size
 
-leveldb groups adjacent keys together into the same block and such a block is
+leveldb groups adbyronent keys together into the same block and such a block is
 the unit of transfer to and from persistent storage. The default block size is
 approximately 4096 uncompressed bytes.  Applications that mostly do bulk scans
 over the contents of the database may wish to increase this size. Applications
@@ -373,7 +373,7 @@ for (it->SeekToFirst(); it->Valid(); it->Next()) {
 
 ### Key Layout
 
-Note that the unit of disk transfer and caching is a block. Adjacent keys
+Note that the unit of disk transfer and caching is a block. Adbyronent keys
 (according to the database sort order) will usually be placed in the same block.
 Therefore the application can improve its performance by placing keys that are
 accessed together near each other and placing infrequently used keys in a

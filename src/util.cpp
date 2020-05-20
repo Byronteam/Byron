@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -104,18 +105,23 @@ std::string to_internal(const std::string&);
 
 using namespace std;
 
-// Byron only features
 // Masternode
 bool fMasterNode = false;
 string strMasterNodePrivKey = "";
 string strMasterNodeAddr = "";
 bool fLiteMode = false;
-// SwiftTX
+// SwiftX
 bool fEnableSwiftTX = true;
 int nSwiftTXDepth = 5;
+
+int nZeromintPercentage = 10;
+int nAnonymizeBYRONAmount = 1000;
+int nLiquidityProvider = 0;
 /** Spork enforcement enabled time */
 int64_t enforceMasternodePaymentsTime = 4085657524;
 bool fSucessfullyLoaded = false;
+/** All denominations used by obfuscation */
+std::vector<int64_t> obfuScationDenominations;
 string strBudgetMode = "";
 
 map<string, string> mapArgs;
@@ -173,7 +179,7 @@ public:
         // Securely erase the memory used by the PRNG
         RAND_cleanup();
         // Shutdown OpenSSL library multithreading support
-        CRYPTO_set_locking_callback(nullptr);
+        CRYPTO_set_locking_callback(NULL);
         for (int i = 0; i < CRYPTO_num_locks(); i++)
             delete ppmutexOpenSSL[i];
         OPENSSL_free(ppmutexOpenSSL);
@@ -196,24 +202,24 @@ static boost::once_flag debugPrintInitFlag = BOOST_ONCE_INIT;
  * We use boost::call_once() to make sure these are initialized
  * in a thread-safe manner the first time called:
  */
-static FILE* fileout = nullptr;
-static boost::mutex* mutexDebugLog = nullptr;
+static FILE* fileout = NULL;
+static boost::mutex* mutexDebugLog = NULL;
 
 static void DebugPrintInit()
 {
-    assert(fileout == nullptr);
-    assert(mutexDebugLog == nullptr);
+    assert(fileout == NULL);
+    assert(mutexDebugLog == NULL);
 
     boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
     fileout = fopen(pathDebug.string().c_str(), "a");
-    if (fileout) setbuf(fileout, nullptr); // unbuffered
+    if (fileout) setbuf(fileout, NULL); // unbuffered
 
     mutexDebugLog = new boost::mutex();
 }
 
 bool LogAcceptCategory(const char* category)
 {
-    if (category != nullptr) {
+    if (category != NULL) {
         if (!fDebug)
             return false;
 
@@ -222,22 +228,23 @@ bool LogAcceptCategory(const char* category)
         // where mapMultiArgs might be deleted before another
         // global destructor calls LogPrint()
         static boost::thread_specific_ptr<set<string> > ptrCategory;
-        if (ptrCategory.get() == nullptr) {
+        if (ptrCategory.get() == NULL) {
             const vector<string>& categories = mapMultiArgs["-debug"];
             ptrCategory.reset(new set<string>(categories.begin(), categories.end()));
             // thread_specific_ptr automatically deletes the set when the thread ends.
-            // "byron" is a composite category enabling all Byron-related debug output
+            // "byron" is a composite category enabling all BYRON-related debug output
             if (ptrCategory->count(string("byron"))) {
-                ptrCategory->insert(string("swifttx"));
+                ptrCategory->insert(string("obfuscation"));
+                ptrCategory->insert(string("swiftx"));
                 ptrCategory->insert(string("masternode"));
                 ptrCategory->insert(string("mnpayments"));
+                ptrCategory->insert(string("zero"));
                 ptrCategory->insert(string("mnbudget"));
-                ptrCategory->insert(string("mncommunityvote"));
             }
         }
         const set<string>& setCategories = *ptrCategory.get();
 
-        // if not debugging everything and not debugging specific category, LogPrint does nothing.
+        // If not debugging everything and not debugging specific category, LogPrint does nothing.
         if (setCategories.count(string("")) == 0 &&
             setCategories.count(string(category)) == 0)
             return false;
@@ -249,24 +256,24 @@ int LogPrintStr(const std::string& str)
 {
     int ret = 0; // Returns total number of characters written
     if (fPrintToConsole) {
-        // print to console
+        // Print to console
         ret = fwrite(str.data(), 1, str.size(), stdout);
         fflush(stdout);
     } else if (fPrintToDebugLog && AreBaseParamsConfigured()) {
         static bool fStartedNewLine = true;
         boost::call_once(&DebugPrintInit, debugPrintInitFlag);
 
-        if (fileout == nullptr)
+        if (fileout == NULL)
             return ret;
 
         boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
 
-        // reopen the log file, if requested
+        // Reopen the log file, if requested
         if (fReopenDebugLog) {
             fReopenDebugLog = false;
             boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
-            if (freopen(pathDebug.string().c_str(), "a", fileout) != nullptr)
-                setbuf(fileout, nullptr); // unbuffered
+            if (freopen(pathDebug.string().c_str(), "a", fileout) != NULL)
+                setbuf(fileout, NULL); // unbuffered
         }
 
         // Debug print useful for profiling
@@ -389,7 +396,7 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
 {
 #ifdef WIN32
     char pszModule[MAX_PATH] = "";
-    GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
+    GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
     const char* pszModule = "byron";
 #endif
@@ -412,17 +419,17 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\Byron
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\Byron
-// Mac: ~/Library/Application Support/Byron
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\BYRON
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\BYRON
+// Mac: ~/Library/Application Support/BYRON
 // Unix: ~/.byron
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Byron";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "byron";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
-    if (pszHome == nullptr || strlen(pszHome) == 0)
+    if (pszHome == NULL || strlen(pszHome) == 0)
         pathRet = fs::path("/");
     else
         pathRet = fs::path(pszHome);
@@ -430,7 +437,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "Byron";
+    return pathRet / "byron";
 #else
     // Unix
     return pathRet / ".byron";
@@ -501,7 +508,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
     if (!streamConfig.good()) {
         // Create empty byron.conf if it does not exist
         FILE* configFile = fopen(GetConfigFile().string().c_str(), "a");
-        if (configFile != nullptr)
+        if (configFile != NULL)
             fclose(configFile);
         return; // Nothing to read, so just return
     }
@@ -565,7 +572,7 @@ bool TryCreateDirectory(const boost::filesystem::path& p)
             throw;
     }
 
-    // create_directory didn't create the directory, it had to have existed already
+    // Create_directory didn't create the directory, it had to have existed already
     return false;
 }
 
@@ -683,7 +690,7 @@ void ShrinkDebugFile()
             fwrite(begin_ptr(vch), 1, nBytes, file);
             fclose(file);
         }
-    } else if (file != nullptr)
+    } else if (file != NULL)
         fclose(file);
 }
 
@@ -694,7 +701,7 @@ boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate)
 
     char pszPath[MAX_PATH] = "";
 
-    if (SHGetSpecialFolderPathA(nullptr, pszPath, nFolder, fCreate)) {
+    if (SHGetSpecialFolderPathA(NULL, pszPath, nFolder, fCreate)) {
         return fs::path(pszPath);
     }
 
@@ -724,6 +731,26 @@ boost::filesystem::path GetTempPath()
     }
     return path;
 #endif
+}
+
+double double_safe_addition(double fValue, double fIncrement)
+{
+    double fLimit = std::numeric_limits<double>::max() - fValue;
+
+    if (fLimit > fIncrement)
+        return fValue + fIncrement;
+    else
+        return std::numeric_limits<double>::max();
+}
+
+double double_safe_multiplication(double fValue, double fmultiplicator)
+{
+    double fLimit = std::numeric_limits<double>::max() / fmultiplicator;
+
+    if (fLimit > fmultiplicator)
+        return fValue * fmultiplicator;
+    else
+        return std::numeric_limits<double>::max();
 }
 
 void runCommand(std::string strCommand)

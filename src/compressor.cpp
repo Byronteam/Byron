@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,6 +17,7 @@ bool CScriptCompressor::IsToKeyID(CKeyID& hash) const
         memcpy(&hash, &script[3], 20);
         return true;
     }
+
     return false;
 }
 
@@ -24,6 +27,7 @@ bool CScriptCompressor::IsToScriptID(CScriptID& hash) const
         memcpy(&hash, &script[2], 20);
         return true;
     }
+
     return false;
 }
 
@@ -37,6 +41,7 @@ bool CScriptCompressor::IsToPubKey(CPubKey& pubkey) const
         pubkey.Set(&script[1], &script[66]);
         return pubkey.IsFullyValid(); // if not fully valid, a case that would not be compressible
     }
+
     return false;
 }
 
@@ -49,6 +54,7 @@ bool CScriptCompressor::Compress(std::vector<unsigned char>& out) const
         memcpy(&out[1], &keyID, 20);
         return true;
     }
+
     CScriptID scriptID;
     if (IsToScriptID(scriptID)) {
         out.resize(21);
@@ -56,6 +62,7 @@ bool CScriptCompressor::Compress(std::vector<unsigned char>& out) const
         memcpy(&out[1], &scriptID, 20);
         return true;
     }
+
     CPubKey pubkey;
     if (IsToPubKey(pubkey)) {
         out.resize(33);
@@ -68,6 +75,7 @@ bool CScriptCompressor::Compress(std::vector<unsigned char>& out) const
             return true;
         }
     }
+
     return false;
 }
 
@@ -75,8 +83,10 @@ unsigned int CScriptCompressor::GetSpecialSize(unsigned int nSize) const
 {
     if (nSize == 0 || nSize == 1)
         return 20;
+
     if (nSize == 2 || nSize == 3 || nSize == 4 || nSize == 5)
         return 32;
+
     return 0;
 }
 
@@ -138,11 +148,14 @@ uint64_t CTxOutCompressor::CompressAmount(uint64_t n)
 {
     if (n == 0)
         return 0;
+
     int e = 0;
+
     while (((n % 10) == 0) && e < 9) {
         n /= 10;
         e++;
     }
+
     if (e < 9) {
         int d = (n % 10);
         assert(d >= 1 && d <= 9);
@@ -163,6 +176,7 @@ uint64_t CTxOutCompressor::DecompressAmount(uint64_t x)
     int e = x % 10;
     x /= 10;
     uint64_t n = 0;
+
     if (e < 9) {
         // x = 9*n + d - 1
         int d = (x % 9) + 1;
@@ -172,9 +186,11 @@ uint64_t CTxOutCompressor::DecompressAmount(uint64_t x)
     } else {
         n = x + 1;
     }
+
     while (e) {
         n *= 10;
         e--;
     }
+    
     return n;
 }

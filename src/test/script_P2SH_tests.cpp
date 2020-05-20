@@ -13,8 +13,6 @@
 #include "wallet_ismine.h"
 #endif
 
-#include "test/test_byron.h"
-
 #include <vector>
 
 #include <boost/test/unit_test.hpp>
@@ -49,7 +47,7 @@ Verify(const CScript& scriptSig, const CScript& scriptPubKey, bool fStrict, Scri
 }
 
 
-BOOST_FIXTURE_TEST_SUITE(script_P2SH_tests, TestingSetup)
+BOOST_AUTO_TEST_SUITE(script_P2SH_tests)
 
 BOOST_AUTO_TEST_CASE(sign)
 {
@@ -212,7 +210,7 @@ BOOST_AUTO_TEST_CASE(set)
 BOOST_AUTO_TEST_CASE(is)
 {
     // Test CScript::IsPayToScriptHash()
-    uint160 dummy;
+    uint160 dummy(0);
     CScript p2sh;
     p2sh << OP_HASH160 << ToByteVector(dummy) << OP_EQUAL;
     BOOST_CHECK(p2sh.IsPayToScriptHash());

@@ -136,8 +136,8 @@
         <translation>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</translation>
     </message>
     <message>
-        <source>For staking only</source>
-        <translation>For staking only</translation>
+        <source>For anonymization and staking only</source>
+        <translation>For anonymization and staking only</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -176,8 +176,8 @@
         <translation>Confirm wallet encryption</translation>
     </message>
     <message>
-        <source>Byron will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</source>
-        <translation>Byron will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</translation>
+        <source>BYRON will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</source>
+        <translation>BYRON will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BYRONs from being stolen by malware infecting your computer.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -630,8 +630,8 @@
         <translation>Show information about Byron Core</translation>
     </message>
     <message>
-        <source>Modify configuration options for Byron</source>
-        <translation>Modify configuration options for Byron</translation>
+        <source>Modify configuration options for BYRON</source>
+        <translation>Modify configuration options for BYRON</translation>
     </message>
     <message>
         <source>Sign messages with your BYRON addresses to prove you own them</source>
@@ -670,8 +670,8 @@
         <translation>Open Masternode configuration file</translation>
     </message>
     <message>
-        <source>Open a byron: URI or payment request</source>
-        <translation>Open a byron: URI or payment request</translation>
+        <source>Open a BYRON: URI or payment request</source>
+        <translation>Open a BYRON: URI or payment request</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -682,16 +682,16 @@
         <translation>Block explorer window</translation>
     </message>
     <message>
-        <source>Show the Byron Core help message to get a list with possible Byron command-line options</source>
-        <translation>Show the Byron Core help message to get a list with possible Byron command-line options</translation>
+        <source>Show the Byron Core help message to get a list with possible BYRON command-line options</source>
+        <translation>Show the Byron Core help message to get a list with possible BYRON command-line options</translation>
     </message>
     <message>
         <source>Byron Core client</source>
         <translation>Byron Core client</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Byron network</source>
-        <translation><numerusform>%n active connection(s) to Byron network</numerusform><numerusform>%n active connection(s) to Byron network</numerusform></translation>
+        <source>%n active connection(s) to BYRON network</source>
+        <translation><numerusform>%n active connection(s) to BYRON network</numerusform><numerusform>%n active connection(s) to BYRON network</numerusform></translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -810,6 +810,10 @@ Address: %4
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</translation>
     </message>
     <message>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization and staking only</source>
+        <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization and staking only</translation>
+    </message>
+    <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
     </message>
@@ -919,6 +923,10 @@ Address: %4
         <translation>Received with address</translation>
     </message>
     <message>
+        <source>DS Rounds</source>
+        <translation>DS Rounds</translation>
+    </message>
+    <message>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -991,6 +999,10 @@ Address: %4
         <translation>Please switch to "List mode" to use this function.</translation>
     </message>
     <message>
+        <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
+        <translation>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</translation>
+    </message>
+    <message>
         <source>highest</source>
         <translation>highest</translation>
     </message>
@@ -1007,8 +1019,8 @@ Address: %4
         <translation>medium-high</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 ubyron per input.</source>
-        <translation>Can vary +/- %1 ubyron per input.</translation>
+        <source>Can vary +/- %1 duff(s) per input.</source>
+        <translation>Can vary +/- %1 duff(s) per input.</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -1235,8 +1247,8 @@ Address: %4
         <translation>As this is the first time the program is launched, you can choose where Byron Core will store its data.</translation>
     </message>
     <message>
-        <source>Byron Core will download and store a copy of the Byron block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Byron Core will download and store a copy of the Byron block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
+        <source>Byron Core will download and store a copy of the BYRON block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Byron Core will download and store a copy of the BYRON block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1510,6 +1522,73 @@ Please check the address and try again.</translation>
     </message>
 </context>
 <context>
+    <name>ObfuscationConfig</name>
+    <message>
+        <source>Configure Obfuscation</source>
+        <translation>Configure Obfuscation</translation>
+    </message>
+    <message>
+        <source>Basic Privacy</source>
+        <translation>Basic Privacy</translation>
+    </message>
+    <message>
+        <source>High Privacy</source>
+        <translation>High Privacy</translation>
+    </message>
+    <message>
+        <source>Maximum Privacy</source>
+        <translation>Maximum Privacy</translation>
+    </message>
+    <message>
+        <source>Please select a privacy level.</source>
+        <translation>Please select a privacy level.</translation>
+    </message>
+    <message>
+        <source>Use 2 separate masternodes to mix funds up to 200000 BYRON</source>
+        <translation>Use 2 separate masternodes to mix funds up to 200000 BYRON</translation>
+    </message>
+    <message>
+        <source>Use 8 separate masternodes to mix funds up to 200000 BYRON</source>
+        <translation>Use 8 separate masternodes to mix funds up to 200000 BYRON</translation>
+    </message>
+    <message>
+        <source>Use 16 separate masternodes</source>
+        <translation>Use 16 separate masternodes</translation>
+    </message>
+    <message>
+        <source>This option is the quickest and will cost about ~0.025 BYRON to anonymize 200000 BYRON</source>
+        <translation>This option is the quickest and will cost about ~0.025 BYRON to anonymize 200000 BYRON</translation>
+    </message>
+    <message>
+        <source>This option is moderately fast and will cost about 0.05 BYRON to anonymize 200000 BYRON</source>
+        <translation>This option is moderately fast and will cost about 0.05 BYRON to anonymize 200000 BYRON</translation>
+    </message>
+    <message>
+        <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
+        <translation>This is the slowest and most secure option. Using maximum anonymity will cost</translation>
+    </message>
+    <message>
+        <source>0.1 BYRON per 200000 BYRON you anonymize.</source>
+        <translation>0.1 BYRON per 200000 BYRON you anonymize.</translation>
+    </message>
+    <message>
+        <source>Obfuscation Configuration</source>
+        <translation>Obfuscation Configuration</translation>
+    </message>
+    <message>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening BYRON's configuration screen.</source>
+        <translation>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening BYRON's configuration screen.</translation>
+    </message>
+    <message>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening BYRON's configuration screen.</source>
+        <translation>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening BYRON's configuration screen.</translation>
+    </message>
+    <message>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening BYRON's configuration screen.</source>
+        <translation>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening BYRON's configuration screen.</translation>
+    </message>
+</context>
+<context>
     <name>OpenURIDialog</name>
     <message>
         <source>Open URI</source>
@@ -1567,8 +1646,8 @@ Please check the address and try again.</translation>
         <translation>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</translation>
     </message>
     <message>
-        <source>Automatically open the Byron client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatically open the Byron client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
+        <source>Automatically open the BYRON client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatically open the BYRON client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1587,12 +1666,28 @@ Please check the address and try again.</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start Byron after logging in to the system.</source>
-        <translation>Automatically start Byron after logging in to the system.</translation>
+        <source>Automatically start BYRON after logging in to the system.</source>
+        <translation>Automatically start BYRON after logging in to the system.</translation>
     </message>
     <message>
-        <source>&amp;Start Byron on system login</source>
-        <translation>&amp;Start Byron on system login</translation>
+        <source>&amp;Start BYRON on system login</source>
+        <translation>&amp;Start BYRON on system login</translation>
+    </message>
+    <message>
+        <source>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</source>
+        <translation>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</translation>
+    </message>
+    <message>
+        <source>Obfuscation rounds to use</source>
+        <translation>Obfuscation rounds to use</translation>
+    </message>
+    <message>
+        <source>This amount acts as a threshold to turn off Obfuscation once it's reached.</source>
+        <translation>This amount acts as a threshold to turn off Obfuscation once it's reached.</translation>
+    </message>
+    <message>
+        <source>Amount of BYRON to keep anonymized</source>
+        <translation>Amount of BYRON to keep anonymized</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1619,16 +1714,22 @@ Please check the address and try again.</translation>
         <translation>&amp;Network</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Byron.</source>
-        <translation>The user interface language can be set here. This setting will take effect after restarting Byron.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting BYRON.</source>
+        <translation>The user interface language can be set here. This setting will take effect after restarting BYRON.</translation>
+    </message>
+    <message>
+        <source>Language missing or translation incomplete? Help contributing translations here:
+https://www.transifex.com/byron-project/byron-project-translations</source>
+        <translation>Language missing or translation incomplete? Help contributing translations here:
+https://www.transifex.com/byron-project/byron-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Byron network through a SOCKS5 proxy.</source>
-        <translation>Connect to the Byron network through a SOCKS5 proxy.</translation>
+        <source>Connect to the BYRON network through a SOCKS5 proxy.</source>
+        <translation>Connect to the BYRON network through a SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1673,6 +1774,10 @@ Please check the address and try again.</translation>
     <message>
         <source>User Interface &amp;language:</source>
         <translation>User Interface &amp;language:</translation>
+    </message>
+    <message>
+        <source>User Interface Theme:</source>
+        <translation>User Interface Theme:</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
@@ -1778,8 +1883,8 @@ Please check the address and try again.</translation>
         <translation>Balances</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Byron network after a connection is established, but this process has not completed yet.</source>
-        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Byron network after a connection is established, but this process has not completed yet.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the BYRON network after a connection is established, but this process has not completed yet.</source>
+        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the BYRON network after a connection is established, but this process has not completed yet.</translation>
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
@@ -1818,8 +1923,68 @@ Please check the address and try again.</translation>
         <translation>Status:</translation>
     </message>
     <message>
-        <source>Recent transactions</source>
-        <translation>Recent transactions</translation>
+        <source>Obfuscation Balance:</source>
+        <translation>Obfuscation Balance:</translation>
+    </message>
+    <message>
+        <source>0 BYRON / 0 Rounds</source>
+        <translation>0 BYRON / 0 Rounds</translation>
+    </message>
+    <message>
+        <source>Enabled/Disabled</source>
+        <translation>Enabled/Disabled</translation>
+    </message>
+    <message>
+        <source>Try to manually submit a Obfuscation request.</source>
+        <translation>Try to manually submit a Obfuscation request.</translation>
+    </message>
+    <message>
+        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it's in the process of Mixing, which can cost you money!)</source>
+        <translation>Reset the current status of Obfuscation (can interrupt Obfuscation if it's in the process of Mixing, which can cost you money!)</translation>
+    </message>
+    <message>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
+    </message>
+    <message>
+        <source>Completion:</source>
+        <translation>Completion:</translation>
+    </message>
+    <message>
+        <source>Amount and Rounds:</source>
+        <translation>Amount and Rounds:</translation>
+    </message>
+    <message>
+        <source>Submitted Denom:</source>
+        <translation>Submitted Denom:</translation>
+    </message>
+    <message>
+        <source>n/a</source>
+        <translation>n/a</translation>
+    </message>
+    <message>
+        <source>Recent Transactions</source>
+        <translation>Recent Transactions</translation>
+    </message>
+    <message>
+        <source>Start/Stop Mixing</source>
+        <translation>Start/Stop Mixing</translation>
+    </message>
+    <message>
+        <source>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</source>
+        <translation>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</translation>
+    </message>
+    <message>
+        <source>(Last Message)</source>
+        <translation>(Last Message)</translation>
+    </message>
+    <message>
+        <source>Try Mix</source>
+        <translation>Try Mix</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Reset</translation>
     </message>
     <message>
         <source>out of sync</source>
@@ -1832,6 +1997,76 @@ Please check the address and try again.</translation>
     <message>
         <source>No inputs detected</source>
         <translation>No inputs detected</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Rounds</source>
+        <translation><numerusform>%n Round</numerusform><numerusform>%n Rounds</numerusform></translation>
+    </message>
+    <message>
+        <source>Not enough compatible inputs to anonymize &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt;will anonymize &lt;span style='color:red;'&gt;%2&lt;/span&gt; instead</source>
+        <translation>Not enough compatible inputs to anonymize &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt;will anonymize &lt;span style='color:red;'&gt;%2&lt;/span&gt; instead</translation>
+    </message>
+    <message>
+        <source>Overall progress</source>
+        <translation>Overall progress</translation>
+    </message>
+    <message>
+        <source>Denominated</source>
+        <translation>Denominated</translation>
+    </message>
+    <message>
+        <source>Anonymized</source>
+        <translation>Anonymized</translation>
+    </message>
+    <message numerus="yes">
+        <source>Denominated inputs have %5 of %n rounds on average</source>
+        <translation><numerusform>Denominated inputs have %5 of %n rounds on average</numerusform><numerusform>Denominated inputs have %5 of %n rounds on average</numerusform></translation>
+    </message>
+    <message>
+        <source>Last Obfuscation message:
+</source>
+        <translation>Last Obfuscation message:
+</translation>
+    </message>
+    <message>
+        <source>Obfuscation was successfully reset.</source>
+        <translation>Obfuscation was successfully reset.</translation>
+    </message>
+    <message>
+        <source>If you don't want to see internal Obfuscation fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
+        <translation>If you don't want to see internal Obfuscation fees/transactions select "Most Common" as Type on the "Transactions" tab.</translation>
+    </message>
+    <message>
+        <source>Obfuscation requires at least %1 to use.</source>
+        <translation>Obfuscation requires at least %1 to use.</translation>
+    </message>
+    <message>
+        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
+        <translation>Wallet is locked and user declined to unlock. Disabling Obfuscation.</translation>
+    </message>
+    <message>
+        <source>Found enough compatible inputs to anonymize %1</source>
+        <translation>Found enough compatible inputs to anonymize %1</translation>
+    </message>
+    <message>
+        <source>Start Obfuscation</source>
+        <translation>Start Obfuscation</translation>
+    </message>
+    <message>
+        <source>Stop Obfuscation</source>
+        <translation>Stop Obfuscation</translation>
+    </message>
+    <message>
+        <source>Mixed</source>
+        <translation>Mixed</translation>
+    </message>
+    <message>
+        <source>Enabled</source>
+        <translation>Enabled</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/A</translation>
     </message>
 </context>
 <context>
@@ -1861,8 +2096,8 @@ Please check the address and try again.</translation>
         <translation>Cannot start byron: click-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Byron address or malformed URI parameters.</source>
-        <translation>URI cannot be parsed! This can be caused by an invalid Byron address or malformed URI parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid BYRON address or malformed URI parameters.</source>
+        <translation>URI cannot be parsed! This can be caused by an invalid BYRON address or malformed URI parameters.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2081,8 +2316,8 @@ Please check the address and try again.</translation>
         <translation>Block chain</translation>
     </message>
     <message>
-        <source>Open the Byron debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open the Byron debug log file from the current data directory. This can take a few seconds for large log files.</translation>
+        <source>Open the BYRON debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open the BYRON debug log file from the current data directory. This can take a few seconds for large log files.</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -2249,8 +2484,8 @@ Please check the address and try again.</translation>
         <translation>Out:</translation>
     </message>
     <message>
-        <source>Welcome to the Byron RPC console.</source>
-        <translation>Welcome to the Byron RPC console.</translation>
+        <source>Welcome to the BYRON RPC console.</source>
+        <translation>Welcome to the BYRON RPC console.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -2320,12 +2555,12 @@ Please check the address and try again.</translation>
         <translation>An optional label to associate with the new receiving address.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Byron network.</source>
-        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Byron network.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the BYRON network.</source>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the BYRON network.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Byron network.</source>
-        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Byron network.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the BYRON network.</source>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the BYRON network.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -2577,6 +2812,10 @@ Please check the address and try again.</translation>
         <translation>Minimize</translation>
     </message>
     <message>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
+    </message>
+    <message>
         <source>per kilobyte</source>
         <translation>per kilobyte</translation>
     </message>
@@ -2609,8 +2848,8 @@ Please check the address and try again.</translation>
         <translation>If the custom fee is set to 1000 uBYRONs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uBYRONs in fee,&lt;br /&gt;while "total at least" pays 1000 uBYRONs. For transactions bigger than a kilobyte both pay by kilobyte.</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Byron transactions than the network can process.</source>
-        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Byron transactions than the network can process.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for BYRON transactions than the network can process.</source>
+        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for BYRON transactions than the network can process.</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2709,8 +2948,12 @@ Please check the address and try again.</translation>
         <translation>using</translation>
     </message>
     <message>
-        <source>Warning: Invalid Byron address</source>
-        <translation>Warning: Invalid Byron address</translation>
+        <source>anonymous funds</source>
+        <translation>anonymous funds</translation>
+    </message>
+    <message>
+        <source>Warning: Invalid BYRON address</source>
+        <translation>Warning: Invalid BYRON address</translation>
     </message>
     <message>
         <source>any available funds (not recommended)</source>
@@ -2753,6 +2996,10 @@ Please check the address and try again.</translation>
         <translation>The recipient address is not valid, please recheck.</translation>
     </message>
     <message>
+        <source>(obfuscation requires this amount to be rounded up to the nearest %1).</source>
+        <translation>(obfuscation requires this amount to be rounded up to the nearest %1).</translation>
+    </message>
+    <message>
         <source> split into %1 outputs using the UTXO splitter.</source>
         <translation> split into %1 outputs using the UTXO splitter.</translation>
     </message>
@@ -2783,6 +3030,10 @@ Please check the address and try again.</translation>
     <message>
         <source>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
         <translation>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</translation>
+    </message>
+    <message>
+        <source>Error: The wallet was unlocked only to anonymize coins.</source>
+        <translation>Error: The wallet was unlocked only to anonymize coins.</translation>
     </message>
     <message>
         <source>Pay only the minimum fee of %1</source>
@@ -2848,8 +3099,8 @@ Please check the address and try again.</translation>
         <translation>Message:</translation>
     </message>
     <message>
-        <source>A message that was attached to the byron: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Byron network.</source>
-        <translation>A message that was attached to the byron: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Byron network.</translation>
+        <source>A message that was attached to the BYRON: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the BYRON network.</source>
+        <translation>A message that was attached to the BYRON: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the BYRON network.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>
@@ -3039,10 +3290,6 @@ Please check the address and try again.</translation>
     <message>
         <source>The Dash Core developers</source>
         <translation>The Dash Core developers</translation>
-    </message>
-    <message>
-        <source>The PIVX Core developers</source>
-        <translation>The PIVX Core developers</translation>
     </message>
     <message>
         <source>The Byron Core developers</source>
@@ -3321,6 +3568,26 @@ Please check the address and try again.</translation>
         <translation>Received from</translation>
     </message>
     <message>
+        <source>Received via Obfuscation</source>
+        <translation>Received via Obfuscation</translation>
+    </message>
+    <message>
+        <source>Obfuscation Denominate</source>
+        <translation>Obfuscation Denominate</translation>
+    </message>
+    <message>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Obfuscation Collateral Payment</translation>
+    </message>
+    <message>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation Make Collateral Inputs</translation>
+    </message>
+    <message>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation Create Denominations</translation>
+    </message>
+    <message>
         <source>Sent to</source>
         <translation>Sent to</translation>
     </message>
@@ -3339,6 +3606,10 @@ Please check the address and try again.</translation>
     <message>
         <source>Mined</source>
         <translation>Mined</translation>
+    </message>
+    <message>
+        <source>Obfuscated</source>
+        <translation>Obfuscated</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -3414,6 +3685,26 @@ Please check the address and try again.</translation>
     <message>
         <source>Sent to</source>
         <translation>Sent to</translation>
+    </message>
+    <message>
+        <source>Obfuscated</source>
+        <translation>Obfuscated</translation>
+    </message>
+    <message>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation Make Collateral Inputs</translation>
+    </message>
+    <message>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation Create Denominations</translation>
+    </message>
+    <message>
+        <source>Obfuscation Denominate</source>
+        <translation>Obfuscation Denominate</translation>
+    </message>
+    <message>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Obfuscation Collateral Payment</translation>
     </message>
     <message>
         <source>To yourself</source>
@@ -3639,8 +3930,8 @@ Please check the address and try again.</translation>
         <translation>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
     </message>
     <message>
-        <source>Disable all Byron specific functionality (Masternodes, SwiftTX, Budgeting) (0-1, default: %u)</source>
-        <translation>Disable all Byron specific functionality (Masternodes, SwiftTX, Budgeting) (0-1, default: %u)</translation>
+        <source>Disable all BYRON specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <translation>Disable all BYRON specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
@@ -3653,6 +3944,10 @@ Please check the address and try again.</translation>
     <message>
         <source>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</source>
         <translation>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</translation>
+    </message>
+    <message>
+        <source>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</source>
+        <translation>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
@@ -3689,6 +3984,10 @@ Please check the address and try again.</translation>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
         <translation>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</translation>
+    </message>
+    <message>
+        <source>Found unconfirmed denominated outputs, will wait till they confirm to continue.</source>
+        <translation>Found unconfirmed denominated outputs, will wait till they confirm to continue.</translation>
     </message>
     <message>
         <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>
@@ -3731,8 +4030,16 @@ Please check the address and try again.</translation>
         <translation>Number of seconds to keep misbehaving peers from reconnecting (default: %u)</translation>
     </message>
     <message>
+        <source>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</translation>
+    </message>
+    <message>
         <source>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</source>
         <translation>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</translation>
+    </message>
+    <message>
+        <source>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
+        <translation>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</translation>
     </message>
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</source>
@@ -3784,7 +4091,7 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
+for example: alertnotify=echo %%s | mail -s "BYRON Alert" admin@foo.com
 </source>
         <translation>To use byrond, or the -server option to byron-qt, you must set an rpcpassword in the configuration file:
 %s
@@ -3795,7 +4102,7 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
+for example: alertnotify=echo %%s | mail -s "BYRON Alert" admin@foo.com
 </translation>
     </message>
     <message>
@@ -3803,8 +4110,16 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Unable to bind to %s on this computer. Byron Core is probably already running.</translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 10000 BYRON.</source>
-        <translation>Unable to locate enough funds for this transaction that are not equal 10000 BYRON.</translation>
+        <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
+        <translation>Unable to locate enough Obfuscation denominated funds for this transaction.</translation>
+    </message>
+    <message>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200000 BYRON.</source>
+        <translation>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200000 BYRON.</translation>
+    </message>
+    <message>
+        <source>Unable to locate enough funds for this transaction that are not equal 200000 BYRON.</source>
+        <translation>Unable to locate enough funds for this transaction that are not equal 200000 BYRON.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -3907,8 +4222,16 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Block creation options:</translation>
     </message>
     <message>
+        <source>Can't denominate: no compatible inputs left.</source>
+        <translation>Can't denominate: no compatible inputs left.</translation>
+    </message>
+    <message>
         <source>Can't find random Masternode.</source>
         <translation>Can't find random Masternode.</translation>
+    </message>
+    <message>
+        <source>Can't mix while sync in progress.</source>
+        <translation>Can't mix while sync in progress.</translation>
     </message>
     <message>
         <source>Cannot downgrade wallet</source>
@@ -3959,12 +4282,8 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The PIVX Core Developers</source>
-        <translation>Copyright (C) 2015-%i The PIVX Core Developers</translation>
-    </message>
-    <message>
-        <source>Copyright (C) 2017-%i The Byron Core Developers</source>
-        <translation>Copyright (C) 2017-%i The Byron Core Developers</translation>
+        <source>Copyright (C) 2015-%i The Byron Core Developers</source>
+        <translation>Copyright (C) 2015-%i The Byron Core Developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -4059,6 +4378,10 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Error: A fatal internal error occured, see debug.log for details</translation>
     </message>
     <message>
+        <source>Error: Can't select current denominated inputs</source>
+        <translation>Error: Can't select current denominated inputs</translation>
+    </message>
+    <message>
         <source>Error: Disk space is low!</source>
         <translation>Error: Disk space is low!</translation>
     </message>
@@ -4069,6 +4392,10 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
     <message>
         <source>Error: Wallet locked, unable to create transaction!</source>
         <translation>Error: Wallet locked, unable to create transaction!</translation>
+    </message>
+    <message>
+        <source>Error: You already have pending entries in the Obfuscation pool</source>
+        <translation>Error: You already have pending entries in the Obfuscation pool</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -4251,8 +4578,20 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Enable staking functionality (0-1, default: %u)</translation>
     </message>
     <message>
+        <source>Keep N BYRON anonymized (default: %u)</source>
+        <translation>Keep N BYRON anonymized (default: %u)</translation>
+    </message>
+    <message>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
         <translation>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</translation>
+    </message>
+    <message>
+        <source>Last Obfuscation was too recent.</source>
+        <translation>Last Obfuscation was too recent.</translation>
+    </message>
+    <message>
+        <source>Last successful Obfuscation action was too recent.</source>
+        <translation>Last successful Obfuscation action was too recent.</translation>
     </message>
     <message>
         <source>Limit size of signature cache to &lt;n&gt; entries (default: %u)</source>
@@ -4335,6 +4674,10 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Missing input transaction information.</translation>
     </message>
     <message>
+        <source>Mixing in progress...</source>
+        <translation>Mixing in progress...</translation>
+    </message>
+    <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
         <translation>Need to specify a port with -whitebind: '%s'</translation>
     </message>
@@ -4345,6 +4688,14 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
     <message>
         <source>No compatible Masternode found.</source>
         <translation>No compatible Masternode found.</translation>
+    </message>
+    <message>
+        <source>No funds detected in need of denominating.</source>
+        <translation>No funds detected in need of denominating.</translation>
+    </message>
+    <message>
+        <source>No matching denominations found for mixing.</source>
+        <translation>No matching denominations found for mixing.</translation>
     </message>
     <message>
         <source>Node relay options:</source>
@@ -4369,6 +4720,22 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
     <message>
         <source>Number of automatic wallet backups (default: 10)</source>
         <translation>Number of automatic wallet backups (default: 10)</translation>
+    </message>
+    <message>
+        <source>Obfuscation is idle.</source>
+        <translation>Obfuscation is idle.</translation>
+    </message>
+    <message>
+        <source>Obfuscation options:</source>
+        <translation>Obfuscation options:</translation>
+    </message>
+    <message>
+        <source>Obfuscation request complete:</source>
+        <translation>Obfuscation request complete:</translation>
+    </message>
+    <message>
+        <source>Obfuscation request incomplete:</source>
+        <translation>Obfuscation request incomplete:</translation>
     </message>
     <message>
         <source>Only accept block chain matching built-in checkpoints (default: %u)</source>
@@ -4675,6 +5042,10 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
         <translation>Upgrade wallet to latest format</translation>
     </message>
     <message>
+        <source>Use N separate masternodes to anonymize funds  (2-8, default: %u)</source>
+        <translation>Use N separate masternodes to anonymize funds  (2-8, default: %u)</translation>
+    </message>
+    <message>
         <source>Use OpenSSL (https) for JSON-RPC connections</source>
         <translation>Use OpenSSL (https) for JSON-RPC connections</translation>
     </message>
@@ -4693,6 +5064,10 @@ for example: alertnotify=echo %%s | mail -s "Byron Alert" admin@foo.com
     <message>
         <source>Username for JSON-RPC connections</source>
         <translation>Username for JSON-RPC connections</translation>
+    </message>
+    <message>
+        <source>Value more than Obfuscation pool maximum allows.</source>
+        <translation>Value more than Obfuscation pool maximum allows.</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>

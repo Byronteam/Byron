@@ -1,7 +1,7 @@
 Masternode Budget API
 =======================
 
-Byron now supports full decentralized budgets that are paid directly from the blockchain via superblocks once per month.
+BYRON now supports full decentralized budgets that are paid directly from the blockchain via superblocks once per month.
 
 Budgets go through a series of stages before being paid:
 * prepare - create a special transaction that destroys coins in order to make a proposal
@@ -148,9 +148,9 @@ The following new RPC commands are supported:
 - mnbudget "command"... ( "passphrase" )
  * prepare            - Prepare proposal for network by signing and creating tx
  * submit             - Submit proposal for network
- * vote-many          - Vote on a Byron initiative
- * vote-alias         - Vote on a Byron initiative
- * vote               - Vote on a Byron initiative/budget
+ * vote-many          - Vote on a BYRON initiative
+ * vote-alias         - Vote on a BYRON initiative
+ * vote               - Vote on a BYRON initiative/budget
  * getvotes           - Show current masternode budgets
  * getinfo            - Show current masternode budgets
  * show               - Show all budgets

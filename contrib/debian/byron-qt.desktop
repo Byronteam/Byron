@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=BYRON
+Comment=BYRON P2P Cryptocurrency
+Comment[fr]=BYRON, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=BYRON, eşten eşe kriptografik sanal para birimi
+Exec=byron-qt %u
+Terminal=false
+Type=Application
+Icon=byron128
+MimeType=x-scheme-handler/byron;
+Categories=Office;Finance;

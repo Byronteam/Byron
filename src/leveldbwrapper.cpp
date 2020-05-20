@@ -13,7 +13,7 @@
 #include <leveldb/filter_policy.h>
 #include <memenv.h>
 
-void HandleError(const leveldb::Status& status) throw(leveldb_error)
+void HandleError(const leveldb::Status& status)
 {
     if (status.ok())
         return;
@@ -35,17 +35,19 @@ static leveldb::Options GetOptions(size_t nCacheSize)
     options.filter_policy = leveldb::NewBloomFilterPolicy(10);
     options.compression = leveldb::kNoCompression;
     options.max_open_files = 64;
+
     if (leveldb::kMajorVersion > 1 || (leveldb::kMajorVersion == 1 && leveldb::kMinorVersion >= 16)) {
         // LevelDB versions before 1.16 consider short writes to be corruption. Only trigger error
         // on corruption in later versions.
         options.paranoid_checks = true;
     }
+    
     return options;
 }
 
 CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory, bool fWipe)
 {
-    penv = nullptr;
+    penv = NULL;
     readoptions.verify_checksums = true;
     iteroptions.verify_checksums = true;
     iteroptions.fill_cache = false;
@@ -58,8 +60,7 @@ CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCa
     } else {
         if (fWipe) {
             LogPrintf("Wiping LevelDB in %s\n", path.string());
-            leveldb::Status result = leveldb::DestroyDB(path.string(), options);
-            HandleError(result);
+            leveldb::DestroyDB(path.string(), options);
         }
         TryCreateDirectory(path);
         LogPrintf("Opening LevelDB in %s\n", path.string());
@@ -72,16 +73,16 @@ CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCa
 CLevelDBWrapper::~CLevelDBWrapper()
 {
     delete pdb;
-    pdb = nullptr;
+    pdb = NULL;
     delete options.filter_policy;
-    options.filter_policy = nullptr;
+    options.filter_policy = NULL;
     delete options.block_cache;
-    options.block_cache = nullptr;
+    options.block_cache = NULL;
     delete penv;
-    options.env = nullptr;
+    options.env = NULL;
 }
 
-bool CLevelDBWrapper::WriteBatch(CLevelDBBatch& batch, bool fSync) throw(leveldb_error)
+bool CLevelDBWrapper::WriteBatch(CLevelDBBatch& batch, bool fSync)
 {
     leveldb::Status status = pdb->Write(fSync ? syncoptions : writeoptions, &batch.batch);
     HandleError(status);

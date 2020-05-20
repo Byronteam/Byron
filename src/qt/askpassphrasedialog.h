@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +25,7 @@ class AskPassphraseDialog : public QDialog
 public:
     enum class Mode {
         Encrypt,         /**< Ask passphrase twice and encrypt */
-        UnlockStaking,   /**< Ask passphrase and unlock only for staking */
+        UnlockAnonymize, /**< Ask passphrase and unlock only for anonymization */
         Unlock,          /**< Ask passphrase and unlock */
         ChangePass,      /**< Ask old passphrase + new passphrase twice */
         Decrypt          /**< Ask passphrase and decrypt wallet */
@@ -39,7 +39,7 @@ public:
         Encrypt,        /** Encrypt unencrypted wallet */
         ToggleLock,     /** Toggle wallet lock state */
         ChangePass,     /** Change passphrase */
-        Send_BYRON,      /** Send BYRON */
+        Send_BYRON,       /** Send BYRON */
         BIP_38,         /** BIP38 menu */
         Multi_Sig,      /** Multi-Signature dialog */
         Sign_Message    /** Sign/verify message dialog */

@@ -32,7 +32,7 @@ CScript ParseScript(std::string s)
     static map<string, opcodetype> mapOpNames;
 
     if (mapOpNames.empty()) {
-        for (int op = 0; op <= OP_NOP10; op++) {
+        for (int op = 0; op <= OP_ZEROCOINSPEND; op++) {
             // Allow OP_RESERVED to get into mapOpNames
             if (op < OP_NOP && op != OP_RESERVED)
                 continue;
@@ -116,6 +116,7 @@ uint256 ParseHashUV(const UniValue& v, const string& strName)
     string strHex;
     if (v.isStr())
         strHex = v.getValStr();
+
     return ParseHashStr(strHex, strName); // Note: ParseHashStr("") throws a runtime_error
 }
 
@@ -126,6 +127,7 @@ uint256 ParseHashStr(const std::string& strHex, const std::string& strName)
 
     uint256 result;
     result.SetHex(strHex);
+
     return result;
 }
 
@@ -136,5 +138,6 @@ vector<unsigned char> ParseHexUV(const UniValue& v, const string& strName)
         strHex = v.getValStr();
     if (!IsHex(strHex))
         throw runtime_error(strName + " must be hexadecimal string (not '" + strHex + "')");
+    
     return ParseHex(strHex);
 }

@@ -1,5 +1,4 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2019 The Bicoin Green Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -80,10 +79,10 @@ BITCOIN_CORE_H = \
   alert.h \
   allocators.h \
   amount.h \
-  arith_uint256.h \
   base58.h \
   bip38.h \
   bloom.h \
+  blocksignature.h \
   chain.h \
   chainparams.h \
   chainparamsbase.h \
@@ -94,17 +93,24 @@ BITCOIN_CORE_H = \
   coincontrol.h \
   coins.h \
   compat.h \
+  compat/byteswap.h \
+  compat/endian.h \
   compat/sanity.h \
   compressor.h \
   primitives/block.h \
   primitives/transaction.h \
   core_io.h \
   crypter.h \
+  obfuscation.h \
+  obfuscation-relay.h \
   db.h \
   hash.h \
   httprpc.h \
   httpserver.h \
   init.h \
+  invalid.h \
+  invalid_outpoints.json.h \
+  invalid_serials.json.h \
   kernel.h \
   swifttx.h \
   key.h \
@@ -114,12 +120,9 @@ BITCOIN_CORE_H = \
   main.h \
   masternode.h \
   masternode-payments.h \
-  masternode-budget.h \
   masternode-sync.h \
   masternodeman.h \
   masternodeconfig.h \
-  masternode-helpers.h \
-  masternode-vote.h \
   merkleblock.h \
   miner.h \
   mruset.h \
@@ -132,9 +135,9 @@ BITCOIN_CORE_H = \
   random.h \
   reverselock.h \
   reverse_iterate.h \
-  rpcclient.h \
-  rpcprotocol.h \
-  rpcserver.h \
+  rpc/client.h \
+  rpc/protocol.h \
+  rpc/server.h \
   scheduler.h \
   script/interpreter.h \
   script/script.h \
@@ -145,6 +148,7 @@ BITCOIN_CORE_H = \
   serialize.h \
   spork.h \
   sporkdb.h \
+  stakeinput.h \
   streams.h \
   support/cleanse.h \
   sync.h \
@@ -166,6 +170,7 @@ BITCOIN_CORE_H = \
   wallet.h \
   wallet_ismine.h \
   walletdb.h \
+  zbyrontracker.h \
   zmq/zmqabstractnotifier.h \
   zmq/zmqconfig.h \
   zmq/zmqnotificationinterface.h \
@@ -184,6 +189,7 @@ libbitcoin_server_a_SOURCES = \
   addrman.cpp \
   alert.cpp \
   bloom.cpp \
+  blocksignature.cpp \
   chain.cpp \
   checkpoints.cpp \
   httprpc.cpp \
@@ -197,15 +203,13 @@ libbitcoin_server_a_SOURCES = \
   noui.cpp \
   pow.cpp \
   rest.cpp \
-  rpcblockchain.cpp \
-  rpcmasternode.cpp \
-  rpcmasternode-budget.cpp \
-  rpcmasternode-vote.cpp \
-  rpcmining.cpp \
-  rpcmisc.cpp \
-  rpcnet.cpp \
-  rpcrawtransaction.cpp \
-  rpcserver.cpp \
+  rpc/blockchain.cpp \
+  rpc/masternode.cpp \
+  rpc/mining.cpp \
+  rpc/misc.cpp \
+  rpc/net.cpp \
+  rpc/rawtransaction.cpp \
+  rpc/server.cpp \
   script/sigcache.cpp \
   sporkdb.cpp \
   timedata.cpp \
@@ -231,23 +235,23 @@ libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   bip38.cpp \
+  obfuscation.cpp \
+  obfuscation-relay.cpp \
   db.cpp \
   crypter.cpp \
   swifttx.cpp \
   masternode.cpp \
-  masternode-budget.cpp \
   masternode-payments.cpp \
   masternode-sync.cpp \
   masternodeconfig.cpp \
   masternodeman.cpp \
-  masternode-helpers.cpp \
-  masternode-vote.cpp \
   rpcdump.cpp \
   rpcwallet.cpp \
   kernel.cpp \
   wallet.cpp \
   wallet_ismine.cpp \
   walletdb.cpp \
+  stakeinput.cpp \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
@@ -302,6 +306,7 @@ libbitcoin_common_a_SOURCES = \
   core_read.cpp \
   core_write.cpp \
   hash.cpp \
+  invalid.cpp \
   key.cpp \
   keystore.cpp \
   netbase.cpp \
@@ -330,7 +335,7 @@ libbitcoin_util_a_SOURCES = \
   compat/glibcxx_sanity.cpp \
   compat/strnlen.cpp \
   random.cpp \
-  rpcprotocol.cpp \
+  rpc/protocol.cpp \
   support/cleanse.cpp \
   sync.cpp \
   uint256.cpp \
@@ -349,7 +354,7 @@ endif
 libbitcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_cli_a_SOURCES = \
-  rpcclient.cpp \
+  rpc/client.cpp \
   $(BITCOIN_CORE_H)
 
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
@@ -386,7 +391,7 @@ byron_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 byron_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-byrond_SOURCES += byrond-res.rc
+byron_cli_SOURCES += byron-cli-res.rc
 endif
 
 byron_cli_LDADD = \

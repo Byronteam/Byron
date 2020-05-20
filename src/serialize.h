@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SERIALIZE_H
-#define BITCOIN_SERIALIZE_H
+#ifndef BYRON_SERIALIZE_H
+#define BYRON_SERIALIZE_H
 
 #include <algorithm>
 #include <assert.h>
@@ -44,7 +44,7 @@ inline T* NCONST_PTR(const T* val)
     return const_cast<T*>(val);
 }
 
-/**
+/** 
  * Get begin pointer of vector (non-const version).
  * @note These functions avoid the undefined case of indexing into an empty
  * vector, as well as that of indexing after the end of the vector.
@@ -52,25 +52,25 @@ inline T* NCONST_PTR(const T* val)
 template <class T, class TAl>
 inline T* begin_ptr(std::vector<T, TAl>& v)
 {
-    return v.empty() ? nullptr : &v[0];
+    return v.empty() ? NULL : &v[0];
 }
 /** Get begin pointer of vector (const version) */
 template <class T, class TAl>
 inline const T* begin_ptr(const std::vector<T, TAl>& v)
 {
-    return v.empty() ? nullptr : &v[0];
+    return v.empty() ? NULL : &v[0];
 }
 /** Get end pointer of vector (non-const version) */
 template <class T, class TAl>
 inline T* end_ptr(std::vector<T, TAl>& v)
 {
-    return v.empty() ? nullptr : (&v[0] + v.size());
+    return v.empty() ? NULL : (&v[0] + v.size());
 }
 /** Get end pointer of vector (const version) */
 template <class T, class TAl>
 inline const T* end_ptr(const std::vector<T, TAl>& v)
 {
-    return v.empty() ? nullptr : (&v[0] + v.size());
+    return v.empty() ? NULL : (&v[0] + v.size());
 }
 
 /////////////////////////////////////////////////////////////////
@@ -88,11 +88,11 @@ enum {
 
 #define READWRITE(obj) (::SerReadWrite(s, (obj), nType, nVersion, ser_action))
 
-/**
+/** 
  * Implement three methods for serializable objects. These are actually wrappers over
  * "SerializationOp" template, which implements the body of each class' serialization
  * code. Adding "ADD_SERIALIZE_METHODS" in the body of the class causes these wrappers to be
- * added as members.
+ * added as members. 
  */
 #define ADD_SERIALIZE_METHODS                                                         \
     size_t GetSerializeSize(int nType, int nVersion) const                            \
@@ -275,6 +275,8 @@ inline void Serialize(Stream& s, bool a, int, int = 0)
     char f = a;
     WRITEDATA(s, f);
 }
+
+
 template <typename Stream>
 inline void Unserialize(Stream& s, bool& a, int, int = 0)
 {
@@ -282,7 +284,6 @@ inline void Unserialize(Stream& s, bool& a, int, int = 0)
     READDATA(s, f);
     a = f;
 }
-
 
 /**
  * Compact Size
@@ -366,16 +367,16 @@ uint64_t ReadCompactSize(Stream& is)
  * sure the encoding is one-to-one, one is subtracted from all but the last digit.
  * Thus, the byte sequence a[] with length len, where all but the last byte
  * has bit 128 set, encodes the number:
- *
+ * 
  *  (a[len-1] & 0x7F) + sum(i=1..len-1, 128^i*((a[len-i-1] & 0x7F)+1))
- *
+ * 
  * Properties:
  * * Very small (0-127: 1 byte, 128-16511: 2 bytes, 16512-2113663: 3 bytes)
  * * Every integer has exactly one encoding
  * * Encoding does not depend on size of original integer type
  * * No redundancy: every (infinite) byte sequence corresponds to a list
  *   of encoded integers.
- *
+ * 
  * 0:         [0x00]  256:        [0x81 0x00]
  * 1:         [0x01]  16383:      [0xFE 0x7F]
  * 127:       [0x7F]  16384:      [0xFF 0x00]
@@ -433,7 +434,7 @@ I ReadVarInt(Stream& is)
 #define VARINT(obj) REF(WrapVarInt(REF(obj)))
 #define LIMITED_STRING(obj, n) REF(LimitedString<n>(REF(obj)))
 
-/**
+/** 
  * Wrapper for serializing arrays and POD.
  */
 class CFlatData
@@ -929,4 +930,4 @@ public:
     }
 };
 
-#endif // BITCOIN_SERIALIZE_H
+#endif // BYRON_SERIALIZE_H

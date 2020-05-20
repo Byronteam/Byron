@@ -227,7 +227,7 @@ void bench_group_add_affine_var(void* arg) {
     }
 }
 
-void bench_group_jacobi_var(void* arg) {
+void bench_group_byronobi_var(void* arg) {
     int i;
     bench_inv *data = (bench_inv*)arg;
 
@@ -309,7 +309,7 @@ void bench_context_sign(void* arg) {
 }
 
 #ifndef USE_NUM_NONE
-void bench_num_jacobi(void* arg) {
+void bench_num_byronobi(void* arg) {
     int i;
     bench_inv *data = (bench_inv*)arg;
     secp256k1_num nx, norder;
@@ -319,7 +319,7 @@ void bench_num_jacobi(void* arg) {
     secp256k1_scalar_get_num(&norder, &data->scalar_y);
 
     for (i = 0; i < 200000; i++) {
-        secp256k1_num_jacobi(&nx, &norder);
+        secp256k1_num_byronobi(&nx, &norder);
     }
 }
 #endif
@@ -348,7 +348,7 @@ int main(int argc, char **argv) {
     if (have_flag(argc, argv, "group") || have_flag(argc, argv, "add")) run_benchmark("group_add_var", bench_group_add_var, bench_setup, NULL, &data, 10, 200000);
     if (have_flag(argc, argv, "group") || have_flag(argc, argv, "add")) run_benchmark("group_add_affine", bench_group_add_affine, bench_setup, NULL, &data, 10, 200000);
     if (have_flag(argc, argv, "group") || have_flag(argc, argv, "add")) run_benchmark("group_add_affine_var", bench_group_add_affine_var, bench_setup, NULL, &data, 10, 200000);
-    if (have_flag(argc, argv, "group") || have_flag(argc, argv, "jacobi")) run_benchmark("group_jacobi_var", bench_group_jacobi_var, bench_setup, NULL, &data, 10, 20000);
+    if (have_flag(argc, argv, "group") || have_flag(argc, argv, "byronobi")) run_benchmark("group_byronobi_var", bench_group_byronobi_var, bench_setup, NULL, &data, 10, 20000);
 
     if (have_flag(argc, argv, "ecmult") || have_flag(argc, argv, "wnaf")) run_benchmark("wnaf_const", bench_wnaf_const, bench_setup, NULL, &data, 10, 20000);
     if (have_flag(argc, argv, "ecmult") || have_flag(argc, argv, "wnaf")) run_benchmark("ecmult_wnaf", bench_ecmult_wnaf, bench_setup, NULL, &data, 10, 20000);
@@ -361,7 +361,7 @@ int main(int argc, char **argv) {
     if (have_flag(argc, argv, "context") || have_flag(argc, argv, "sign")) run_benchmark("context_sign", bench_context_sign, bench_setup, NULL, &data, 10, 200);
 
 #ifndef USE_NUM_NONE
-    if (have_flag(argc, argv, "num") || have_flag(argc, argv, "jacobi")) run_benchmark("num_jacobi", bench_num_jacobi, bench_setup, NULL, &data, 10, 200000);
+    if (have_flag(argc, argv, "num") || have_flag(argc, argv, "byronobi")) run_benchmark("num_byronobi", bench_num_byronobi, bench_setup, NULL, &data, 10, 200000);
 #endif
     return 0;
 }

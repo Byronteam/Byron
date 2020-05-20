@@ -54,7 +54,7 @@ static void secp256k1_ecmult_gen_context_build(secp256k1_ecmult_gen_context *ctx
 
     /* compute prec. */
     {
-        secp256k1_gej precj[1024]; /* Jacobian versions of prec. */
+        secp256k1_gej precj[1024]; /* Byronobian versions of prec. */
         secp256k1_gej gbase;
         secp256k1_gej numsbase;
         gbase = gj; /* 16^j * G */

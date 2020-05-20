@@ -1,5 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -113,7 +115,6 @@ bool CAlert::Cancels(const CAlert& alert) const
 
 bool CAlert::AppliesTo(int nVersion, std::string strSubVerIn) const
 {
-    // TODO: rework for client-version-embedded-in-strSubVer ?
     return (IsInEffect() &&
             nMinVer <= nVersion && nVersion <= nMaxVer &&
             (setSubVer.empty() || setSubVer.count(strSubVerIn)));
@@ -128,10 +129,10 @@ bool CAlert::RelayTo(CNode* pnode) const
 {
     if (!IsInEffect())
         return false;
-    // don't relay to nodes which haven't sent their version message
+    // Don't relay to nodes which haven't sent their version message
     if (pnode->nVersion == 0)
         return false;
-    // returns true if wasn't already contained in the set
+    // Returns true if wasn't already contained in the set
     if (pnode->setKnown.insert(GetHash()).second) {
         if (AppliesTo(pnode->nVersion, pnode->strSubVer) ||
             AppliesToMe() ||
@@ -247,7 +248,7 @@ void CAlert::Notify(const std::string& strMessage, bool fThread)
     boost::replace_all(strCmd, "%s", safeStatus);
 
     if (fThread)
-        boost::thread t(runCommand, strCmd); // thread runs free
+        boost::thread t(runCommand, strCmd); // Thread runs free
     else
         runCommand(strCmd);
 }

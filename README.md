@@ -11,13 +11,14 @@ Byron (BYRON) is a sustainable cryptocurrency modeled after Satoshi Nakamoto’s
 
 Please reach out at ceo@adabyron.dev
 ### Coin Specs
-| Block Time                  | 3 Minutes      |
-| Max Coin Supply (PoW Phase) | 5,000,000 BYRON    |
-| Max Coin Supply (PoS Phase) | 50,000,000 BYRON |
-| Premine                     | 5,000,000 BYRON    |
+| Block Time                  | 1 Minutes      |
+| Max Coin Supply             | 25,000,000 BYRON    |
+| Premine                     | 11,000,000 BYRON    |
+| Collateral                  | 200,000 BYRON    |
 
 ### Reward Distribution
 
 | **Block Height** | **Masternodes**  | **PoS**          |
 |------------------|------------------|------------------|
-| 201-Infinite     | 95% (13.3 BYRON) | 5% (0.7 BYRON)   |
+| 1000-Infinite     |80% (0.8 BYRON) | 20% (0.2 BYRON)   |
+

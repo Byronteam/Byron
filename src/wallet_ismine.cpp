@@ -26,6 +26,7 @@ unsigned int HaveKeys(const vector<valtype>& pubkeys, const CKeyStore& keystore)
         if(keystore.HaveKey(keyID))
             ++nResult;
     }
+
     return nResult;
 }
 
@@ -39,6 +40,7 @@ isminetype IsMine(const CKeyStore& keystore, const CScript& scriptPubKey)
 {
     if(keystore.HaveWatchOnly(scriptPubKey))
         return ISMINE_WATCH_ONLY;
+
     if(keystore.HaveMultiSig(scriptPubKey))
         return ISMINE_MULTISIG;
 
@@ -58,6 +60,7 @@ isminetype IsMine(const CKeyStore& keystore, const CScript& scriptPubKey)
     case TX_NONSTANDARD:
     case TX_NULL_DATA:
         break;
+    case TX_ZEROCOINMINT:
     case TX_PUBKEY:
         keyID = CPubKey(vSolutions[0]).GetID();
         if(keystore.HaveKey(keyID))
@@ -73,7 +76,7 @@ isminetype IsMine(const CKeyStore& keystore, const CScript& scriptPubKey)
         CScript subscript;
         if(keystore.GetCScript(scriptID, subscript)) {
             isminetype ret = IsMine(keystore, subscript);
-            if (ret != ISMINE_NO)
+            if(ret != ISMINE_NO)
                 return ret;
         }
         break;
@@ -93,6 +96,7 @@ isminetype IsMine(const CKeyStore& keystore, const CScript& scriptPubKey)
 
     if(keystore.HaveWatchOnly(scriptPubKey))
         return ISMINE_WATCH_ONLY;
+    
     if(keystore.HaveMultiSig(scriptPubKey))
         return ISMINE_MULTISIG;
 

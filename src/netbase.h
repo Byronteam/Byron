@@ -1,4 +1,6 @@
 // Copyright (c) 2009-2013 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -86,7 +88,7 @@ public:
     uint64_t GetHash() const;
     bool GetInAddr(struct in_addr* pipv4Addr) const;
     std::vector<unsigned char> GetGroup() const;
-    int GetReachabilityFrom(const CNetAddr* paddrPartner = nullptr) const;
+    int GetReachabilityFrom(const CNetAddr* paddrPartner = NULL) const;
 
     CNetAddr(const struct in6_addr& pipv6Addr);
     bool GetIn6Addr(struct in6_addr* pipv6Addr) const;

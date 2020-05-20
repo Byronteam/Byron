@@ -14,12 +14,18 @@ QT_TS = \
   qt/locale/byron_de.ts \
   qt/locale/byron_en.ts \
   qt/locale/byron_en_US.ts \
+  qt/locale/byron_eo.ts \
   qt/locale/byron_es.ts \
+  qt/locale/byron_es_ES.ts \
   qt/locale/byron_fi.ts \
   qt/locale/byron_fr_FR.ts \
+  qt/locale/byron_hi_IN.ts \
+  qt/locale/byron_hr.ts \
+  qt/locale/byron_hr_HR.ts \
   qt/locale/byron_it.ts \
   qt/locale/byron_ja.ts \
   qt/locale/byron_ko_KR.ts \
+  qt/locale/byron_lt_LT.ts \
   qt/locale/byron_nl.ts \
   qt/locale/byron_pl.ts \
   qt/locale/byron_pt.ts \
@@ -30,6 +36,7 @@ QT_TS = \
   qt/locale/byron_sv.ts \
   qt/locale/byron_tr.ts \
   qt/locale/byron_uk.ts \
+  qt/locale/byron_vi.ts \
   qt/locale/byron_zh_CN.ts \
   qt/locale/byron_zh_TW.ts
 
@@ -39,6 +46,7 @@ QT_FORMS_UI = \
   qt/forms/bip38tooldialog.ui \
   qt/forms/coincontroldialog.ui \
   qt/forms/blockexplorer.ui \
+  qt/forms/obfuscationconfig.ui \
   qt/forms/editaddressdialog.ui \
   qt/forms/helpmessagedialog.ui \
   qt/forms/intro.ui \
@@ -60,6 +68,7 @@ QT_MOC_CPP = \
   qt/moc_addressbookpage.cpp \
   qt/moc_addresstablemodel.cpp \
   qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
   qt/moc_bip38tooldialog.cpp \
   qt/moc_bitcoinaddressvalidator.cpp \
   qt/moc_bitcoinamountfield.cpp \
@@ -70,6 +79,7 @@ QT_MOC_CPP = \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
   qt/moc_csvmodelwriter.cpp \
+  qt/moc_obfuscationconfig.cpp \
   qt/moc_editaddressdialog.cpp \
   qt/moc_guiutil.cpp \
   qt/moc_intro.cpp \
@@ -85,13 +95,6 @@ QT_MOC_CPP = \
   qt/moc_overviewpage.cpp \
   qt/moc_peertablemodel.cpp \
   qt/moc_paymentserver.cpp \
-  qt/moc_columnalignedlayout.cpp \
-  qt/moc_proposalfilterproxy.cpp \
-  qt/moc_proposaltablemodel.cpp \
-  qt/moc_proposaldescriptiondialog.cpp \
-  qt/moc_proposalcommunityfilterproxy.cpp \
-  qt/moc_proposalcommunitytablemodel.cpp \
-  qt/moc_proposallist.cpp \
   qt/moc_qvalidatedlineedit.cpp \
   qt/moc_qvaluecombobox.cpp \
   qt/moc_receivecoinsdialog.cpp \
@@ -137,6 +140,7 @@ BITCOIN_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
   qt/bip38tooldialog.h \
   qt/bitcoinaddressvalidator.h \
   qt/bitcoinamountfield.h \
@@ -147,6 +151,7 @@ BITCOIN_QT_H = \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
   qt/csvmodelwriter.h \
+  qt/obfuscationconfig.h \
   qt/editaddressdialog.h \
   qt/guiconstants.h \
   qt/guiutil.h \
@@ -166,15 +171,6 @@ BITCOIN_QT_H = \
   qt/paymentserver.h \
   qt/peertablemodel.h \
   qt/platformstyle.h \
-  qt/columnalignedlayout.h \
-  qt/proposalcommunityfilterproxy.h \
-  qt/proposallist.h \
-  qt/proposaldescriptiondialog.h \
-  qt/proposalcommunityrecord.h \
-  qt/proposalcommunitytablemodel.h \
-  qt/proposalfilterproxy.h \
-  qt/proposalrecord.h \
-  qt/proposaltablemodel.h \
   qt/qvalidatedlineedit.h \
   qt/qvaluecombobox.h \
   qt/receivecoinsdialog.h \
@@ -202,7 +198,8 @@ BITCOIN_QT_H = \
 RES_ICONS = \
   qt/res/icons/add.png \
   qt/res/icons/address-book.png \
-  qt/res/icons/address-book_black.png \
+  qt/res/icons/automint_active.png \
+  qt/res/icons/automint_inactive.png \
   qt/res/icons/bitcoin.ico \
   qt/res/icons/bitcoin.png \
   qt/res/icons/bitcoin_testnet.ico \
@@ -221,10 +218,8 @@ RES_ICONS = \
   qt/res/icons/connect4_16.png \
   qt/res/icons/debugwindow.png \
   qt/res/icons/edit.png \
-  qt/res/icons/edit_black.png \
   qt/res/icons/editcopy.png \
   qt/res/icons/editpaste.png \
-  qt/res/icons/editpaste_black.png \
   qt/res/icons/explorer.png \
   qt/res/icons/export.png \
   qt/res/icons/eye.png \
@@ -232,29 +227,26 @@ RES_ICONS = \
   qt/res/icons/eye_plus.png \
   qt/res/icons/filesave.png \
   qt/res/icons/history.png \
-  qt/res/icons/history_active.png \
   qt/res/icons/key.png \
   qt/res/icons/lock_closed.png \
   qt/res/icons/lock_open.png \
   qt/res/icons/masternodes.png \
-  qt/res/icons/masternodes_active.png \
+  qt/res/icons/onion.png \
   qt/res/icons/overview.png \
-  qt/res/icons/overview_active.png \
   qt/res/icons/qrcode.png \
   qt/res/icons/quit.png \
   qt/res/icons/receive.png \
-  qt/res/icons/receive_active.png \
+  qt/res/icons/receive_dark.png \
+  qt/res/icons/privacy.png \
   qt/res/icons/remove.png \
-  qt/res/icons/remove_black.png \
   qt/res/icons/send.png \
-  qt/res/icons/send_active.png \
-  qt/res/icons/send_black.png \
+  qt/res/icons/send_dark.png \
   qt/res/icons/staking_active.png \
   qt/res/icons/staking_inactive.png \
   qt/res/icons/synced.png \
+  qt/res/icons/trade.png \
   qt/res/icons/transaction0.png \
   qt/res/icons/transaction2.png \
-  qt/res/icons/transaction_black.png \
   qt/res/icons/transaction_conflicted.png \
   qt/res/icons/tx_inout.png \
   qt/res/icons/tx_input.png \
@@ -265,11 +257,10 @@ RES_ICONS = \
   qt/res/icons/unit_ubyron.png \
   qt/res/icons/unit_tbyron.png \
   qt/res/icons/unit_tmbyron.png \
-  qt/res/icons/unit_tubyron.png \
-  qt/res/icons/proposal.png \
-  qt/res/icons/proposal_active.png
+  qt/res/icons/unit_tubyron.png
 
 BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
   qt/bitcoinaddressvalidator.cpp \
   qt/bitcoinamountfield.cpp \
   qt/bitcoingui.cpp \
@@ -303,6 +294,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/blockexplorer.cpp \
   qt/coincontroldialog.cpp \
   qt/coincontroltreewidget.cpp \
+  qt/obfuscationconfig.cpp \
   qt/editaddressdialog.cpp \
   qt/masternodelist.cpp \
   qt/multisenddialog.cpp \
@@ -311,15 +303,6 @@ BITCOIN_QT_WALLET_CPP = \
   qt/overviewpage.cpp \
   qt/paymentrequestplus.cpp \
   qt/paymentserver.cpp \
-  qt/columnalignedlayout.cpp \
-  qt/proposalfilterproxy.cpp \
-  qt/proposallist.cpp \
-  qt/proposaldescriptiondialog.cpp \
-  qt/proposalrecord.cpp \
-  qt/proposaltablemodel.cpp \
-  qt/proposalcommunityfilterproxy.cpp \
-  qt/proposalcommunityrecord.cpp \
-  qt/proposalcommunitytablemodel.cpp \
   qt/receivecoinsdialog.cpp \
   qt/receiverequestdialog.cpp \
   qt/recentrequeststablemodel.cpp \
@@ -346,18 +329,17 @@ BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
 endif
 
 RES_IMAGES = \
-  qt/res/images/byron_logo_horizontal.png \
   qt/res/images/about.png \
   qt/res/images/splash.png \
   qt/res/images/splash_testnet.png \
+  qt/res/images/downArrow_dark.png \
   qt/res/images/downArrow_small_dark.png \
   qt/res/images/downArrow_small.png \
   qt/res/images/upArrow_small_dark.png \
   qt/res/images/upArrow_small.png \
   qt/res/images/leftArrow_small_dark.png \
   qt/res/images/rightArrow_small_dark.png \
-  qt/res/images/qtreeview_selected.png \
-  qt/res/images/walletFrame.png
+  qt/res/images/qtreeview_selected.png 
 
 RES_CSS = \
   qt/res/css/default.css
@@ -412,7 +394,7 @@ endif
 if ENABLE_ZMQ
 qt_byron_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-qt_byron_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+qt_byron_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_byron_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)

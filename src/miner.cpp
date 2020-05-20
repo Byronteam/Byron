@@ -1,8 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2017 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,8 +22,11 @@
 #ifdef ENABLE_WALLET
 #include "wallet.h"
 #endif
+#include "validationinterface.h"
 #include "masternode-payments.h"
+#include "blocksignature.h"
 #include "spork.h"
+#include "invalid.h"
 
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -32,7 +35,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// ByronMiner
+// BYRONMiner
 //
 
 //
@@ -92,54 +95,48 @@ void UpdateTime(CBlockHeader* pblock, const CBlockIndex* pindexPrev)
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
 }
 
+std::pair<int, std::pair<uint256, uint256> > pCheckpointCache;
 CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, bool fProofOfStake)
 {
     CReserveKey reservekey(pwallet);
 
-    // Create new block
+    // Create new block.
     unique_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
     if (!pblocktemplate.get())
-        return nullptr;
+        return NULL;
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
-
-    // Tip
-    CBlockIndex* pindexPrev = nullptr;
-    {
-        LOCK(cs_main);
-        pindexPrev = chainActive.Tip();
-    }
 
     // -regtest only: allow overriding block.nVersion with
     // -blockversion=N to test forking scenarios
     if (Params().MineBlocksOnDemand())
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
-    pblock->nVersion = 4;
+    pblock->nVersion = 5;   // Supports CLTV activation
 
-    // Create coinbase tx
+    // Create coinbase tx.
     CMutableTransaction txNew;
     txNew.vin.resize(1);
     txNew.vin[0].prevout.SetNull();
     txNew.vout.resize(1);
     txNew.vout[0].scriptPubKey = scriptPubKeyIn;
-
     pblock->vtx.push_back(txNew);
     pblocktemplate->vTxFees.push_back(-1);   // updated at end
     pblocktemplate->vTxSigOps.push_back(-1); // updated at end
 
-    // ppcoin: if coinstake available add coinstake tx
+    // ppcoin: if coinstake available add coinstake tx.
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // only initialized at startup
 
     if (fProofOfStake) {
         boost::this_thread::interruption_point();
         pblock->nTime = GetAdjustedTime();
+        CBlockIndex* pindexPrev = chainActive.Tip();
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         CMutableTransaction txCoinStake;
         int64_t nSearchTime = pblock->nTime; // search to current time
         bool fStakeFound = false;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
-            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, 0, txCoinStake, nTxNewTime)) {
+            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
                 pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
                 pblock->vtx.push_back(CTransaction(txCoinStake));
@@ -149,16 +146,16 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             nLastCoinStakeSearchTime = nSearchTime;
         }
 
-        if (!fStakeFound) {
-            LogPrint("staking", "CreateNewBlock(): stake not found\n");
-            return nullptr;
-        }
+        if (!fStakeFound)
+            return NULL;
     }
 
     // Largest block you're willing to create:
     unsigned int nBlockMaxSize = GetArg("-blockmaxsize", DEFAULT_BLOCK_MAX_SIZE);
+
     // Limit to betweeen 1K and MAX_BLOCK_SIZE-1K for sanity:
-    nBlockMaxSize = std::max((unsigned int)1000, std::min((unsigned int)(MAX_BLOCK_SIZE - 1000), nBlockMaxSize));
+    unsigned int nBlockMaxSizeNetwork = MAX_BLOCK_SIZE_CURRENT;
+    nBlockMaxSize = std::max((unsigned int)1000, std::min((nBlockMaxSizeNetwork - 1000), nBlockMaxSize));
 
     // How much of the block should be dedicated to high-priority transactions,
     // included regardless of the fees they pay
@@ -170,7 +167,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     unsigned int nBlockMinSize = GetArg("-blockminsize", DEFAULT_BLOCK_MIN_SIZE);
     nBlockMinSize = std::min(nBlockMaxSize, nBlockMinSize);
 
-    // Collect memory pool transactions into the block
+    // Collect memory pool transactions into the block.
     CAmount nFees = 0;
 
     {
@@ -180,7 +177,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         const int nHeight = pindexPrev->nHeight + 1;
         CCoinsViewCache view(pcoinsTip);
 
-        // Priority order to process transactions
+        // Priority order to process transactions.
         list<COrphan> vOrphan; // list memory doesn't move
         map<uint256, vector<COrphan*> > mapDependers;
         bool fPrintPriority = GetBoolArg("-printpriority", false);
@@ -188,18 +185,20 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         // This vector will be sorted into a priority queue:
         vector<TxPriority> vecPriority;
         vecPriority.reserve(mempool.mapTx.size());
-        for (map<uint256, CTxMemPoolEntry>::iterator mi = mempool.mapTx.begin();
-             mi != mempool.mapTx.end(); ++mi) {
+        for (map<uint256, CTxMemPoolEntry>::iterator mi = mempool.mapTx.begin(); mi != mempool.mapTx.end(); ++mi) {
             const CTransaction& tx = mi->second.GetTx();
-            if (tx.IsCoinBase() || tx.IsCoinStake() || !IsFinalTx(tx, nHeight))
-                continue;
 
-            COrphan* porphan = nullptr;
+            if (tx.IsCoinBase() || tx.IsCoinStake() || !IsFinalTx(tx, nHeight)){
+                continue;
+            }
+
+            COrphan* porphan = NULL;
             double dPriority = 0;
             CAmount nTotalIn = 0;
             bool fMissingInputs = false;
-            for (const CTxIn& txin : tx.vin) {
-                // Read prev transaction
+
+            for (const CTxIn& txin : tx.vin) {               
+                // Read prev transaction.
                 if (!view.HaveCoins(txin.prevout.hash)) {
                     // This should never happen; all transactions in the memory
                     // pool should connect to either transactions in the chain
@@ -213,9 +212,9 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                         break;
                     }
 
-                    // Has to wait for dependencies
+                    // Has to wait for dependencies.
                     if (!porphan) {
-                        // Use list for automatic deletion
+                        // Use list for automatic deletion.
                         vOrphan.push_back(COrphan(&tx));
                         porphan = &vOrphan.back();
                     }
@@ -224,6 +223,14 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                     nTotalIn += mempool.mapTx[txin.prevout.hash].GetTx().vout[txin.prevout.n].nValue;
                     continue;
                 }
+
+                // Check for invalid/fraudulent inputs. They shouldn't make it through mempool, but check anyways.
+                if (invalid_out::ContainsOutPoint(txin.prevout)) {
+                    LogPrintf("%s : found invalid input %s in tx %s", __func__, txin.prevout.ToString(), tx.GetHash().ToString());
+                    fMissingInputs = true;
+                    break;
+                }
+
                 const CCoins* coins = view.AccessCoins(txin.prevout.hash);
                 assert(coins);
 
@@ -232,11 +239,13 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
                 int nConf = nHeight - coins->nHeight;
 
-                dPriority += (double)nValueIn * nConf;
+                dPriority = double_safe_addition(dPriority, ((double)nValueIn * nConf));
+
             }
+
             if (fMissingInputs) continue;
 
-            // Priority is sum(valuein * age) / modified_txsize
+            // Priority is sum(valuein * age) / modified_txsize.
             unsigned int nTxSize = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
             dPriority = tx.ComputePriority(dPriority, nTxSize);
 
@@ -252,7 +261,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 vecPriority.push_back(TxPriority(dPriority, feeRate, &mi->second.GetTx()));
         }
 
-        // Collect transactions into block
+        // Collect transactions into block.
         uint64_t nBlockSize = 1000;
         uint64_t nBlockTx = 0;
         int nBlockSigOps = 100;
@@ -261,6 +270,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         TxPriorityCompare comparer(fSortedByFee);
         std::make_heap(vecPriority.begin(), vecPriority.end(), comparer);
 
+        vector<CBigNum> vBlockSerials;
+        vector<CBigNum> vTxSerials;
         while (!vecPriority.empty()) {
             // Take highest priority transaction off the priority queue:
             double dPriority = vecPriority.front().get<0>();
@@ -276,7 +287,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 continue;
 
             // Legacy limits on sigOps:
-            unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS;
+            unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS_CURRENT;
             unsigned int nTxSigOps = GetLegacySigOpCount(tx);
             if (nBlockSigOps + nTxSigOps >= nMaxBlockSigOps)
                 continue;
@@ -310,6 +321,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             // Note that flags: we don't want to set mempool/IsStandard()
             // policy here, but we still have to ensure that the block we
             // create only contains transactions that are valid in new blocks.
+
             CValidationState state;
             if (!CheckInputs(tx, state, view, true, MANDATORY_SCRIPT_VERIFY_FLAGS, true))
                 continue;
@@ -317,7 +329,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             CTxUndo txundo;
             UpdateCoins(tx, state, view, txundo, nHeight);
 
-            // Added
+            // Added.
             pblock->vtx.push_back(tx);
             pblocktemplate->vTxFees.push_back(nTxFees);
             pblocktemplate->vTxSigOps.push_back(nTxSigOps);
@@ -326,12 +338,15 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             nBlockSigOps += nTxSigOps;
             nFees += nTxFees;
 
+            for (const CBigNum& bnSerial : vTxSerials)
+                vBlockSerials.emplace_back(bnSerial);
+
             if (fPrintPriority) {
                 LogPrintf("priority %.1f fee %s txid %s\n",
                     dPriority, feeRate.ToString(), tx.GetHash().ToString());
             }
 
-            // Add transactions that depend on this one to the priority queue
+            // Add transactions that depend on this one to the priority queue.
             if (mapDependers.count(hash)) {
                 BOOST_FOREACH (COrphan* porphan, mapDependers[hash]) {
                     if (!porphan->setDependsOn.empty()) {
@@ -346,16 +361,12 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         }
 
         if (!fProofOfStake) {
-            //Masternode and general budget payments
+            // Masternode and general budget payments.
             FillBlockPayee(txNew, nFees, fProofOfStake);
 
-            //Make payee
+            // Make payee.
             if (txNew.vout.size() > 1) {
                 pblock->payee = txNew.vout[1].scriptPubKey;
-            } else {
-                CAmount blockSubsidy = nFees + GetBlockValue(pindexPrev->nHeight);
-                txNew.vout[0].nValue = blockSubsidy;
-                txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
             }
         }
 
@@ -370,29 +381,23 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             pblocktemplate->vTxFees[0] = -nFees;
         }
 
-        // Fill in header
+        // Fill in header.
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
+        
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         pblock->nNonce = 0;
-        pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
 
-        if (fProofOfStake) {
-            unsigned int nExtraNonce = 0;
-            IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
-            LogPrintf("ByronMiner : proof-of-stake block found %s \n", pblock->GetHash().ToString().c_str());
-            if (!pblock->SignBlock(*pwallet)) {
-                LogPrintf("BitcoinMiner(): Signing new block with UTXO key failed \n");
-                return nullptr;
-            }
+        if(pblock->vtx[0].vout[0].nValue < 0) {
+            pblock->vtx[0].vout[0].nValue = GetBlockValue(nHeight);
         }
 
         CValidationState state;
         if (!TestBlockValidity(state, *pblock, pindexPrev, false, false)) {
             LogPrintf("CreateNewBlock() : TestBlockValidity failed\n");
             mempool.clear();
-            return nullptr;
+            return NULL;
         }
     }
 
@@ -401,7 +406,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
 void IncrementExtraNonce(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce)
 {
-    // Update nExtraNonce
+    // Update nExtraNonce.
     static uint256 hashPrevBlock;
     if (hashPrevBlock != pblock->hashPrevBlock) {
         nExtraNonce = 0;
@@ -429,7 +434,7 @@ CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey, CWallet* pwallet,
 {
     CPubKey pubkey;
     if (!reservekey.GetReservedKey(pubkey))
-        return nullptr;
+        return NULL;
 
     CScript scriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
     return CreateNewBlock(scriptPubKey, pwallet, fProofOfStake);
@@ -440,26 +445,30 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     LogPrintf("%s\n", pblock->ToString());
     LogPrintf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue));
 
-    // Found a solution
+    // Found a solution.
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != chainActive.Tip()->GetBlockHash())
-            return error("ByronMiner : generated block is stale");
+            return error("BYRONMiner : generated block is stale");
     }
 
-    // Remove key from key pool
+    // Remove key from key pool.
     reservekey.KeepKey();
 
-    // Track how many getdata requests this block gets
+    // Track how many getdata requests this block gets.
     {
         LOCK(wallet.cs_wallet);
         wallet.mapRequestCount[pblock->GetHash()] = 0;
     }
 
-    // Process this block the same as if we had received it from another node
+    // Inform about the new block
+    GetMainSignals().BlockFound(pblock->GetHash());
+
+    // Process this block the same as if we had received it from another node.
     CValidationState state;
-    if (!ProcessNewBlock(state, nullptr, pblock))
-        return error("ByronMiner : ProcessNewBlock, block not accepted");
+    if (!ProcessNewBlock(state, NULL, pblock)) {
+        return error("BYRONMiner : ProcessNewBlock, block not accepted");
+    }
 
     for (CNode* node : vNodes) {
         node->PushInventory(CInv(MSG_BLOCK, pblock->GetHash()));
@@ -476,7 +485,7 @@ int nMintableLastCheck = 0;
 
 void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
 {
-    LogPrintf("ByronMiner started\n");
+    LogPrintf("BYRONMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
     RenameThread("byron-miner");
 
@@ -486,8 +495,9 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
 
     while (fGenerateBitcoins || fProofOfStake) {
         if (fProofOfStake) {
-            //control the amount of times the client will check for mintable coins
-            if ((GetTime() - nMintableLastCheck > 5 * 60)) { // 5 minute check time
+            // Control the amount of times the client will check for mintable coins
+            if ((GetTime() - nMintableLastCheck > 5 * 60)) // 5 minute check time
+            {
                 nMintableLastCheck = GetTime();
                 fMintableCoins = pwallet->MintableCoins();
             }
@@ -497,16 +507,25 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 continue;
             }
 
-            if (vNodes.empty() || pwallet->IsLocked() || !fMintableCoins ||
-                (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ||
-                !masternodeSync.IsSynced()) {
+            while (vNodes.empty() || pwallet->IsLocked() || !fMintableCoins || (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance())) {
                 nLastCoinStakeSearchInterval = 0;
+                // Do a separate 1 minute check here to ensure fMintableCoins is updated
+                if (!fMintableCoins) {
+                    if (GetTime() - nMintableLastCheck > 1 * 60) // 1 minute check time
+                    {
+                        nMintableLastCheck = GetTime();
+                        fMintableCoins = pwallet->MintableCoins();
+                    }
+                }
                 MilliSleep(5000);
-                continue;
+                if (!fGenerateBitcoins && !fProofOfStake)
+                    continue;
             }
 
-            if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) { //search our map of hashed blocks, see if bestblock has been hashed yet
-                if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1)) { // wait half of the nHashDrift with max wait of 3 minutes
+            if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
+            {
+                if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
+                {
                     MilliSleep(5000);
                     continue;
                 }
@@ -528,12 +547,12 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
         CBlock* pblock = &pblocktemplate->block;
         IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-        //Stake miner main
+        // Stake miner main.
         if (fProofOfStake) {
             LogPrintf("CPUMiner : proof-of-stake block found %s \n", pblock->GetHash().ToString().c_str());
 
-            if (!pblock->SignBlock(*pwallet)) {
-                LogPrintf("BitcoinMiner(): Signing new block failed \n");
+            if (!SignBlock(*pblock, *pwallet)) {
+                LogPrintf("BitcoinMiner(): Signing new block with UTXO key failed \n");
                 continue;
             }
 
@@ -545,22 +564,22 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             continue;
         }
 
-        LogPrintf("Running ByronMiner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
+        LogPrintf("Running BYRONMiner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
             ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
         //
         // Search
         //
         int64_t nStart = GetTime();
-        arith_uint256 hashTarget = arith_uint256().SetCompact(pblock->nBits);
+        uint256 hashTarget = uint256().SetCompact(pblock->nBits);
         while (true) {
             unsigned int nHashesDone = 0;
 
             uint256 hash;
             while (true) {
                 hash = pblock->GetHash();
-                if (UintToArith256(hash) <= hashTarget) {
-                    // Found a solution
+                if (hash <= hashTarget) {
+                    // Found a solution.
                     SetThreadPriority(THREAD_PRIORITY_NORMAL);
                     LogPrintf("BitcoinMiner:\n");
                     LogPrintf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex(), hashTarget.GetHex());
@@ -580,7 +599,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                     break;
             }
 
-            // Meter hashes/sec
+            // Meter hashes/sec.
             static int64_t nHashCounter;
             if (nHPSTimerStart == 0) {
                 nHPSTimerStart = GetTimeMillis();
@@ -604,9 +623,9 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 }
             }
 
-            // Check for stop or if block needs to be rebuilt
+            // Check for stop or if block needs to be rebuilt.
             boost::this_thread::interruption_point();
-            // Regtest mode doesn't require peers
+            // Regtest mode doesn't require peers.
             if (vNodes.empty() && Params().MiningRequiresPeers())
                 break;
             if (pblock->nNonce >= 0xffff0000)
@@ -616,7 +635,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             if (pindexPrev != chainActive.Tip())
                 break;
 
-            // Update nTime every few seconds
+            // Update nTime every few seconds.
             UpdateTime(pblock, pindexPrev);
             if (Params().AllowMinDifficultyBlocks()) {
                 // Changing pblock->nTime can change work required on testnet:
@@ -644,21 +663,21 @@ void static ThreadBitcoinMiner(void* parg)
 
 void GenerateBitcoins(bool fGenerate, CWallet* pwallet, int nThreads)
 {
-    static boost::thread_group* minerThreads = nullptr;
+    static boost::thread_group* minerThreads = NULL;
     fGenerateBitcoins = fGenerate;
 
     if (nThreads < 0) {
-        // In regtest threads defaults to 1
+        // In regtest threads defaults to 1.
         if (Params().DefaultMinerThreads())
             nThreads = Params().DefaultMinerThreads();
         else
             nThreads = boost::thread::hardware_concurrency();
     }
 
-    if (minerThreads != nullptr) {
+    if (minerThreads != NULL) {
         minerThreads->interrupt_all();
         delete minerThreads;
-        minerThreads = nullptr;
+        minerThreads = NULL;
     }
 
     if (nThreads == 0 || !fGenerate)

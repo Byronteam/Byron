@@ -17,12 +17,12 @@
 namespace Checkpoints
 {
 /**
-     * How many times we expect transactions after the last checkpoint to
-     * be slower. This number is a compromise, as it can't be accurate for
-     * every system. When reindexing from a fast disk with a slow CPU, it
-     * can be up to 20, while when downloading from a slow network with a
-     * fast multicore CPU, it won't be much higher than 1.
-     */
+ * How many times we expect transactions after the last checkpoint to
+ * be slower. This number is a compromise, as it can't be accurate for
+ * every system. When reindexing from a fast disk with a slow CPU, it
+ * can be up to 20, while when downloading from a slow network with a
+ * fast multicore CPU, it won't be much higher than 1.
+ */
 static const double SIGCHECK_VERIFICATION_FACTOR = 5.0;
 
 bool fEnabled = true;
@@ -43,17 +43,17 @@ bool CheckBlock(int nHeight, const uint256& hash, bool fMatchesCheckpoint)
 //! Guess how far we are in the verification process at the given block index
 double GuessVerificationProgress(CBlockIndex* pindex, bool fSigchecks)
 {
-    if (pindex == nullptr)
+    if (pindex == NULL)
         return 0.0;
 
-    int64_t nNow = time(nullptr);
+    int64_t nNow = time(NULL);
 
     double fSigcheckVerificationFactor = fSigchecks ? SIGCHECK_VERIFICATION_FACTOR : 1.0;
     double fWorkBefore = 0.0; // Amount of work done before pindex
     double fWorkAfter = 0.0;  // Amount of work left after pindex (estimated)
+
     // Work is defined as: 1.0 per transaction before the last checkpoint, and
     // fSigcheckVerificationFactor per transaction after.
-
     const CCheckpointData& data = Params().Checkpoints();
 
     if (pindex->nChainTx <= data.nTransactionsLastCheckpoint) {
@@ -86,7 +86,7 @@ int GetTotalBlocksEstimate()
 CBlockIndex* GetLastCheckpoint()
 {
     if (!fEnabled)
-        return nullptr;
+        return NULL;
 
     const MapCheckpoints& checkpoints = *Params().Checkpoints().mapCheckpoints;
 
@@ -96,7 +96,8 @@ CBlockIndex* GetLastCheckpoint()
         if (t != mapBlockIndex.end())
             return t->second;
     }
-    return nullptr;
+    
+    return NULL;
 }
 
 } // namespace Checkpoints

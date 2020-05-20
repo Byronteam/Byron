@@ -1,7 +1,7 @@
-TOR SUPPORT IN Byron
-============================
+TOR SUPPORT IN BYRON
+=======================
 
-It is possible to run Byron as a Tor hidden service, and connect to such services.
+It is possible to run BYRON as a Tor hidden service, and connect to such services.
 
 The following directions assume you have a Tor proxy running on port 9050. Many
 distributions default to having a SOCKS proxy listening on port 9050, but others
@@ -10,10 +10,10 @@ port. See [Tor Project FAQ:TBBSocksPort](https://www.torproject.org/docs/faq.htm
 for how to properly configure Tor.
 
 
-Run Byron behind a Tor proxy
-------------------------------------
+Run BYRON behind a Tor proxy
+----------------------------------
 
-The first step is running Byron behind a Tor proxy. This will already make all
+The first step is running BYRON behind a Tor proxy. This will already make all
 outgoing connections be anonymized, but more is possible.
 ```
 -proxy=ip:port  Set the proxy server. If SOCKS5 is selected (default), this proxy
@@ -46,8 +46,8 @@ In a typical situation, this suffices to run behind a Tor proxy:
 ./byrond -proxy=127.0.0.1:9050
 ```
 
-Run a Byron hidden server
-----------------------------------
+Run a BYRON hidden server
+-------------------------------
 
 If you configure your Tor system accordingly, it is possible to make your node also
 reachable from the Tor network. Add these lines to your /etc/tor/torrc (or equivalent
@@ -110,8 +110,17 @@ for normal IPv4/IPv6 communication, use:
 ./byrond -onion=127.0.0.1:9050 -externalip=dnetzj6l4cvo2fxy.onion:989 -discover
 ```
 
-List of known Byron Tor relays
+List of known BYRON Tor relays
 ------------------------------------
 ```
-***TODO***
+y5kcscnhpygvvnjn.onion:989
+5bmhtjvn2jvwpiej.onion:989
+pyfdxkazur3iib7y.onion:989
+ok3ym5zy6m5klimk.onion:989
+i6vpvzk2jxuqqs5f.onion:989
+bgdhpb76fkbw5fmg.onion:989
+gtlqzb5zbws5di7g.onion:989
+f7j2m26rptm5f7af.onion:989
+dnetzj6l4cvo2fxy.onion:989
+s3v3n7xhqafg6sb7.onion:989
 ```

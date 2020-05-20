@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2017 The Bitcoin Core developers
 // Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2019 The Byron Core developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,8 +9,8 @@
 #include "base58.h"
 #include "chainparams.h"
 #include "httpserver.h"
-#include "rpcprotocol.h"
-#include "rpcserver.h"
+#include "rpc/protocol.h"
+#include "rpc/server.h"
 #include "random.h"
 #include "sync.h"
 #include "util.h"
@@ -19,7 +19,8 @@
 
 #include <boost/algorithm/string.hpp> // boost::trim
 
-/** Simple one-shot callback timer to be used by the RPC mechanism to e.g.
+/** 
+ * Simple one-shot callback timer to be used by the RPC mechanism to e.g.
  * re-lock the wellet.
  */
 class HTTPRPCTimer : public RPCTimerBase
@@ -82,11 +83,14 @@ static bool RPCAuthorized(const std::string& strAuth)
 {
     if (strRPCUserColonPass.empty()) // Belt-and-suspenders measure if InitRPCAuthentication was not called
         return false;
+
     if (strAuth.substr(0, 6) != "Basic ")
         return false;
+
     std::string strUserPass64 = strAuth.substr(6);
     boost::trim(strUserPass64);
     std::string strUserPass = DecodeBase64(strUserPass64);
+
     return TimingResistantEqual(strUserPass, strRPCUserColonPass);
 }
 
@@ -97,6 +101,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
         req->WriteReply(HTTP_BAD_METHOD, "JSONRPC server handles only POST requests");
         return false;
     }
+
     // Check authorization
     std::pair<bool, std::string> authHeader = req->GetHeader("authorization");
     if (!authHeader.first) {
@@ -124,7 +129,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
             throw JSONRPCError(RPC_PARSE_ERROR, "Parse error");
 
         std::string strReply;
-        // singleton request
+        // Singleton request
         if (valRequest.isObject()) {
             jreq.parse(valRequest);
 
@@ -133,7 +138,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
             // Send reply
             strReply = JSONRPCReply(result, NullUniValue, jreq.id);
 
-        // array of requests
+        // Array of requests
         } else if (valRequest.isArray())
             strReply = JSONRPCExecBatch(valRequest.get_array());
         else
@@ -148,6 +153,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
         JSONErrorReply(req, JSONRPCError(RPC_PARSE_ERROR, e.what()), jreq.id);
         return false;
     }
+    
     return true;
 }
 
@@ -165,6 +171,7 @@ static bool InitRPCAuthentication()
     } else {
         strRPCUserColonPass = mapArgs["-rpcuser"] + ":" + mapArgs["-rpcpassword"];
     }
+
     return true;
 }
 
@@ -179,6 +186,7 @@ bool StartHTTPRPC()
     assert(EventBase());
     httpRPCTimerInterface = new HTTPRPCTimerInterface(EventBase());
     RPCSetTimerInterface(httpRPCTimerInterface);
+
     return true;
 }
 

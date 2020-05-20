@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The Byron Core developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019 The Byron developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UINT256_H
-#define BITCOIN_UINT256_H
+#ifndef BYRON_UINT256_H
+#define BYRON_UINT256_H
 
 #include <assert.h>
 #include <cstring>
@@ -42,6 +42,21 @@ public:
         for (int i = 0; i < WIDTH; i++)
             pn[i] = b.pn[i];
     }
+
+
+    bool IsNull() const
+    {
+        for (int i = 0; i < WIDTH; i++)
+            if (pn[i] != 0)
+                return false;
+        return true;
+    }
+
+    void SetNull()
+    {
+        memset(pn, 0, sizeof(pn));
+    }
+
 
     base_uint& operator=(const base_uint& b)
     {
@@ -297,25 +312,8 @@ public:
         s.read((char*)pn, sizeof(pn));
     }
 
-    // Temporary for migration to opaque uint160/256
-    uint64_t GetCheapHash() const
-    {
-        return GetLow64();
-    }
-
-    void SetNull()
-    {
-        memset(pn, 0, sizeof(pn));
-    }
-
-    bool IsNull() const
-    {
-        for (int i = 0; i < WIDTH; i++)
-            if (pn[i] != 0)
-                return false;
-        return true;
-    }
-
+    friend class uint160;
+    friend class uint256;
     friend class uint512;
 };
 
@@ -349,18 +347,18 @@ public:
      * The lower 23 bits are the mantissa.
      * Bit number 24 (0x800000) represents the sign of N.
      * N = (-1^sign) * mantissa * 256^(exponent-3)
-     *
+     * 
      * Satoshi's original implementation used BN_bn2mpi() and BN_mpi2bn().
      * MPI uses the most significant bit of the first byte as sign.
      * Thus 0x1234560000 is compact (0x05123456)
      * and  0xc0de000000 is compact (0x0600c0de)
-     *
+     * 
      * Bitcoin only uses this "compact" format for encoding difficulty
      * targets, which are unsigned 256bit quantities.  Thus, all the
      * complexities of the sign bit and using base 256 are probably an
      * implementation accident.
      */
-    uint256& SetCompact(uint32_t nCompact, bool* pfNegative = nullptr, bool* pfOverflow = nullptr);
+    uint256& SetCompact(uint32_t nCompact, bool* pfNegative = NULL, bool* pfOverflow = NULL);
     uint32_t GetCompact(bool fNegative = false) const;
     uint64_t GetHash(const uint256& salt) const;
 };
@@ -413,4 +411,4 @@ inline uint512 uint512S(const std::string& str)
     return rv;
 }
 
-#endif // BITCOIN_UINT256_H
+#endif // BYRON_UINT256_H
