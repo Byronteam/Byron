@@ -5,7 +5,7 @@ Byron (BYRON) is a sustainable cryptocurrency modeled after Satoshi Nakamoto’s
 
 - Decentralized blockchain voting providing for consensus based advancement of the current Masternode
   technology used to secure the network and provide the above features, each Masternode is secured
-  with a collateral of 25,000 BYRON.
+  with a collateral of 200,000 BYRON.
 
 
 Please reach out at ceo@adabyron.dev
