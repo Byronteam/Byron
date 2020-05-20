@@ -13,6 +13,11 @@ src/byron-cli
 src/byron-tx
 src/test/test_byron
 src/qt/test/test_byron-qt
+src/byrond.exe
+src/byron-cli.exe
+src/byron-tx.exe
+src/qt/byron-qt.exe
+
 
 # autoreconf
 Makefile.in
@@ -64,6 +69,7 @@ src/qt/test/moc*.cpp
 *.pyc
 *.o
 *.o-*
+*.patch
 .byron
 *.a
 *.pb.cc
@@ -74,7 +80,6 @@ src/qt/test/moc*.cpp
 *.dmg
 
 *.json.h
-!invalid_outpoints.json.h
 *.raw.h
 
 #libtool object files
@@ -85,7 +90,8 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 byron-qt
-Byron-Qt.app
+BYRON-Qt.app
+background.tiff*
 
 # Unit-tests
 Makefile.test
@@ -119,6 +125,7 @@ qa/pull-tester/run-bitcoind-for-test.sh
 qa/pull-tester/tests-config.sh
 qa/pull-tester/cache/*
 qa/pull-tester/test.*/*
+cache/*
 
 !src/leveldb*/Makefile
 
@@ -130,3 +137,4 @@ libbitcoinconsensus.pc
 .idea
 CMakeLists.txt
 cmake-build-debug
+
