@@ -419,13 +419,10 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\BYRON
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\BYRON
-// Mac: ~/Library/Application Support/BYRON
-// Unix: ~/.byron
+
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "byron";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "byron_new";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -437,10 +434,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "byron";
+    return pathRet / "byron_new";
 #else
     // Unix
-    return pathRet / ".byron";
+    return pathRet / ".byron_new";
 #endif
 #endif
 }

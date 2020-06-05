@@ -30,7 +30,7 @@ Exit the Bitcoin client software if you have it running. Be sure not to have an 
 **For Windows users:**
 Open explorer, and type into the address bar:
 
-	%APPDATA%\Bitcoin
+	byron_new\Bitcoin
     
 This will open up the data folder. It should look like the image below. Copy over the bootstrap.dat from your download folder to this directory.
 ![Fig4](img/bootstrap4.png)
