@@ -422,7 +422,7 @@ boost::filesystem::path GetDefaultDataDir()
 
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "byron_new";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "byron_2";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -434,10 +434,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "byron_new";
+    return pathRet / "byron_2";
 #else
     // Unix
-    return pathRet / ".byron_new";
+    return pathRet / ".byron_2";
 #endif
 #endif
 }
